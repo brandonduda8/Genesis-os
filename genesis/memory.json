@@ -1,15 +1,38 @@
 {
     "mission": "mission run Build a calculator",
-    "results": [
-        {
+    "results": {
+        "blueprint": {
+            "mission": "mission run Build a calculator",
+            "project_name": "mission_run_build_a_calculator",
+            "agents": [
+                "Architect",
+                "Coder",
+                "Tester",
+                "Reviewer"
+            ],
+            "tasks": [
+                "Analyze mission",
+                "Design architecture",
+                "Generate code",
+                "Run tests",
+                "Review implementation"
+            ],
+            "status": "blueprint_created"
+        },
+        "project": {
+            "status": "project_generated",
+            "project": "mission_run_build_a_calculator"
+        },
+        "architect": {
             "agent": "Architect",
-            "task": "Plan Architecture",
+            "task": "mission run Build a calculator",
             "status": "complete"
         },
-        {
+        "coder": {
             "agent": "Coder",
-            "task": "Generate Code",
+            "task": "mission run Build a calculator",
             "status": "complete"
-        }
-    ]
+        },
+        "status": "completed"
+    }
 }
