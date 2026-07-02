@@ -1,0 +1,6 @@
+JOB_CREATED = "job_created"
+JOB_ASSIGNED = "job_assigned"
+JOB_STARTED = "job_started"
+JOB_COMPLETED = "job_completed"
+HELP_REQUESTED = "help_requested"
+MISSION_COMPLETED = "mission_completed"
