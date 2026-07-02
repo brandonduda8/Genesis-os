@@ -1,12 +1,16 @@
+import sys
 from genesis.kernel.mission_control import MissionControl
 
 def main():
     print("🚀 Genesis Kernel Booting...")
 
-    mission = input("Mission: ")
+    if len(sys.argv) > 1:
+        mission = " ".join(sys.argv[1:])
+    else:
+        mission = input("Mission: ")
 
-    mc = MissionControl()
-    mc.run(mission)
+    controller = MissionControl()
+    controller.run(mission)
 
 if __name__ == "__main__":
     main()

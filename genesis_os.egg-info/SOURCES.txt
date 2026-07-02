@@ -1,0 +1,8 @@
+pyproject.toml
+genesis/__init__.py
+genesis/main.py
+genesis_os.egg-info/PKG-INFO
+genesis_os.egg-info/SOURCES.txt
+genesis_os.egg-info/dependency_links.txt
+genesis_os.egg-info/entry_points.txt
+genesis_os.egg-info/top_level.txt

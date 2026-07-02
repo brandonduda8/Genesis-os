@@ -1,5 +1,5 @@
 {
-    "mission": "genesis mission run \"Build a calculator\"",
+    "mission": "mission run Build a calculator",
     "results": [
         {
             "agent": "Architect",
