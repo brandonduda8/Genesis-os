@@ -3,6 +3,10 @@
         {
             "title": "Python Packaging",
             "content": "Use pyproject.toml and editable installs during development."
+        },
+        {
+            "title": "SQLite vs JSON databases",
+            "content": "Research summary for 'SQLite vs JSON databases'."
         }
     ]
 }
