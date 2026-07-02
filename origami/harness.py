@@ -9,6 +9,12 @@ from origami.tools.loader import ToolLoader
 
 from origami.memory.store import MemoryStore
 
+from origami.workers.registry import WorkerRegistry
+from origami.workers.builder import BuilderWorker
+from origami.workers.researcher import ResearchWorker
+from origami.workers.design import DesignWorker
+from origami.workers.qa import QAWorker
+
 
 class OrigamiHarness:
 
@@ -17,6 +23,10 @@ class OrigamiHarness:
 
         self.registry = AgentRegistry()
         self.router = CapabilityRouter(self.registry)
+
+        self.workers = WorkerRegistry()
+        self._load_workers()
+
         self.planner = MissionPlanner()
         self.executor = MissionExecutor(kernel, self)
         self.system = SystemStatus(self)
@@ -26,12 +36,20 @@ class OrigamiHarness:
 
         self.memory = MemoryStore()
 
+    def _load_workers(self):
+        self.workers.register(BuilderWorker())
+        self.workers.register(ResearchWorker())
+        self.workers.register(DesignWorker())
+        self.workers.register(QAWorker())
+
     def register(self, name, agent):
         self.registry.register(name, agent)
 
     def boot(self):
         print("🦢 Origami Harness Online")
+
         print(f"Registered Agents: {self.registry.count()}")
+        print(f"Registered Workers: {len(self.workers.list())}")
 
         for agent in self.registry.all().values():
             print(
@@ -72,6 +90,7 @@ class OrigamiHarness:
         report = self.system.report()
         report["tools"] = self.tools.list()
         report["memory_items"] = len(self.memory.all())
+        report["workers"] = self.workers.list()
         return report
 
     def tools_available(self):
