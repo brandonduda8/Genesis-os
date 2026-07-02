@@ -1,0 +1,15 @@
+{
+    "mission": "genesis mission run \"Build a calculator\"",
+    "results": [
+        {
+            "agent": "Architect",
+            "task": "Plan Architecture",
+            "status": "complete"
+        },
+        {
+            "agent": "Coder",
+            "task": "Generate Code",
+            "status": "complete"
+        }
+    ]
+}
