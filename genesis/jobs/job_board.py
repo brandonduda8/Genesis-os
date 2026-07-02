@@ -1,36 +1,20 @@
-from .job import Job
+from genesis.storage.job_repository import JobRepository
+
 
 class JobBoard:
 
     def __init__(self):
-        self.jobs = {}
+        self.repository = JobRepository()
 
     def add(self, job):
-        self.jobs[job.id] = job
+        self.repository.add(job)
         print(f"📌 Job Added: {job.title}")
 
     def list(self):
-        return list(self.jobs.values())
+        return self.repository.list()
 
-    def claim(self, job_id, agent):
-        job = self.jobs.get(job_id)
+    def get(self, job_id):
+        return self.repository.get(job_id)
 
-        if not job:
-            return None
-
-        if job.status != "queued":
-            return None
-
-        job.status = "running"
-        job.assigned_to = agent
-
-        print(f"🤖 {agent} claimed {job.title}")
-
-        return job
-
-    def complete(self, job_id):
-        job = self.jobs.get(job_id)
-
-        if job:
-            job.status = "completed"
-            print(f"✅ {job.title} completed")
+    def delete(self, job_id):
+        self.repository.delete(job_id)
