@@ -1,0 +1,8 @@
+{
+    "research": [
+        {
+            "title": "Python Packaging",
+            "content": "Use pyproject.toml and editable installs during development."
+        }
+    ]
+}
