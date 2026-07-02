@@ -1,9 +1,9 @@
 {
-    "mission": "mission run Build a calculator",
+    "mission": "mission run Build a FastAPI todo app",
     "results": {
         "blueprint": {
-            "mission": "mission run Build a calculator",
-            "project_name": "mission_run_build_a_calculator",
+            "mission": "mission run Build a FastAPI todo app",
+            "project_name": "mission_run_build_a_fastapi_todo_app",
             "agents": [
                 "Architect",
                 "Coder",
@@ -21,16 +21,16 @@
         },
         "project": {
             "status": "project_generated",
-            "project": "mission_run_build_a_calculator"
+            "project": "mission_run_build_a_fastapi_todo_app"
         },
         "architect": {
             "agent": "Architect",
-            "task": "mission run Build a calculator",
+            "task": "mission run Build a FastAPI todo app",
             "status": "complete"
         },
         "coder": {
             "agent": "Coder",
-            "task": "mission run Build a calculator",
+            "task": "mission run Build a FastAPI todo app",
             "status": "complete"
         },
         "status": "completed"
