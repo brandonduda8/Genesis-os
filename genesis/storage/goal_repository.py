@@ -1,57 +1,54 @@
+import uuid
+
+
 class GoalRepository:
 
     def __init__(self, database):
         self.db = database
 
-        self.db.cursor.execute("""
-        CREATE TABLE IF NOT EXISTS goals (
-            id TEXT PRIMARY KEY,
-            title TEXT,
-            description TEXT,
-            status TEXT,
-            priority TEXT
-        )
-        """)
-        self.db.connection.commit()
+    def add(self, title, description="", status="active"):
+        goal_id = str(uuid.uuid4())
 
-    def add(self, goal):
-        self.db.cursor.execute(
+        self.db.execute(
             """
-            INSERT OR REPLACE INTO goals
-            (id, title, description, status, priority)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO goals
+            (id, title, description, status)
+            VALUES (?, ?, ?, ?)
             """,
             (
-                goal.id,
-                goal.title,
-                goal.description,
-                goal.status,
-                goal.priority,
+                goal_id,
+                title,
+                description,
+                status,
             ),
         )
 
-        self.db.connection.commit()
+        return goal_id
 
-        print(f"🎯 Saved goal: {goal.title}")
+    def update_status(self, goal_id, status):
+        self.db.execute(
+            """
+            UPDATE goals
+            SET status = ?
+            WHERE id = ?
+            """,
+            (
+                status,
+                goal_id,
+            ),
+        )
 
     def list(self):
-        self.db.cursor.execute(
-            "SELECT * FROM goals"
+        cursor = self.db.execute(
+            """
+            SELECT
+                id,
+                title,
+                description,
+                status
+            FROM goals
+            ORDER BY title
+            """
         )
-        return self.db.cursor.fetchall()
 
-    def get(self, goal_id):
-        self.db.cursor.execute(
-            "SELECT * FROM goals WHERE id=?",
-            (goal_id,),
-        )
-        return self.db.cursor.fetchone()
-
-    def delete(self, goal_id):
-        self.db.cursor.execute(
-            "DELETE FROM goals WHERE id=?",
-            (goal_id,),
-        )
-        self.db.connection.commit()
-
-        print(f"🗑 Deleted goal: {goal_id}")
+        return [tuple(row) for row in cursor.fetchall()]

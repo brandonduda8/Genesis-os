@@ -1,25 +1,37 @@
 import sqlite3
+import threading
+
 
 class Database:
 
     def __init__(self, path="genesis.db"):
-        self.connection = sqlite3.connect(path)
-        self.cursor = self.connection.cursor()
+        self.path = path
+        self.lock = threading.RLock()
+
+        self.connection = sqlite3.connect(
+            path,
+            check_same_thread=False,
+        )
+        self.connection.row_factory = sqlite3.Row
+
+    def execute(self, sql, params=()):
+        with self.lock:
+            cursor = self.connection.cursor()
+            cursor.execute(sql, params)
+            self.connection.commit()
+            return cursor
+
+    def executescript(self, script):
+        with self.lock:
+            self.connection.executescript(script)
+            self.connection.commit()
 
     def initialize(self):
-        self.cursor.execute("""
-        CREATE TABLE IF NOT EXISTS jobs (
-            id TEXT PRIMARY KEY,
-            title TEXT,
-            description TEXT,
-            priority TEXT,
-            status TEXT,
-            assigned_to TEXT
-        )
-        """)
+        with open("genesis/storage/schema.sql") as f:
+            self.executescript(f.read())
 
-        self.connection.commit()
         print("💾 Database initialized")
 
     def close(self):
-        self.connection.close()
+        with self.lock:
+            self.connection.close()

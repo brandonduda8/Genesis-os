@@ -4,11 +4,10 @@ class AgentRegistry:
         self.agents = {}
 
     def register(self, agent):
-        self.agents[agent["name"]] = agent
-        print(f"🤖 Registered agent: {agent['name']}")
+        self.agents[agent.name] = agent
 
     def get(self, name):
         return self.agents.get(name)
 
     def list(self):
-        return list(self.agents.values())
+        return [agent.to_dict() for agent in self.agents.values()]

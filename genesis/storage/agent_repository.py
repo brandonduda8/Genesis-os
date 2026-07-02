@@ -3,37 +3,63 @@ class AgentRepository:
     def __init__(self, database):
         self.db = database
 
-        self.db.cursor.execute("""
-        CREATE TABLE IF NOT EXISTS agents (
-            name TEXT PRIMARY KEY,
-            role TEXT,
-            skills TEXT,
-            status TEXT,
-            jobs_completed INTEGER
-        )
-        """)
-        self.db.connection.commit()
-
     def add(self, agent):
-        self.db.cursor.execute(
+        self.db.execute(
             """
             INSERT OR REPLACE INTO agents
             (name, role, skills, status, jobs_completed)
             VALUES (?, ?, ?, ?, ?)
             """,
             (
-                agent["name"],
-                agent["role"],
-                ",".join(agent["skills"]),
-                agent["status"],
-                agent["jobs_completed"],
+                agent.name,
+                agent.role,
+                ",".join(agent.skills),
+                getattr(agent, "status", "idle"),
+                getattr(agent, "jobs_completed", 0),
             ),
         )
 
-        self.db.connection.commit()
-
-        print(f"🤖 Saved agent: {agent['name']}")
+        print(f"🤖 Saved agent: {agent.name}")
 
     def list(self):
-        self.db.cursor.execute("SELECT * FROM agents")
-        return self.db.cursor.fetchall()
+        cursor = self.db.execute(
+            """
+            SELECT
+                name,
+                role,
+                skills,
+                status,
+                jobs_completed
+            FROM agents
+            ORDER BY name
+            """
+        )
+
+        return [tuple(row) for row in cursor.fetchall()]
+
+    def available(self):
+        cursor = self.db.execute(
+            """
+            SELECT
+                name,
+                role,
+                skills,
+                status,
+                jobs_completed
+            FROM agents
+            WHERE status = 'idle'
+            ORDER BY name
+            """
+        )
+
+        return [tuple(row) for row in cursor.fetchall()]
+
+    def update_status(self, name, status):
+        self.db.execute(
+            """
+            UPDATE agents
+            SET status = ?
+            WHERE name = ?
+            """,
+            (status, name),
+        )

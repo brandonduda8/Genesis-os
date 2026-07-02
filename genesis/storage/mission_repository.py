@@ -1,54 +1,59 @@
+import uuid
+
+
 class MissionRepository:
 
     def __init__(self, database):
         self.db = database
 
-        self.db.cursor.execute("""
-        CREATE TABLE IF NOT EXISTS missions (
-            id TEXT PRIMARY KEY,
-            name TEXT,
-            objective TEXT,
-            status TEXT,
-            progress INTEGER
-        )
-        """)
-        self.db.connection.commit()
+    def add(self, mission, status="planned"):
+        mission_id = getattr(mission, "id", str(uuid.uuid4()))
+        mission_name = getattr(mission, "name", str(mission))
 
-    def add(self, mission):
-        self.db.cursor.execute(
+        self.db.execute(
             """
-            INSERT OR REPLACE INTO missions
-            (id, name, objective, status, progress)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO missions
+            (id, mission, status)
+            VALUES (?, ?, ?)
             """,
             (
-                mission.id,
-                mission.name,
-                mission.objective,
-                mission.status,
-                mission.progress,
+                mission_id,
+                mission_name,
+                status,
             ),
         )
-        self.db.connection.commit()
 
-        print(f"🚀 Saved mission: {mission.name}")
+        print(f"🚀 Saved mission: {mission_name}")
 
     def list(self):
-        self.db.cursor.execute("SELECT * FROM missions")
-        return self.db.cursor.fetchall()
+        cursor = self.db.execute(
+            """
+            SELECT id, mission, status, created_at
+            FROM missions
+            ORDER BY created_at DESC
+            """
+        )
+        return [tuple(row) for row in cursor.fetchall()]
 
     def get(self, mission_id):
-        self.db.cursor.execute(
-            "SELECT * FROM missions WHERE id=?",
+        cursor = self.db.execute(
+            """
+            SELECT id, mission, status, created_at
+            FROM missions
+            WHERE id = ?
+            """,
             (mission_id,),
         )
-        return self.db.cursor.fetchone()
+        row = cursor.fetchone()
+        return tuple(row) if row else None
 
     def delete(self, mission_id):
-        self.db.cursor.execute(
-            "DELETE FROM missions WHERE id=?",
+        self.db.execute(
+            """
+            DELETE FROM missions
+            WHERE id = ?
+            """,
             (mission_id,),
         )
-        self.db.connection.commit()
 
         print(f"🗑 Deleted mission: {mission_id}")
