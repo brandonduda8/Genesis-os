@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from uuid import uuid4
 
 
 @dataclass
 class Mission:
+    """
+    Represents a Genesis OS mission.
+    """
+
     capability: str
     description: str
-    priority: int = 0
+    priority: int
     status: str = "queued"
-    created_at: datetime = field(default_factory=datetime.utcnow)
+    id: str = field(default_factory=lambda: str(uuid4()))

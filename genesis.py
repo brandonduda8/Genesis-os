@@ -10,6 +10,7 @@ from origami.workers.registry import WorkerRegistry
 from origami.knowledge.search import KnowledgeSearch
 from origami.docs.generator import DocumentationGenerator
 from origami.status.system_status import SystemStatus
+from origami.memory.history import MissionHistory
 
 
 def main():
@@ -45,6 +46,12 @@ def main():
     subparsers.add_parser(
         "status",
         help="Show Genesis OS system status",
+    )
+
+    # Mission history
+    subparsers.add_parser(
+        "history",
+        help="Show mission history",
     )
 
     # Version
@@ -121,6 +128,23 @@ def main():
         print("-------------------")
         for provider in summary["providers"]:
             print(f"- {provider}")
+
+    elif args.command == "history":
+        history = MissionHistory()
+        missions = history.all()
+
+        print("Genesis OS Mission History")
+        print("--------------------------")
+
+        if not missions:
+            print("No missions found.")
+        else:
+            for mission in missions:
+                print(f"\nID: {mission['id']}")
+                print(f"Capability: {mission['capability']}")
+                print(f"Description: {mission['description']}")
+                print(f"Priority: {mission['priority']}")
+                print(f"Status: {mission['status']}")
 
     elif args.command == "version":
         print(f"Genesis OS v{VERSION}")
