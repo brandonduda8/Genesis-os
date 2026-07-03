@@ -46,5 +46,29 @@
         "completed_at": "2026-07-03T17:57:08.528812",
         "duration": 0.0,
         "error": null
+    },
+    {
+        "id": "4f2a4680-24b4-4da2-beda-333ee2467ecf",
+        "capability": "python",
+        "description": "Priority command test",
+        "priority": 10,
+        "status": "completed",
+        "created_at": "2026-07-03T18:46:42.318773",
+        "started_at": "2026-07-03T18:46:42.319641",
+        "completed_at": "2026-07-03T18:46:42.319746",
+        "duration": 0.0,
+        "error": null
+    },
+    {
+        "id": "a3e5d5b8-2702-4f94-811b-5d794548a13d",
+        "capability": "python",
+        "description": "Persistent queue test",
+        "priority": 10,
+        "status": "completed",
+        "created_at": "2026-07-03T19:05:07.284291",
+        "started_at": "2026-07-03T19:05:07.289010",
+        "completed_at": "2026-07-03T19:05:07.289242",
+        "duration": 0.0,
+        "error": null
     }
 ]

@@ -28,7 +28,7 @@ class WorkerRegistry:
         return sorted(
             matches,
             key=lambda w: w.priority,
-            reverse=True
+            reverse=True,
         )[0]
 
     def discover(self, package_name="origami.workers"):
@@ -49,8 +49,14 @@ class WorkerRegistry:
 
             for _, obj in inspect.getmembers(module, inspect.isclass):
 
-                if (
-                    issubclass(obj, Worker)
-                    and obj is not Worker
-                ):
-                    self.register(obj())
+                if not issubclass(obj, Worker):
+                    continue
+
+                if obj is Worker:
+                    continue
+
+                # Skip abstract base classes like ExecutiveWorker
+                if inspect.isabstract(obj):
+                    continue
+
+                self.register(obj())

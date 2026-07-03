@@ -6,6 +6,7 @@ from origami.models.mission import Mission
 from origami.scheduler.mission_scheduler import MissionScheduler
 from origami.providers.provider_manager import ProviderManager
 from origami.workers.registry import WorkerRegistry
+from origami.executive.council import ExecutiveCouncil
 from origami.knowledge.search import KnowledgeSearch
 from origami.docs.generator import DocumentationGenerator
 from origami.status.system_status import SystemStatus
@@ -30,6 +31,7 @@ def main():
     subparsers.add_parser("queue", help="Show mission queue")
     subparsers.add_parser("stats", help="Show mission statistics")
     subparsers.add_parser("version", help="Show version")
+    subparsers.add_parser("council", help="Show Executive Council report")
 
     knowledge = subparsers.add_parser(
         "knowledge",
@@ -45,9 +47,7 @@ def main():
         "--status",
         choices=["queued", "completed", "failed"],
     )
-    history.add_argument(
-        "--capability",
-    )
+    history.add_argument("--capability")
 
     show = subparsers.add_parser(
         "show",
@@ -84,6 +84,29 @@ def main():
         registry = WorkerRegistry()
         registry.discover()
         print(registry.list())
+
+    elif args.command == "council":
+        council = ExecutiveCouncil()
+
+        print("Genesis Executive Council")
+        print("=========================")
+
+        for report in council.report():
+            print()
+            print(f"Executive: {report['executive']}")
+            print(f"Department: {report['department']}")
+            print(f"Health: {report['health']}")
+            print(f"Objective: {report.get('objective', 'N/A')}")
+            print(f"Recommendation: {report['recommendation']}")
+
+        recommendation = council.recommendation()
+
+        print()
+        print("Council Recommendation")
+        print("----------------------")
+        print(f"Priority: {recommendation['priority']}")
+        print(f"Next Mission: {recommendation['next_mission']}")
+        print(f"Reason: {recommendation['reason']}")
 
     elif args.command == "providers":
         print(ProviderManager().list())

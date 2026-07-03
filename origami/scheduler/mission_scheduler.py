@@ -8,33 +8,54 @@ class MissionScheduler:
     """
 
     def __init__(self):
-        self.queue = []
         self.executor = MissionExecutor()
         self.store = MissionStore()
 
     def submit(self, mission):
         mission.status = "queued"
-        self.queue.append(mission)
         self.store.save(mission)
 
     def next(self):
-        if not self.queue:
+        missions = self.store.all()
+
+        queued = [
+            mission
+            for mission in missions
+            if mission["status"] == "queued"
+        ]
+
+        if not queued:
             return None
 
-        return self.queue.pop(0)
+        queued.sort(key=lambda m: m["priority"], reverse=True)
+
+        return queued[0]
 
     def run_next(self):
-        mission = self.next()
+        record = self.next()
 
-        if mission is None:
+        if record is None:
             return None
 
-        result = self.executor.execute(mission)
+        from origami.models.mission import Mission
 
-        # Save updated mission status after execution
-        self.store.save(mission)
+        mission = Mission(
+            capability=record["capability"],
+            description=record["description"],
+            priority=record["priority"],
+        )
 
-        return result
+        mission.id = record["id"]
+        mission.status = record["status"]
+        mission.created_at = record.get("created_at")
+
+        return self.executor.execute(mission)
 
     def pending(self):
-        return len(self.queue)
+        return len(
+            [
+                mission
+                for mission in self.store.all()
+                if mission["status"] == "queued"
+            ]
+        )

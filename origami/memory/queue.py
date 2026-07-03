@@ -33,3 +33,17 @@ class MissionQueue:
                 return True
 
         return False
+
+    def update_priority(self, mission_id, priority):
+        missions = self.store.all()
+
+        for mission in missions:
+            if mission["id"] == mission_id:
+                if mission["status"] != "queued":
+                    return False
+
+                mission["priority"] = priority
+                self.store.save_all(missions)
+                return True
+
+        return False
