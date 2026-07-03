@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+from origami.models.mission import Mission
+
 
 class MissionStore:
     """
@@ -19,16 +21,10 @@ class MissionStore:
     def _save(self, missions):
         self.path.write_text(json.dumps(missions, indent=4))
 
-    def save(self, mission):
+    def save(self, mission: Mission):
         missions = self._load()
 
-        record = {
-            "id": mission.id,
-            "capability": mission.capability,
-            "description": mission.description,
-            "priority": mission.priority,
-            "status": mission.status,
-        }
+        record = mission.to_dict()
 
         for index, existing in enumerate(missions):
             if existing["id"] == mission.id:

@@ -1,9 +1,38 @@
 [
     {
-        "id": "4a017623-9072-4851-ad5e-059a367148d8",
+        "id": "472a6a39-1e12-4206-a091-c0d83cd2d85a",
         "capability": "python",
-        "description": "Mission ID test",
+        "description": "Persistence metadata test",
+        "priority": 10,
+        "status": "queued",
+        "created_at": "2026-07-03T16:48:52.940311",
+        "started_at": null,
+        "completed_at": null,
+        "duration": null,
+        "error": null
+    },
+    {
+        "id": "b7361299-3ac2-40f1-830d-92c61d5657c4",
+        "capability": "python",
+        "description": "Lifecycle verification",
         "priority": 5,
-        "status": "completed"
+        "status": "failed",
+        "created_at": "2026-07-03T16:50:37.585246",
+        "started_at": "2026-07-03T16:50:37.595664",
+        "completed_at": "2026-07-03T16:50:37.595734",
+        "duration": 0.0,
+        "error": "'ProviderManager' object has no attribute 'get_provider'"
+    },
+    {
+        "id": "0db1ec6e-952c-455c-ad42-b815c91a0775",
+        "capability": "python",
+        "description": "Provider fix verification",
+        "priority": 5,
+        "status": "completed",
+        "created_at": "2026-07-03T16:53:31.756684",
+        "started_at": "2026-07-03T16:53:31.765459",
+        "completed_at": "2026-07-03T16:53:31.765607",
+        "duration": 0.0,
+        "error": null
     }
 ]

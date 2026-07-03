@@ -11,6 +11,7 @@ from origami.knowledge.search import KnowledgeSearch
 from origami.docs.generator import DocumentationGenerator
 from origami.status.system_status import SystemStatus
 from origami.memory.history import MissionHistory
+from origami.memory.queue import MissionQueue
 
 
 def main():
@@ -23,20 +24,20 @@ def main():
     run.add_argument("--capability", default="python")
     run.add_argument("--description", required=True)
 
-    # List workers
+    # Workers
     subparsers.add_parser("workers", help="List available workers")
 
-    # List providers
+    # Providers
     subparsers.add_parser("providers", help="List available providers")
 
-    # Search knowledge
+    # Knowledge
     knowledge = subparsers.add_parser(
         "knowledge",
         help="Search the Genesis knowledge base",
     )
     knowledge.add_argument("query")
 
-    # Generated documentation
+    # Documentation
     subparsers.add_parser(
         "docs",
         help="Show generated system documentation",
@@ -54,6 +55,12 @@ def main():
         help="Show mission history",
     )
 
+    # Mission queue
+    subparsers.add_parser(
+        "queue",
+        help="Show queued missions",
+    )
+
     # Version
     subparsers.add_parser(
         "version",
@@ -64,6 +71,7 @@ def main():
 
     if args.command == "run":
         scheduler = MissionScheduler()
+
         scheduler.submit(
             Mission(
                 capability=args.capability,
@@ -71,6 +79,7 @@ def main():
                 priority=10,
             )
         )
+
         print(scheduler.run_next())
 
     elif args.command == "workers":
@@ -138,6 +147,23 @@ def main():
 
         if not missions:
             print("No missions found.")
+        else:
+            for mission in missions:
+                print(f"\nID: {mission['id']}")
+                print(f"Capability: {mission['capability']}")
+                print(f"Description: {mission['description']}")
+                print(f"Priority: {mission['priority']}")
+                print(f"Status: {mission['status']}")
+
+    elif args.command == "queue":
+        queue = MissionQueue()
+        missions = queue.all()
+
+        print("Genesis OS Mission Queue")
+        print("------------------------")
+
+        if not missions:
+            print("No pending missions.")
         else:
             for mission in missions:
                 print(f"\nID: {mission['id']}")

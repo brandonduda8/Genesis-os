@@ -16,5 +16,15 @@ class ProviderManager:
     def get(self, name="LocalProvider"):
         return self.providers.get(name)
 
+    def get_provider(self, capability=None):
+        """
+        Returns the appropriate provider for a mission.
+
+        Future versions can route based on capability or
+        provider configuration. For now, always return the
+        default LocalProvider.
+        """
+        return self.get()
+
     def list(self):
         return list(self.providers.keys())
