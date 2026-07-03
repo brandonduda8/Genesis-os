@@ -1,61 +1,33 @@
-from origami.execution.mission_executor import MissionExecutor
-from origami.memory.mission_store import MissionStore
-
-
 class MissionScheduler:
     """
-    Schedules and executes missions for Genesis OS.
+    Simple mission scheduler for Genesis.
     """
 
     def __init__(self):
-        self.executor = MissionExecutor()
-        self.store = MissionStore()
+        self.queue = []
 
     def submit(self, mission):
-        mission.status = "queued"
-        self.store.save(mission)
-
-    def next(self):
-        missions = self.store.all()
-
-        queued = [
-            mission
-            for mission in missions
-            if mission["status"] == "queued"
-        ]
-
-        if not queued:
-            return None
-
-        queued.sort(key=lambda m: m["priority"], reverse=True)
-
-        return queued[0]
+        mission.transition("queued")
+        self.queue.append(mission)
+        return mission.id
 
     def run_next(self):
-        record = self.next()
-
-        if record is None:
+        if not self.queue:
             return None
 
-        from origami.models.mission import Mission
+        mission = self.queue.pop(0)
 
-        mission = Mission(
-            capability=record["capability"],
-            description=record["description"],
-            priority=record["priority"],
-        )
+        try:
+            mission.transition("running")
 
-        mission.id = record["id"]
-        mission.status = record["status"]
-        mission.created_at = record.get("created_at")
+            # Placeholder for actual mission execution.
+            mission.transition("completed")
 
-        return self.executor.execute(mission)
+        except Exception:
+            mission.transition("failed")
+            raise
+
+        return mission
 
     def pending(self):
-        return len(
-            [
-                mission
-                for mission in self.store.all()
-                if mission["status"] == "queued"
-            ]
-        )
+        return len(self.queue)
