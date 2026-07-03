@@ -6,7 +6,7 @@ from origami.models.mission import Mission
 from origami.scheduler.mission_scheduler import MissionScheduler
 from origami.providers.provider_manager import ProviderManager
 from origami.workers.registry import WorkerRegistry
-from origami.executive.council import ExecutiveCouncil
+from origami.workers.master_engineer import MasterEngineer
 from origami.knowledge.search import KnowledgeSearch
 from origami.docs.generator import DocumentationGenerator
 from origami.status.system_status import SystemStatus
@@ -31,7 +31,10 @@ def main():
     subparsers.add_parser("queue", help="Show mission queue")
     subparsers.add_parser("stats", help="Show mission statistics")
     subparsers.add_parser("version", help="Show version")
-    subparsers.add_parser("council", help="Show Executive Council report")
+    subparsers.add_parser(
+        "engineering",
+        help="Show engineering dashboard",
+    )
 
     knowledge = subparsers.add_parser(
         "knowledge",
@@ -85,29 +88,6 @@ def main():
         registry.discover()
         print(registry.list())
 
-    elif args.command == "council":
-        council = ExecutiveCouncil()
-
-        print("Genesis Executive Council")
-        print("=========================")
-
-        for report in council.report():
-            print()
-            print(f"Executive: {report['executive']}")
-            print(f"Department: {report['department']}")
-            print(f"Health: {report['health']}")
-            print(f"Objective: {report.get('objective', 'N/A')}")
-            print(f"Recommendation: {report['recommendation']}")
-
-        recommendation = council.recommendation()
-
-        print()
-        print("Council Recommendation")
-        print("----------------------")
-        print(f"Priority: {recommendation['priority']}")
-        print(f"Next Mission: {recommendation['next_mission']}")
-        print(f"Reason: {recommendation['reason']}")
-
     elif args.command == "providers":
         print(ProviderManager().list())
 
@@ -144,6 +124,64 @@ def main():
         print(f"Providers: {len(status['providers'])}")
         print(f"Pending Missions: {status['pending_missions']}")
 
+    elif args.command == "engineering":
+        engineer = MasterEngineer()
+
+        report = engineer.report()
+        missions = engineer.create_missions()
+
+        print("Genesis Engineering Report")
+        print("==========================")
+        print()
+
+        print(f"Python Files:       {report['python_files']}")
+        print(f"Markdown Files:     {report['markdown_files']}")
+        print(f"Workers:            {report['workers']}")
+        print(f"Executives:         {report['executives']}")
+        print(f"Technical Debt:     {report['technical_debt_items']}")
+        print()
+        print(f"Recommendation: {report['recommendation']}")
+        print()
+
+        print("Recommended Missions")
+        print("--------------------")
+
+        if not missions:
+            print("No engineering missions generated.")
+        else:
+            for mission in missions:
+                print()
+                print(f"[{mission['priority'].upper()}]")
+                print(mission["title"])
+                print(f"Reason: {mission['reason']}")
+
+    elif args.command == "queue":
+        queue = MissionQueue()
+
+        print("Genesis OS Mission Queue")
+        print("------------------------")
+
+        if queue.empty():
+            print("No pending missions.")
+        else:
+            for mission in queue.all():
+                print(mission)
+
+    elif args.command == "stats":
+        stats = MissionStats().summary()
+
+        print("Genesis OS Mission Statistics")
+        print("-----------------------------")
+        print(f"Total Missions:      {stats['total']}")
+        print(f"Completed:           {stats['completed']}")
+        print(f"Failed:              {stats['failed']}")
+        print(f"Queued:              {stats['queued']}")
+        print(f"Success Rate:        {stats['success_rate']}%")
+        print(f"Average Duration:    {stats['average_duration']} sec")
+
+    elif args.command == "version":
+        print(f"Genesis OS v{VERSION}")
+
     elif args.command == "history":
         history = MissionHistory()
 
@@ -177,16 +215,8 @@ def main():
         else:
             print("Genesis OS Mission Details")
             print("--------------------------")
-            print(f"ID:            {mission.get('id')}")
-            print(f"Capability:    {mission.get('capability')}")
-            print(f"Description:   {mission.get('description')}")
-            print(f"Priority:      {mission.get('priority')}")
-            print(f"Status:        {mission.get('status')}")
-            print(f"Created At:    {mission.get('created_at')}")
-            print(f"Started At:    {mission.get('started_at')}")
-            print(f"Completed At:  {mission.get('completed_at')}")
-            print(f"Duration:      {mission.get('duration')}")
-            print(f"Error:         {mission.get('error')}")
+            for key, value in mission.items():
+                print(f"{key}: {value}")
 
     elif args.command == "retry":
         history = MissionHistory()
@@ -212,33 +242,6 @@ def main():
             print("Mission cancelled.")
         else:
             print("Unable to cancel mission.")
-
-    elif args.command == "queue":
-        queue = MissionQueue()
-
-        print("Genesis OS Mission Queue")
-        print("------------------------")
-
-        if queue.empty():
-            print("No pending missions.")
-        else:
-            for mission in queue.all():
-                print(mission)
-
-    elif args.command == "stats":
-        stats = MissionStats().summary()
-
-        print("Genesis OS Mission Statistics")
-        print("-----------------------------")
-        print(f"Total Missions:      {stats['total']}")
-        print(f"Completed:           {stats['completed']}")
-        print(f"Failed:              {stats['failed']}")
-        print(f"Queued:              {stats['queued']}")
-        print(f"Success Rate:        {stats['success_rate']}%")
-        print(f"Average Duration:    {stats['average_duration']} sec")
-
-    elif args.command == "version":
-        print(f"Genesis OS v{VERSION}")
 
     else:
         parser.print_help()

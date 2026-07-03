@@ -1,5 +1,6 @@
 from origami.workers.base import Worker
 from origami.engineering.project_inspector import ProjectInspector
+from origami.engineering.mission_generator import EngineeringMissionGenerator
 
 
 class MasterEngineer(Worker):
@@ -59,16 +60,7 @@ class MasterEngineer(Worker):
         }
 
     def create_missions(self):
-        return [
-            {
-                "title": "Review project architecture",
-                "priority": "high",
-            },
-            {
-                "title": "Increase automated test coverage",
-                "priority": "medium",
-            },
-        ]
+        return EngineeringMissionGenerator().generate()
 
     def execute(self, mission):
         return {
