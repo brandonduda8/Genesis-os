@@ -1,4 +1,12 @@
+import importlib
+import inspect
+import pkgutil
+
+from .base import Worker
+
+
 class WorkerRegistry:
+
     def __init__(self):
         self._workers = []
 
@@ -6,18 +14,43 @@ class WorkerRegistry:
         self._workers.append(worker)
 
     def list(self):
-        return [w.name for w in self._workers]
+        return [worker.name for worker in self._workers]
 
-    def find(self, capability):
-        return [
+    def best(self, capability):
+        matches = [
             w for w in self._workers
             if capability in w.capabilities
         ]
 
-    def best(self, capability):
-        workers = self.find(capability)
-
-        if not workers:
+        if not matches:
             return None
 
-        return max(workers, key=lambda w: w.score(capability))
+        return sorted(
+            matches,
+            key=lambda w: w.priority,
+            reverse=True
+        )[0]
+
+    def discover(self, package_name="origami.workers"):
+        package = importlib.import_module(package_name)
+
+        for _, module_name, _ in pkgutil.iter_modules(package.__path__):
+
+            if module_name in {
+                "base",
+                "registry",
+                "__init__",
+            }:
+                continue
+
+            module = importlib.import_module(
+                f"{package_name}.{module_name}"
+            )
+
+            for _, obj in inspect.getmembers(module, inspect.isclass):
+
+                if (
+                    issubclass(obj, Worker)
+                    and obj is not Worker
+                ):
+                    self.register(obj())

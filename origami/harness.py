@@ -10,10 +10,6 @@ from origami.tools.loader import ToolLoader
 from origami.memory.store import MemoryStore
 
 from origami.workers.registry import WorkerRegistry
-from origami.workers.builder import BuilderWorker
-from origami.workers.researcher import ResearchWorker
-from origami.workers.design import DesignWorker
-from origami.workers.qa import QAWorker
 
 
 class OrigamiHarness:
@@ -25,7 +21,7 @@ class OrigamiHarness:
         self.router = CapabilityRouter(self.registry)
 
         self.workers = WorkerRegistry()
-        self._load_workers()
+        self.workers.discover()
 
         self.planner = MissionPlanner()
         self.executor = MissionExecutor(kernel, self)
@@ -35,12 +31,6 @@ class OrigamiHarness:
         ToolLoader.load(self.tools)
 
         self.memory = MemoryStore()
-
-    def _load_workers(self):
-        self.workers.register(BuilderWorker())
-        self.workers.register(ResearchWorker())
-        self.workers.register(DesignWorker())
-        self.workers.register(QAWorker())
 
     def register(self, name, agent):
         self.registry.register(name, agent)
