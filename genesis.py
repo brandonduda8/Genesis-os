@@ -7,6 +7,7 @@ from origami.scheduler.mission_scheduler import MissionScheduler
 from origami.providers.provider_manager import ProviderManager
 from origami.workers.registry import WorkerRegistry
 from origami.workers.master_engineer import MasterEngineer
+from origami.engineering.approval import EngineeringApproval
 from origami.knowledge.search import KnowledgeSearch
 from origami.docs.generator import DocumentationGenerator
 from origami.status.system_status import SystemStatus
@@ -31,9 +32,15 @@ def main():
     subparsers.add_parser("queue", help="Show mission queue")
     subparsers.add_parser("stats", help="Show mission statistics")
     subparsers.add_parser("version", help="Show version")
-    subparsers.add_parser(
+
+    engineering = subparsers.add_parser(
         "engineering",
         help="Show engineering dashboard",
+    )
+    engineering.add_argument(
+        "--approve",
+        type=int,
+        help="Approve an engineering mission by index",
     )
 
     knowledge = subparsers.add_parser(
@@ -125,6 +132,17 @@ def main():
         print(f"Pending Missions: {status['pending_missions']}")
 
     elif args.command == "engineering":
+
+        if args.approve is not None:
+            result = EngineeringApproval().approve(args.approve)
+
+            print("✓ Engineering mission approved")
+            print()
+            print(f"Mission: {result['mission']['title']}")
+            print(f"Priority: {result['mission']['priority'].upper()}")
+            print(f"Mission ID: {result['mission_id']}")
+            return
+
         engineer = MasterEngineer()
 
         report = engineer.report()
@@ -146,14 +164,11 @@ def main():
         print("Recommended Missions")
         print("--------------------")
 
-        if not missions:
-            print("No engineering missions generated.")
-        else:
-            for mission in missions:
-                print()
-                print(f"[{mission['priority'].upper()}]")
-                print(mission["title"])
-                print(f"Reason: {mission['reason']}")
+        for i, mission in enumerate(missions):
+            print()
+            print(f"[{i}] {mission['title']}")
+            print(f"Priority: {mission['priority'].upper()}")
+            print(f"Reason: {mission['reason']}")
 
     elif args.command == "queue":
         queue = MissionQueue()
