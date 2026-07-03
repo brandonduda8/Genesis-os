@@ -55,6 +55,12 @@ def main():
     )
     show.add_argument("mission_id")
 
+    retry = subparsers.add_parser(
+        "retry",
+        help="Retry a mission by ID",
+    )
+    retry.add_argument("mission_id")
+
     args = parser.parse_args()
 
     if args.command == "run":
@@ -152,6 +158,23 @@ def main():
             print(f"Completed At:  {mission.get('completed_at')}")
             print(f"Duration:      {mission.get('duration')}")
             print(f"Error:         {mission.get('error')}")
+
+    elif args.command == "retry":
+        history = MissionHistory()
+        mission = history.get(args.mission_id)
+
+        if mission is None:
+            print("Mission not found.")
+        else:
+            scheduler = MissionScheduler()
+            scheduler.submit(
+                Mission(
+                    capability=mission["capability"],
+                    description=mission["description"],
+                    priority=mission["priority"],
+                )
+            )
+            print(scheduler.run_next())
 
     elif args.command == "queue":
         queue = MissionQueue()
