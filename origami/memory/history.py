@@ -34,3 +34,9 @@ class MissionHistory:
             for mission in self.store.all()
             if mission["capability"] == capability
         ]
+
+    def get(self, mission_id):
+        for mission in self.store.all():
+            if mission["id"] == mission_id:
+                return mission
+        return None

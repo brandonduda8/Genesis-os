@@ -49,6 +49,12 @@ def main():
         "--capability",
     )
 
+    show = subparsers.add_parser(
+        "show",
+        help="Show a mission by ID",
+    )
+    show.add_argument("mission_id")
+
     args = parser.parse_args()
 
     if args.command == "run":
@@ -120,11 +126,32 @@ def main():
             print("No matching missions.")
         else:
             for mission in missions:
-                print(f"\nID: {mission['id']}")
+                print("-" * 40)
+                print(f"ID: {mission['id']}")
                 print(f"Capability: {mission['capability']}")
                 print(f"Description: {mission['description']}")
                 print(f"Priority: {mission['priority']}")
                 print(f"Status: {mission['status']}")
+
+    elif args.command == "show":
+        history = MissionHistory()
+        mission = history.get(args.mission_id)
+
+        if mission is None:
+            print("Mission not found.")
+        else:
+            print("Genesis OS Mission Details")
+            print("--------------------------")
+            print(f"ID:            {mission.get('id')}")
+            print(f"Capability:    {mission.get('capability')}")
+            print(f"Description:   {mission.get('description')}")
+            print(f"Priority:      {mission.get('priority')}")
+            print(f"Status:        {mission.get('status')}")
+            print(f"Created At:    {mission.get('created_at')}")
+            print(f"Started At:    {mission.get('started_at')}")
+            print(f"Completed At:  {mission.get('completed_at')}")
+            print(f"Duration:      {mission.get('duration')}")
+            print(f"Error:         {mission.get('error')}")
 
     elif args.command == "queue":
         queue = MissionQueue()
