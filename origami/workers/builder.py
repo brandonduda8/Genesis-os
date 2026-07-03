@@ -2,17 +2,17 @@ from .base import Worker
 
 
 class BuilderWorker(Worker):
-    def __init__(self):
-        super().__init__(
-            name="Builder",
-            capabilities=[
-                "python",
-                "git",
-                "backend",
-                "development"
-            ],
-            priority=90,
-        )
+    """
+    Builder worker responsible for implementation tasks.
+    """
+
+    name = "Builder"
+    capabilities = [
+        "python",
+        "coding",
+        "implementation",
+    ]
+    priority = 100
 
     def execute(self, mission):
         print(f"🚀 Builder executing: {mission}")
@@ -22,4 +22,6 @@ class BuilderWorker(Worker):
             "worker": self.name,
             "mission": mission,
             "status": "completed",
+            "execution": "worker",
+            "capability": "python",
         }

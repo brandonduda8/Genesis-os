@@ -2,17 +2,17 @@ from .base import Worker
 
 
 class DesignWorker(Worker):
-    def __init__(self):
-        super().__init__(
-            name="DesignBot",
-            capabilities=[
-                "design",
-                "architecture",
-                "system_design",
-                "planning",
-            ],
-            priority=80,
-        )
+    """
+    Design worker responsible for UI/UX and system design.
+    """
+
+    name = "DesignBot"
+    capabilities = [
+        "design",
+        "ui",
+        "ux",
+    ]
+    priority = 85
 
     def execute(self, mission):
         print(f"🎨 DesignBot executing: {mission}")
@@ -22,4 +22,6 @@ class DesignWorker(Worker):
             "worker": self.name,
             "mission": mission,
             "status": "completed",
+            "execution": "worker",
+            "capability": "design",
         }

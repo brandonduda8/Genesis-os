@@ -2,17 +2,17 @@ from .base import Worker
 
 
 class ResearchWorker(Worker):
-    def __init__(self):
-        super().__init__(
-            name="ResearchBot",
-            capabilities=[
-                "research",
-                "documentation",
-                "analysis",
-                "planning",
-            ],
-            priority=85,
-        )
+    """
+    Research worker responsible for analysis and investigation.
+    """
+
+    name = "ResearchBot"
+    capabilities = [
+        "research",
+        "analysis",
+        "planning",
+    ]
+    priority = 90
 
     def execute(self, mission):
         print(f"🔬 ResearchBot executing: {mission}")
@@ -22,4 +22,6 @@ class ResearchWorker(Worker):
             "worker": self.name,
             "mission": mission,
             "status": "completed",
+            "execution": "worker",
+            "capability": "research",
         }

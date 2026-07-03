@@ -2,10 +2,18 @@ from abc import ABC, abstractmethod
 
 
 class Worker(ABC):
-    def __init__(self, name, capabilities=None, priority=50):
-        self.name = name
-        self.capabilities = capabilities or []
-        self.priority = priority
+    """
+    Base class for all Genesis OS workers.
+    Workers expose metadata through class attributes so they
+    can be discovered automatically by the WorkerRegistry.
+    """
+
+    name = "Worker"
+    capabilities = []
+    priority = 50
+
+    def __init__(self):
+        pass
 
     def available(self):
         return True
