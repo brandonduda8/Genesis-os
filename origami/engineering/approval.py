@@ -1,6 +1,7 @@
 from origami.models.mission import Mission
 from origami.scheduler.mission_scheduler import MissionScheduler
 from origami.engineering.mission_generator import EngineeringMissionGenerator
+from origami.executive.review import ExecutiveReview
 
 
 class EngineeringApproval:
@@ -12,6 +13,14 @@ class EngineeringApproval:
             raise IndexError("Invalid mission index.")
 
         recommendation = missions[index]
+
+        review = ExecutiveReview().review(recommendation)
+
+        if review["decision"] != "approved":
+            return {
+                "approved": False,
+                "review": review,
+            }
 
         priority_map = {
             "high": 100,
@@ -33,6 +42,7 @@ class EngineeringApproval:
 
         return {
             "approved": True,
+            "review": review,
             "mission": recommendation,
             "mission_id": mission.id,
         }
