@@ -3,20 +3,31 @@ from origami.workers.registry import WorkerRegistry
 
 class MissionExecutor:
     """
-    Executes scheduled missions using the best available worker.
+    Executes Mission objects using the best available worker.
     """
 
     def __init__(self):
         self.registry = WorkerRegistry()
         self.registry.discover()
 
-    def execute(self, capability, mission):
-        worker = self.registry.best(capability)
+    def execute(self, mission):
+        worker = self.registry.best(mission.capability)
 
         if worker is None:
+            mission.status = "failed"
             return {
                 "success": False,
-                "error": f"No worker found for '{capability}'",
+                "error": f"No worker found for '{mission.capability}'",
             }
 
-        return worker.execute(mission)
+        mission.status = "running"
+
+        result = worker.execute(mission.description)
+
+        mission.status = (
+            "completed"
+            if result.get("success", False)
+            else "failed"
+        )
+
+        return result

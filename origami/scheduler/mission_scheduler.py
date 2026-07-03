@@ -1,24 +1,25 @@
+from origami.execution.mission_executor import MissionExecutor
+
+
 class MissionScheduler:
     """
-    Schedules and tracks missions for Genesis OS.
+    Queues and executes Mission objects.
     """
 
     def __init__(self):
         self.queue = []
+        self.executor = MissionExecutor()
 
     def submit(self, mission):
-        self.queue.append({
-            "mission": mission,
-            "status": "queued",
-        })
+        mission.status = "queued"
+        self.queue.append(mission)
 
-    def next(self):
+    def run_next(self):
         if not self.queue:
             return None
 
         mission = self.queue.pop(0)
-        mission["status"] = "running"
-        return mission
+        return self.executor.execute(mission)
 
     def pending(self):
         return len(self.queue)
