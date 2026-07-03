@@ -1,4 +1,5 @@
 from origami.workers.base import Worker
+from origami.engineering.project_inspector import ProjectInspector
 
 
 class MasterEngineer(Worker):
@@ -32,12 +33,29 @@ class MasterEngineer(Worker):
         }
 
     def report(self):
+        summary = ProjectInspector().summary()
+
+        if summary["todos"] == 0:
+            recommendation = (
+                "Continue expanding Genesis capabilities."
+            )
+        elif summary["todos"] < 5:
+            recommendation = (
+                "Resolve remaining TODO items before major expansion."
+            )
+        else:
+            recommendation = (
+                "Prioritize technical debt reduction."
+            )
+
         return {
             "worker": self.name,
-            "technical_debt": "Low",
-            "recommendation": (
-                "Continue improving architecture and test coverage."
-            ),
+            "python_files": summary["python_files"],
+            "markdown_files": summary["markdown_files"],
+            "workers": summary["workers"],
+            "executives": summary["executives"],
+            "technical_debt_items": summary["todos"],
+            "recommendation": recommendation,
         }
 
     def create_missions(self):
