@@ -27,7 +27,6 @@ def main():
     subparsers.add_parser("providers", help="List providers")
     subparsers.add_parser("docs", help="Show documentation")
     subparsers.add_parser("status", help="Show system status")
-    subparsers.add_parser("history", help="Show mission history")
     subparsers.add_parser("queue", help="Show mission queue")
     subparsers.add_parser("stats", help="Show mission statistics")
     subparsers.add_parser("version", help="Show version")
@@ -37,6 +36,18 @@ def main():
         help="Search the knowledge base",
     )
     knowledge.add_argument("query")
+
+    history = subparsers.add_parser(
+        "history",
+        help="Show mission history",
+    )
+    history.add_argument(
+        "--status",
+        choices=["queued", "completed", "failed"],
+    )
+    history.add_argument(
+        "--capability",
+    )
 
     args = parser.parse_args()
 
@@ -93,15 +104,22 @@ def main():
         print(f"Pending Missions: {status['pending_missions']}")
 
     elif args.command == "history":
-        history = MissionHistory().all()
+        history = MissionHistory()
+
+        if args.status:
+            missions = history.by_status(args.status)
+        elif args.capability:
+            missions = history.by_capability(args.capability)
+        else:
+            missions = history.all()
 
         print("Genesis OS Mission History")
         print("--------------------------")
 
-        if not history:
-            print("No mission history.")
+        if not missions:
+            print("No matching missions.")
         else:
-            for mission in history:
+            for mission in missions:
                 print(f"\nID: {mission['id']}")
                 print(f"Capability: {mission['capability']}")
                 print(f"Description: {mission['description']}")
