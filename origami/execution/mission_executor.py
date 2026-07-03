@@ -1,3 +1,4 @@
+from origami.config.providers import DEFAULT_PROVIDER
 from origami.providers.provider_manager import ProviderManager
 
 
@@ -9,14 +10,14 @@ class MissionExecutor:
     def __init__(self):
         self.providers = ProviderManager()
 
-    def execute(self, mission, provider="LocalProvider"):
-        execution_provider = self.providers.get(provider)
+    def execute(self, mission):
+        provider = self.providers.get(DEFAULT_PROVIDER)
 
-        if execution_provider is None:
+        if provider is None:
             mission.status = "failed"
             return {
                 "success": False,
-                "error": f"Provider '{provider}' not found",
+                "error": f"Provider '{DEFAULT_PROVIDER}' not found",
             }
 
-        return execution_provider.execute(mission)
+        return provider.execute(mission)
