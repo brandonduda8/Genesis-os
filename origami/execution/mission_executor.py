@@ -1,33 +1,13 @@
-from origami.workers.registry import WorkerRegistry
+from origami.providers.local_provider import LocalProvider
 
 
 class MissionExecutor:
     """
-    Executes Mission objects using the best available worker.
+    Executes missions through a configured provider.
     """
 
-    def __init__(self):
-        self.registry = WorkerRegistry()
-        self.registry.discover()
+    def __init__(self, provider=None):
+        self.provider = provider or LocalProvider()
 
     def execute(self, mission):
-        worker = self.registry.best(mission.capability)
-
-        if worker is None:
-            mission.status = "failed"
-            return {
-                "success": False,
-                "error": f"No worker found for '{mission.capability}'",
-            }
-
-        mission.status = "running"
-
-        result = worker.execute(mission.description)
-
-        mission.status = (
-            "completed"
-            if result.get("success", False)
-            else "failed"
-        )
-
-        return result
+        return self.provider.execute(mission)
