@@ -2,7 +2,6 @@
 
 import argparse
 
-from origami.config.version import VERSION
 from origami.models.mission import Mission
 from origami.scheduler.mission_scheduler import MissionScheduler
 from origami.providers.provider_manager import ProviderManager
@@ -12,66 +11,37 @@ from origami.docs.generator import DocumentationGenerator
 from origami.status.system_status import SystemStatus
 from origami.memory.history import MissionHistory
 from origami.memory.queue import MissionQueue
+from origami.memory.stats import MissionStats
+from origami.config.version import VERSION
 
 
 def main():
     parser = argparse.ArgumentParser(description="Genesis OS CLI")
-
     subparsers = parser.add_subparsers(dest="command")
 
-    # Run mission
     run = subparsers.add_parser("run", help="Run a mission")
     run.add_argument("--capability", default="python")
     run.add_argument("--description", required=True)
 
-    # Workers
-    subparsers.add_parser("workers", help="List available workers")
+    subparsers.add_parser("workers", help="List workers")
+    subparsers.add_parser("providers", help="List providers")
+    subparsers.add_parser("docs", help="Show documentation")
+    subparsers.add_parser("status", help="Show system status")
+    subparsers.add_parser("history", help="Show mission history")
+    subparsers.add_parser("queue", help="Show mission queue")
+    subparsers.add_parser("stats", help="Show mission statistics")
+    subparsers.add_parser("version", help="Show version")
 
-    # Providers
-    subparsers.add_parser("providers", help="List available providers")
-
-    # Knowledge
     knowledge = subparsers.add_parser(
         "knowledge",
-        help="Search the Genesis knowledge base",
+        help="Search the knowledge base",
     )
     knowledge.add_argument("query")
-
-    # Documentation
-    subparsers.add_parser(
-        "docs",
-        help="Show generated system documentation",
-    )
-
-    # System status
-    subparsers.add_parser(
-        "status",
-        help="Show Genesis OS system status",
-    )
-
-    # Mission history
-    subparsers.add_parser(
-        "history",
-        help="Show mission history",
-    )
-
-    # Mission queue
-    subparsers.add_parser(
-        "queue",
-        help="Show queued missions",
-    )
-
-    # Version
-    subparsers.add_parser(
-        "version",
-        help="Show Genesis OS version",
-    )
 
     args = parser.parse_args()
 
     if args.command == "run":
         scheduler = MissionScheduler()
-
         scheduler.submit(
             Mission(
                 capability=args.capability,
@@ -79,7 +49,6 @@ def main():
                 priority=10,
             )
         )
-
         print(scheduler.run_next())
 
     elif args.command == "workers":
@@ -88,12 +57,10 @@ def main():
         print(registry.list())
 
     elif args.command == "providers":
-        manager = ProviderManager()
-        print(manager.list())
+        print(ProviderManager().list())
 
     elif args.command == "knowledge":
-        search = KnowledgeSearch()
-        results = search.search(args.query)
+        results = KnowledgeSearch().search(args.query)
 
         if not results:
             print("No matching knowledge found.")
@@ -103,8 +70,7 @@ def main():
                 print(content)
 
     elif args.command == "docs":
-        docs = DocumentationGenerator()
-        summary = docs.generate_summary()
+        summary = DocumentationGenerator().generate_summary()
 
         print(f"Genesis OS v{summary['version']}\n")
 
@@ -117,38 +83,25 @@ def main():
             print(f"  - {provider}")
 
     elif args.command == "status":
-        status = SystemStatus()
-        summary = status.summary()
+        status = SystemStatus().summary()
 
-        print(f"Genesis OS v{summary['version']}\n")
-
+        print(f"Genesis OS v{status['version']}\n")
         print("System Status")
         print("-------------")
-        print(f"Workers: {len(summary['workers'])}")
-        print(f"Providers: {len(summary['providers'])}")
-        print(f"Pending Missions: {summary['pending_missions']}")
-
-        print("\nAvailable Workers")
-        print("-----------------")
-        for worker in summary["workers"]:
-            print(f"- {worker}")
-
-        print("\nAvailable Providers")
-        print("-------------------")
-        for provider in summary["providers"]:
-            print(f"- {provider}")
+        print(f"Workers: {len(status['workers'])}")
+        print(f"Providers: {len(status['providers'])}")
+        print(f"Pending Missions: {status['pending_missions']}")
 
     elif args.command == "history":
-        history = MissionHistory()
-        missions = history.all()
+        history = MissionHistory().all()
 
         print("Genesis OS Mission History")
         print("--------------------------")
 
-        if not missions:
-            print("No missions found.")
+        if not history:
+            print("No mission history.")
         else:
-            for mission in missions:
+            for mission in history:
                 print(f"\nID: {mission['id']}")
                 print(f"Capability: {mission['capability']}")
                 print(f"Description: {mission['description']}")
@@ -157,20 +110,27 @@ def main():
 
     elif args.command == "queue":
         queue = MissionQueue()
-        missions = queue.all()
 
         print("Genesis OS Mission Queue")
         print("------------------------")
 
-        if not missions:
+        if queue.empty():
             print("No pending missions.")
         else:
-            for mission in missions:
-                print(f"\nID: {mission['id']}")
-                print(f"Capability: {mission['capability']}")
-                print(f"Description: {mission['description']}")
-                print(f"Priority: {mission['priority']}")
-                print(f"Status: {mission['status']}")
+            for mission in queue.all():
+                print(mission)
+
+    elif args.command == "stats":
+        stats = MissionStats().summary()
+
+        print("Genesis OS Mission Statistics")
+        print("-----------------------------")
+        print(f"Total Missions:      {stats['total']}")
+        print(f"Completed:           {stats['completed']}")
+        print(f"Failed:              {stats['failed']}")
+        print(f"Queued:              {stats['queued']}")
+        print(f"Success Rate:        {stats['success_rate']}%")
+        print(f"Average Duration:    {stats['average_duration']} sec")
 
     elif args.command == "version":
         print(f"Genesis OS v{VERSION}")
