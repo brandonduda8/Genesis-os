@@ -6,8 +6,10 @@ from origami.models.mission import Mission
 from origami.scheduler.mission_scheduler import MissionScheduler
 from origami.providers.provider_manager import ProviderManager
 from origami.workers.registry import WorkerRegistry
+from origami.knowledge.search import KnowledgeSearch
+from origami.docs.generator import DocumentationGenerator
 
-VERSION = "0.9.1"
+VERSION = "1.0.0-beta1"
 
 
 def main():
@@ -15,12 +17,31 @@ def main():
 
     subparsers = parser.add_subparsers(dest="command")
 
+    # Run mission
     run = subparsers.add_parser("run", help="Run a mission")
     run.add_argument("--capability", default="python")
     run.add_argument("--description", required=True)
 
+    # List workers
     subparsers.add_parser("workers", help="List available workers")
+
+    # List providers
     subparsers.add_parser("providers", help="List available providers")
+
+    # Search knowledge
+    knowledge = subparsers.add_parser(
+        "knowledge",
+        help="Search the Genesis knowledge base",
+    )
+    knowledge.add_argument("query")
+
+    # Generated documentation
+    subparsers.add_parser(
+        "docs",
+        help="Show generated system documentation",
+    )
+
+    # Version
     subparsers.add_parser("version", help="Show Genesis OS version")
 
     args = parser.parse_args()
@@ -44,6 +65,31 @@ def main():
     elif args.command == "providers":
         manager = ProviderManager()
         print(manager.list())
+
+    elif args.command == "knowledge":
+        search = KnowledgeSearch()
+        results = search.search(args.query)
+
+        if not results:
+            print("No matching knowledge found.")
+        else:
+            for section, content in results.items():
+                print(f"\n=== {section.upper()} ===")
+                print(content)
+
+    elif args.command == "docs":
+        docs = DocumentationGenerator()
+        summary = docs.generate_summary()
+
+        print(f"Genesis OS v{summary['version']}\n")
+
+        print("Workers:")
+        for worker in summary["workers"]:
+            print(f"  - {worker}")
+
+        print("\nProviders:")
+        for provider in summary["providers"]:
+            print(f"  - {provider}")
 
     elif args.command == "version":
         print(f"Genesis OS v{VERSION}")
