@@ -35,6 +35,9 @@ class MissionStore:
 
         self._save(missions)
 
+    def save_all(self, missions):
+        self._save(missions)
+
     def all(self):
         return self._load()
 

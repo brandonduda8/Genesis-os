@@ -1,4 +1,5 @@
 from origami.memory.history import MissionHistory
+from origami.memory.mission_store import MissionStore
 
 
 class MissionQueue:
@@ -8,6 +9,7 @@ class MissionQueue:
 
     def __init__(self):
         self.history = MissionHistory()
+        self.store = MissionStore()
 
     def all(self):
         return self.history.pending()
@@ -17,3 +19,17 @@ class MissionQueue:
 
     def empty(self):
         return self.count() == 0
+
+    def cancel(self, mission_id):
+        missions = self.store.all()
+
+        for mission in missions:
+            if mission["id"] == mission_id:
+                if mission["status"] != "queued":
+                    return False
+
+                mission["status"] = "cancelled"
+                self.store.save_all(missions)
+                return True
+
+        return False

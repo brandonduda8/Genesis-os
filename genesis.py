@@ -61,6 +61,12 @@ def main():
     )
     retry.add_argument("mission_id")
 
+    cancel = subparsers.add_parser(
+        "cancel",
+        help="Cancel a queued mission",
+    )
+    cancel.add_argument("mission_id")
+
     args = parser.parse_args()
 
     if args.command == "run":
@@ -175,6 +181,14 @@ def main():
                 )
             )
             print(scheduler.run_next())
+
+    elif args.command == "cancel":
+        queue = MissionQueue()
+
+        if queue.cancel(args.mission_id):
+            print("Mission cancelled.")
+        else:
+            print("Unable to cancel mission.")
 
     elif args.command == "queue":
         queue = MissionQueue()
