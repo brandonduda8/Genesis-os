@@ -1,3 +1,4 @@
+from origami.config.version import VERSION
 from origami.providers.provider_manager import ProviderManager
 from origami.workers.registry import WorkerRegistry
 
@@ -14,7 +15,7 @@ class DocumentationGenerator:
         providers = ProviderManager()
 
         return {
-            "version": "1.0.0-beta1",
+            "version": VERSION,
             "workers": registry.list(),
             "providers": providers.list(),
         }

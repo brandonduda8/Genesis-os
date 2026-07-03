@@ -2,14 +2,14 @@
 
 import argparse
 
+from origami.config.version import VERSION
 from origami.models.mission import Mission
 from origami.scheduler.mission_scheduler import MissionScheduler
 from origami.providers.provider_manager import ProviderManager
 from origami.workers.registry import WorkerRegistry
 from origami.knowledge.search import KnowledgeSearch
 from origami.docs.generator import DocumentationGenerator
-
-VERSION = "1.0.0-beta1"
+from origami.status.system_status import SystemStatus
 
 
 def main():
@@ -41,8 +41,17 @@ def main():
         help="Show generated system documentation",
     )
 
+    # System status
+    subparsers.add_parser(
+        "status",
+        help="Show Genesis OS system status",
+    )
+
     # Version
-    subparsers.add_parser("version", help="Show Genesis OS version")
+    subparsers.add_parser(
+        "version",
+        help="Show Genesis OS version",
+    )
 
     args = parser.parse_args()
 
@@ -90,6 +99,28 @@ def main():
         print("\nProviders:")
         for provider in summary["providers"]:
             print(f"  - {provider}")
+
+    elif args.command == "status":
+        status = SystemStatus()
+        summary = status.summary()
+
+        print(f"Genesis OS v{summary['version']}\n")
+
+        print("System Status")
+        print("-------------")
+        print(f"Workers: {len(summary['workers'])}")
+        print(f"Providers: {len(summary['providers'])}")
+        print(f"Pending Missions: {summary['pending_missions']}")
+
+        print("\nAvailable Workers")
+        print("-----------------")
+        for worker in summary["workers"]:
+            print(f"- {worker}")
+
+        print("\nAvailable Providers")
+        print("-------------------")
+        for provider in summary["providers"]:
+            print(f"- {provider}")
 
     elif args.command == "version":
         print(f"Genesis OS v{VERSION}")
