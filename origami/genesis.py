@@ -6,7 +6,9 @@ from origami.executive.decision_engine import DecisionEngine
 
 from origami.orchestration.mission_director import MissionDirector
 from origami.orchestration.swarm_builder import SwarmBuilder
+
 from origami.planning.mission_planner import MissionPlanner
+from origami.planning.objective_decomposer import ObjectiveDecomposer
 
 from origami.knowledge.knowledge_engine import KnowledgeEngine
 from origami.analytics.performance_engine import PerformanceEngine
@@ -17,9 +19,6 @@ from origami.history.persistence import Persistence
 
 
 class Genesis:
-    """
-    Genesis Operating System
-    """
 
     def __init__(self):
         self.persistence = Persistence()
@@ -32,6 +31,7 @@ class Genesis:
         self.director = MissionDirector()
         self.planner = MissionPlanner()
         self.swarm = SwarmBuilder()
+        self.decomposer = ObjectiveDecomposer()
 
         self.history = MissionHistory()
 
@@ -73,7 +73,6 @@ class Genesis:
 
         self.history.record(objective, decision)
 
-        # Learn from every decision
         self.knowledge.learn(
             "executive",
             decision["selected_strategy"]["executive"],
@@ -85,8 +84,30 @@ class Genesis:
 
         return decision
 
-    def strategic_review(self):
-        return self.intelligence.analyze()
+    def execute(self, objective):
+        decision = self.decide(objective)
+
+        missions = self.decomposer.decompose(objective)
+
+        executions = []
+
+        for capability, description in missions:
+            executions.append(
+                self.director.execute(
+                    capability,
+                    description,
+                )
+            )
+
+        self.save()
+
+        return {
+            "objective": objective,
+            "decision": decision,
+            "executions": executions,
+            "status": self.status(),
+            "review": self.intelligence.analyze(),
+        }
 
     def save(self):
         self.persistence.save(
@@ -98,6 +119,9 @@ class Genesis:
 
     def history_report(self):
         return self.history.all()
+
+    def strategic_review(self):
+        return self.intelligence.analyze()
 
     def status(self):
         return {
