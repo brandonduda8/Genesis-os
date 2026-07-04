@@ -1,0 +1,56 @@
+{
+    "history": [
+        {
+            "id": "35b48aa7-0711-49e1-8e87-61839c4caba0",
+            "timestamp": "2026-07-04T02:01:07.160139",
+            "objective": "Build Genesis MVP",
+            "decision": {
+                "objective": "Build Genesis MVP",
+                "selected_strategy": {
+                    "executive": "Agent X",
+                    "role": "Chief Orchestrator",
+                    "focus": [
+                        "architecture",
+                        "planning",
+                        "orchestration"
+                    ],
+                    "objective": "Build Genesis MVP"
+                },
+                "participants": [
+                    "Agent X",
+                    "Agent JSON"
+                ],
+                "status": "approved"
+            },
+            "execution": null
+        },
+        {
+            "id": "05568f55-683f-442c-ba1b-9d4d10f158d4",
+            "timestamp": "2026-07-04T02:01:07.160193",
+            "objective": "Create Mobile App",
+            "decision": {
+                "objective": "Create Mobile App",
+                "selected_strategy": {
+                    "executive": "Agent X",
+                    "role": "Chief Orchestrator",
+                    "focus": [
+                        "architecture",
+                        "planning",
+                        "orchestration"
+                    ],
+                    "objective": "Create Mobile App"
+                },
+                "participants": [
+                    "Agent X",
+                    "Agent JSON"
+                ],
+                "status": "approved"
+            },
+            "execution": null
+        }
+    ],
+    "executives": {
+        "Agent X": "Chief Orchestrator",
+        "Agent JSON": "Data & Interface Specialist"
+    }
+}
