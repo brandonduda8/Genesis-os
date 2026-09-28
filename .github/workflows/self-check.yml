@@ -1,0 +1,77 @@
+name: self-check
+
+# Read-only scheduled self-check for the Genesis-os repo.
+# $0: runs on GitHub-hosted ubuntu-latest inside the free Actions minutes
+# budget (~2,000 min/mo). This workflow takes ~1-2 min per run.
+# It NEVER writes to the repo, deploys, or touches secrets.
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # daily at 06:00 UTC
+  workflow_dispatch:       # allow manual runs from the Actions tab
+
+permissions:
+  contents: read
+
+jobs:
+  self-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout (read-only)
+        uses: actions/checkout@v4
+
+      - name: Repo structure audit
+        run: |
+          echo "== top-level entries =="
+          ls -la
+          echo
+          echo "== top-level directories =="
+          find . -maxdepth 1 -mindepth 1 -type d | sort
+          echo
+          # The genesis/ package tree is the load-bearing core of this repo.
+          for must_exist in genesis genesis/main.py genesis/__init__.py \
+                            genesis/agents genesis/kernel genesis/memory genesis/config; do
+            if [ -e "$must_exist" ]; then
+              echo "OK: $must_exist exists"
+            else
+              echo "FAIL: expected $must_exist is missing"
+              exit 1
+            fi
+          done
+          echo
+          echo "python files under genesis/: $(find genesis -name '*.py' | wc -l)"
+
+      - name: Docs presence check (advisory)
+        run: |
+          if [ -f README.md ]; then
+            echo "OK: README.md present"
+          else
+            echo "::warning::README.md is missing at repo root"
+          fi
+          md_count=$(find . -path ./.git -prune -o -name '*.md' -print | wc -l)
+          echo "markdown files in repo (excluding .git): $md_count"
+
+      - name: Markdown link sanity pass
+        run: |
+          # Check relative markdown links in docs; skip http(s) links (read-only,
+          # no network dependence in the check itself).
+          status=0
+          while IFS= read -r f; do
+            echo "checking $f"
+            grep -oE '\]\(([^)#]+)\)' "$f" | sed 's/^](\(//; s/)$//' | while IFS= read -r link; do
+              case "$link" in
+                http*|mailto:*|#*) continue ;;
+              esac
+              target="$(dirname "$f")/$link"
+              if [ ! -e "$target" ]; then
+                echo "::warning file=$f::broken relative link: $link"
+              fi
+            done
+          done < <(find . -path ./.git -prune -o -name '*.md' -print)
+          echo "link pass done"
+
+      - name: Self-check summary
+        run: |
+          echo "self-check completed at $(date -u +%FT%TZ)"
+          echo "repo: ${{ github.repository }} @ ${{ github.sha }}"
