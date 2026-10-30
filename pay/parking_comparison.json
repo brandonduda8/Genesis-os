@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Cash App Savings",
+    "provider": "Cash App",
+    "account_slug": "cash_app",
+    "held": true,
+    "apy_percent": null,
+    "rate_source": null,
+    "rate_checked": null,
+    "notes": "Rate not verified. No figure is used until a rate is recorded from the official source."
+  },
+  {
+    "name": "Chime Savings",
+    "provider": "Chime",
+    "account_slug": "chime",
+    "held": true,
+    "apy_percent": null,
+    "rate_source": null,
+    "rate_checked": null,
+    "notes": "Rate not verified. No figure is used until a rate is recorded from the official source."
+  },
+  {
+    "name": "Current Savings",
+    "provider": "Current",
+    "account_slug": "current",
+    "held": true,
+    "apy_percent": null,
+    "rate_source": null,
+    "rate_checked": null,
+    "notes": "Rate not verified. No figure is used until a rate is recorded from the official source."
+  },
+  {
+    "name": "OnePay Savings",
+    "provider": "OnePay",
+    "account_slug": "onepay",
+    "held": true,
+    "apy_percent": null,
+    "rate_source": null,
+    "rate_checked": null,
+    "notes": "Rate not verified. No figure is used until a rate is recorded from the official source."
+  },
+  {
+    "name": "Robinhood cash sweep",
+    "provider": "Robinhood",
+    "account_slug": "robinhood",
+    "held": true,
+    "apy_percent": null,
+    "rate_source": null,
+    "rate_checked": null,
+    "notes": "Rate not verified. No figure is used until a rate is recorded from the official source."
+  },
+  {
+    "name": "Bank savings",
+    "provider": "Bank",
+    "account_slug": "bank",
+    "held": true,
+    "apy_percent": null,
+    "rate_source": null,
+    "rate_checked": null,
+    "notes": "Rate not verified. No figure is used until a rate is recorded from the official source."
+  },
+  {
+    "name": "PayPal Savings",
+    "provider": "PayPal",
+    "account_slug": "paypal",
+    "held": true,
+    "apy_percent": null,
+    "rate_source": null,
+    "rate_checked": null,
+    "notes": "Rate not verified. No figure is used until a rate is recorded from the official source."
+  }
+]

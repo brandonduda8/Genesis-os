@@ -1,0 +1,109 @@
+{
+  "fake_data_only": true,
+  "invoice_a": {
+    "issued": {
+      "invoice_ref": "INV-DEMO-0001",
+      "entry_id": "je_c3bccd1a9d71266cf64d",
+      "amount_cents": 29700,
+      "currency": "USD",
+      "status": "issued"
+    },
+    "payment": {
+      "intent_id": "pi_881aa649e2d9367d5c92",
+      "entry_id": "je_0af269598033c6374cc5",
+      "state": "confirmed",
+      "invoice_ref": "INV-DEMO-0001",
+      "amount_cents": 29700,
+      "currency": "USD",
+      "rail": "cash_app",
+      "clearing_account": "1200_clearing:cash_app"
+    },
+    "settlement": {
+      "intent_id": "pi_881aa649e2d9367d5c92",
+      "entry_id": "je_0194733c37452d9520ff",
+      "state": "settled",
+      "gross_cents": 29700,
+      "fee_cents": 300,
+      "net_cents": 29400,
+      "currency": "USD"
+    }
+  },
+  "invoice_b": {
+    "issued": {
+      "invoice_ref": "INV-DEMO-0002",
+      "entry_id": "je_262bf7503e66c6d6f441",
+      "amount_cents": 7500,
+      "currency": "USD",
+      "status": "issued"
+    },
+    "payment": {
+      "intent_id": "pi_06a8d9293e0ccdb4445d",
+      "entry_id": "je_2665e035a6e9978c4307",
+      "state": "confirmed",
+      "invoice_ref": "INV-DEMO-0002",
+      "amount_cents": 7500,
+      "currency": "USD",
+      "rail": "cash_app",
+      "clearing_account": "1200_clearing:cash_app"
+    },
+    "settlement": {
+      "intent_id": "pi_06a8d9293e0ccdb4445d",
+      "entry_id": "je_eee12ffd5ad6efa95074",
+      "state": "settled",
+      "gross_cents": 7500,
+      "fee_cents": 0,
+      "net_cents": 7500,
+      "currency": "USD"
+    }
+  },
+  "trial_balance": {
+    "1000_bank_cash": 36900,
+    "1100_accounts_receivable": 0,
+    "1200_clearing:cash_app": 0,
+    "4000_revenue": -37200,
+    "5100_processor_fees": 300,
+    "_total_debits_minus_credits": 0
+  },
+  "reconciliation": {
+    "run_id": "recon_c09eb6f87453f8606d62",
+    "matched": 1,
+    "matched_refs": [
+      "demo-ref-a"
+    ],
+    "breaks": 1,
+    "exception_ids": [
+      "exc_8eaccb2b02fc7cc4c7ec"
+    ],
+    "owner": "genesis-pay",
+    "sla_due": "2026-10-19T01:47:53+00:00"
+  },
+  "open_exceptions": [
+    {
+      "id": "exc_8eaccb2b02fc7cc4c7ec",
+      "external_ref": "demo-ref-b",
+      "break_type": "amount_mismatch",
+      "owner": "genesis-pay",
+      "sla_due": "2026-10-19T01:47:53+00:00",
+      "detail": {
+        "bank_cents": 7000,
+        "leg": "settlement_vs_bank",
+        "settlement_net_cents": 7500
+      }
+    }
+  ],
+  "audit_chain": {
+    "valid": true,
+    "entries": 7,
+    "chain_head": "ac6265143219e2569417c06a8f8cd313e4b9da5e941214abb670f4b066834b0c"
+  },
+  "journal_entry_count": 6,
+  "outbox_topics": [
+    "invoice.issued",
+    "payment.confirmed",
+    "payment.settled",
+    "invoice.issued",
+    "payment.confirmed",
+    "payment.settled",
+    "reconciliation.completed"
+  ]
+}

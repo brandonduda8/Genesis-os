@@ -1,0 +1,64 @@
+{
+  "fake_data_only": true,
+  "invoice": {
+    "invoice_number": "INV-DEMO-0001",
+    "total_cents": 29700,
+    "currency": "USD",
+    "status": "sent"
+  },
+  "pay_page": "/home/hatch/workspace/genesis-os/pay/demo_output/pay_page_demo.html",
+  "rails": [
+    {
+      "rail": "cash_app",
+      "kind": "link",
+      "status": "VERIFIED",
+      "url": "https://cash.app/$zanehart369",
+      "has_qr": true,
+      "config_needed": null
+    },
+    {
+      "rail": "paypal",
+      "kind": "link",
+      "status": "VERIFIED",
+      "url": "https://www.paypal.me/DawnMorrissette/297",
+      "has_qr": true,
+      "config_needed": null
+    },
+    {
+      "rail": "current",
+      "kind": "instruction",
+      "status": "INSTRUCTION",
+      "url": null,
+      "has_qr": false,
+      "config_needed": null
+    },
+    {
+      "rail": "onepay",
+      "kind": "instruction",
+      "status": "INSTRUCTION",
+      "url": null,
+      "has_qr": false,
+      "config_needed": null
+    }
+  ],
+  "paypal_brandon_step": "ONE STEP FOR BRANDON: open PayPal \u2192 Profile (or paypal.me) and read your PayPal.Me handle, then tell Zane or set paypal_me_handle here. Until then the PayPal rail renders as a send-to-email instruction (email above) instead of a one-tap link. The handle is NEVER guessed.",
+  "cash_app_amount_prefill_static_link": "UNVERIFIED (not shipped) \u2014 see rails_config.json",
+  "ledger_confirm": {
+    "intent_id": "pi_0d261d1b16e1ea764338",
+    "rail": "current",
+    "external_ref": "INV-DEMO-0001",
+    "state": "confirmed",
+    "clearing_account_balance": 29700
+  },
+  "trial_balance": {
+    "1100_accounts_receivable": 0,
+    "1200_clearing:current": 29700,
+    "4000_revenue": -29700,
+    "_total_debits_minus_credits": 0
+  },
+  "audit_chain": {
+    "valid": true,
+    "entries": 2,
+    "chain_head": "11968f53789eae9d9eb13768e3a11e02b1428fc219530bbcb66c38be31c29b34"
+  }
+}

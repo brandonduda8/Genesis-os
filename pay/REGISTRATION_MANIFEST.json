@@ -1,0 +1,95 @@
+{
+ "argon_ralph004_convergence": {
+  "adopted": [
+   "DB-level zero-sum trigger (journal_lines_zero_sum) over declared entry totals + line count",
+   "100-case deterministic simulation suite with 0-cent drift assertions",
+   "synchronous=FULL + WAL durability on file-backed ledgers (test-asserted)"
+  ],
+  "delta_note": "Argon's bar said pytest; pytest is not installed on this box and installs are Brandon-tap class, so the suite is unittest (pytest collects unittest suites unchanged).",
+  "not_adopted": [
+   "genesis_pay_router naming",
+   "SQLite-ledger-as-replacement-stack framing \u2014 Apex Invoicing remains the invoicing system of record; Genesis Pay is the ledger behind it"
+  ]
+ },
+ "artifact": "genesis-pay-s0",
+ "authority": "Brandon approval, Power Plan \u00a79.3 via 'Yes tap all' 2026-10-17 ~18:57 CDT; payments spec 2026-10-17 ~20:26 CDT",
+ "commands": {
+  "demo": "cd genesis-os/pay && python3 demo.py && python3 demo_paypage.py",
+  "test": "cd genesis-os/pay && python3 -m unittest discover -s tests -v"
+ },
+ "crucible_draft": {
+  "explicitly_excluded": "No posting, payment, refund, or tap-approval tools are proposed. Money-writing surfaces stay library-internal behind the C8 gate.",
+  "status": "DRAFT ONLY \u2014 not registered, not active",
+  "tools": [
+   {
+    "class": "read",
+    "description": "Read account balances + zero-check from a Genesis Pay ledger DB.",
+    "effect": false,
+    "name": "genesis_pay_trial_balance"
+   },
+   {
+    "class": "read",
+    "description": "List reconciliation runs and open exceptions (owner/SLA) \u2014 read-only.",
+    "effect": false,
+    "name": "genesis_pay_reconciliation_status"
+   },
+   {
+    "class": "read",
+    "description": "Verify the hash-chained audit log of a Genesis Pay ledger DB.",
+    "effect": false,
+    "name": "genesis_pay_audit_verify"
+   }
+  ]
+ },
+ "demo_evidence_summary": "Fake data only: INV-DEMO-0001 $297.00 clean path (fee $3.00, net $294.00); INV-DEMO-0002 $75.00 with a deliberate $5.00 bank shortfall -> 1 matched ref, 1 open amount_mismatch exception (owner genesis-pay, SLA +24h); trial balance nets to 0; audit chain valid (7 entries).",
+ "design_of_record": "genesis-os/war-room/GENESIS_POWER_PLAN_RE_2026-10-17.md \u00a75; payments layer per Brandon spec 2026-10-17; Argon convergence per war-room/ARGON_WO002_RETURN_RALPH_LIST_2026-10-17.md (RALPH-004, ADAPT)",
+ "fences_held": [
+  "$0 spend",
+  "no live Apex code/DB modified",
+  "no money moved",
+  "no external sends",
+  "Hyperswitch not installed"
+ ],
+ "name": "Genesis Pay S0 \u2014 owned double-entry ledger + intent service + reconciliation + no-API-key payments layer",
+ "oce_registration": {
+  "kind": "integration-record + corpus",
+  "text": "Genesis Pay S0 (genesis-os/pay/): owned append-only double-entry ledger behind Apex Invoicing. GenesisPay API: ingest_invoice_issued/voided, record_confirmed_payment, record_settlement, open/resolve_dispute, create/approve_tap_request + prepare_instruction (C8: outbound movement is Brandon's tap; prepared only, no adapter), record_refund (ledger-capped), ingest_webhook (HMAC + dedupe), reconcile (three-way; breaks persist as open exceptions with owner+SLA), verify_audit_chain. All money integer cents; idempotency keys mandatory, same-key/different-payload = 409. Hyperswitch NOT installed (S2, Brandon's open choice); adapter boundary = external_ref + rail strings. v0.2.0: paylinks payments layer (4 no-API-key rails, rails_config.json) + zero-sum DB trigger + WAL/synchronous=FULL."
+ },
+ "paths": {
+  "core": "genesis-os/pay/genesis_pay/core.py",
+  "demo": "genesis-os/pay/demo.py",
+  "demo_evidence": "genesis-os/pay/demo_output/demo_output.json",
+  "errors": "genesis-os/pay/genesis_pay/errors.py",
+  "package": "genesis-os/pay/genesis_pay/",
+  "pay_page_html": "genesis-os/pay/demo_output/pay_page_demo.html",
+  "paylinks": "genesis-os/pay/genesis_pay/paylinks.py",
+  "paypage_demo": "genesis-os/pay/demo_paypage.py",
+  "paypage_evidence": "genesis-os/pay/demo_output/paypage_evidence.json",
+  "rails_config": "genesis-os/pay/rails_config.json",
+  "readme": "genesis-os/pay/README.md",
+  "tests": "genesis-os/pay/tests/ (test_genesis_pay.py, test_argon_acceptance.py, test_paylinks.py)"
+ },
+ "payments_layer": {
+  "cash_app": "VERIFIED profile link https://cash.app/$zanehart369 + pure-stdlib QR; static amount-prefill URL pattern UNVERIFIED (not shipped)",
+  "current": "INSTRUCTION rail (no public merchant link scheme verified) \u2014 payee name/phone + invoice-number note, manual confirm",
+  "ledger": "record_confirmed_payment records rail + reference on the intent (demonstrated on the Current rail in paypage_evidence.json)",
+  "onepay": "INSTRUCTION rail (no public merchant link scheme verified) \u2014 payee name/phone + invoice-number note, manual confirm",
+  "paypal": "PayPal.Me format VERIFIED (PayPal FAQ3918); handle NOT on file \u2014 config slot empty by design, rail renders as email instruction; Brandon step recorded in rails_config.json"
+ },
+ "spine_registration": {
+  "kind": "job",
+  "lane": "money",
+  "owner": "genesis-pay",
+  "payload_keys": [
+   "artifact",
+   "version",
+   "tests",
+   "demo_evidence",
+   "receipt"
+  ],
+  "title": "Genesis Pay S0 build (Approved Builds Kickoff #1)"
+ },
+ "status": "BUILT + TESTED 2026-10-17 (kickoff build 1 + payments layer + Argon RALPH-004 adaptations)",
+ "test_evidence": "46 tests, all passing (re-run 2026-10-17): 28 core + 8 Argon acceptance (100 simulated cases, zero-sum trigger raw-SQL rejection, WAL+synchronous=FULL) + 10 paylinks (rails honesty, page render, QR decode-back with zero RS syndromes, ledger rail+reference). Existing Apex suite baseline also re-verified: 32 tests passing, untouched.",
+ "version": "0.2.0"
+}
