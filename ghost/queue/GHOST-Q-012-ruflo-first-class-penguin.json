@@ -1,0 +1,11 @@
+{
+ "id": "GHOST-Q-012",
+ "title": "RUFLO FIRST-CLASS on penguin \u2014 pinned install into the agent shelf, MCP registration in OpenCode, verify battery, one receipted swarm run",
+ "status": "QUEUED",
+ "target_host": "penguin",
+ "requires_path": "an OpenCode session on penguin (Brandon relay) OR the zane-box heal window; penguin itself has direct internet for npm",
+ "command_or_ref": "genesis-os/master-runtime/ruflo-penguin/ (install.sh \u2192 opencode-mcp-snippet.json merge \u2192 verify.sh \u2192 one swarm task under the master WO's UP-RUFLO package)",
+ "fence_notes": "$0, no sudo, nothing outside $HOME on penguin, pinned ruflo@3.42.5 with drift recorded never silent. Ruflo already seated in master-runtime/agents.json (id 'ruflo', 2026-10-31). Spawning never widens authority: every swarm worker inherits the fences.",
+ "receipt_target": "genesis-os/war-room/RECEIPT-MASTER-RUFLO-2026-10-31.md",
+ "queued_at": "2026-10-31T11:59:06Z"
+}

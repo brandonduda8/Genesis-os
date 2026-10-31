@@ -1,0 +1,11 @@
+{
+ "id": "GHOST-Q-011",
+ "title": "MASTER WO execution \u2014 Genesis Total Connection + Upgrade Program (WO-OPENCODE-MASTER-2026-10-31): deploy the master runtime to penguin + S1, then run the upgrade program under the WIP cap",
+ "status": "QUEUED",
+ "target_host": "penguin + s1 (OpenCode/Cody executes; zane verifies; brandon certifies)",
+ "requires_path": "an OpenCode session on penguin with the WO in hand (Brandon relay \u2014 works TODAY, no zane-box transport needed) OR the zane-box tailnet heal window for fleet-side legs",
+ "command_or_ref": "genesis-os/war-room/WO-OPENCODE-MASTER-2026-10-31.md (the governing document; the Platinum master WO Q-009 pillars remain in force and are incorporated by reference)",
+ "fence_notes": "WIP cap 3 (WS-1 storm/packet, WS-2 runtime+GHOST+Ruflo, WS-3 Station). $0. Level C unchanged: no spend, publishing, accounts, money movement, or signatures without Brandon's named word. Receipts from real runs, read back by Zane; nothing self-certifies; Brandon's acceptance is the only DONE.",
+ "receipt_target": "genesis-os/war-room/RECEIPT-MASTER-<WP>-2026-10-31.md per work package",
+ "queued_at": "2026-10-31T11:59:06Z"
+}

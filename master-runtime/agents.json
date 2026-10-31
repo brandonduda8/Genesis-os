@@ -1,0 +1,170 @@
+{
+ "agents": [
+  {
+   "capabilities": [
+    "all Level C approvals",
+    "signatures",
+    "acceptance = the only DONE"
+   ],
+   "id": "brandon",
+   "limits": [
+    "his taps are the fence \u2014 nobody spends, publishes, signs, or moves money without his named word"
+   ],
+   "name": "Brandon Duda",
+   "role": "Founder / certifier",
+   "surface": "his phone, Chromebook, and this chat"
+  },
+  {
+   "capabilities": [
+    "orchestration",
+    "verification",
+    "browser execution under Brandon's approvals",
+    "registry + memory custody"
+   ],
+   "id": "zane",
+   "limits": [
+    "Level C fences",
+    "never moves money",
+    "never signs in Brandon's name without his per-document approval"
+   ],
+   "name": "Zane",
+   "role": "Operator / Chief Builder, day-to-day accountable",
+   "surface": "zane-box (this host) + hosted browser lanes"
+  },
+  {
+   "capabilities": [
+    "code builds",
+    "compiles (Tauri on S1)",
+    "host-local installs under a WO"
+   ],
+   "id": "cody",
+   "limits": [
+    "works only from a filed WO",
+    "receipts from real runs or it didn't happen",
+    "never self-certifies"
+   ],
+   "name": "Cody (OpenCode)",
+   "role": "Build crew \u2014 executes work orders on penguin + S1",
+   "surface": "OpenCode terminal sessions on penguin and S1"
+  },
+  {
+   "id": "ruflo",
+   "name": "Ruflo",
+   "role": "Swarm conductor \u2014 FIRST-CLASS agent + tool (Brandon's order, 2026-10-31)",
+   "surface": "penguin (home host) \u2014 CLI on PATH + MCP server registered in OpenCode; zane-box seat returns with the F6 shelf reinstall (GHOST-Q-002)",
+   "capabilities": [
+    "multi-agent swarm orchestration for build/research sweeps",
+    "MCP tool provider to OpenCode/Cody and any MCP client on penguin",
+    "task decomposition + parallel worker fan-out under a filed WO"
+   ],
+   "limits": [
+    "works only from a filed WO or a Zane dispatch envelope \u2014 no self-tasking",
+    "receipts from real runs; a swarm claim without a receipt stays UNVERIFIED",
+    "Level C fences apply to every worker it spawns \u2014 spawning never widens authority",
+    "install is pinned (ruflo@3.42.5, the fleet-verified version); version drift gets recorded, never silent"
+   ]
+  },
+  {
+   "capabilities": [
+    "independent review",
+    "code audit"
+   ],
+   "id": "claude",
+   "limits": [
+    "builder is never reviewer \u2014 Claude never grades his own build",
+    "API lane transport-blocked at last check (egress stall, not credits)"
+   ],
+   "name": "Claude",
+   "role": "Reviewer \u2014 adversarial grades, audits",
+   "surface": "Brandon relay (chat) + local proxy lane :18792"
+  },
+  {
+   "capabilities": [
+    "plans",
+    "work orders",
+    "audits"
+   ],
+   "id": "astra",
+   "limits": [
+    "relayed documents are claims until Zane verifies",
+    "formality is not self-authorization",
+    "co-operator grant runs through 2026-11-03 06:32 CST"
+   ],
+   "name": "Astra",
+   "role": "Planning co-lead",
+   "surface": "empire-handoffs mailbox repo (GitHub)"
+  },
+  {
+   "capabilities": [
+    "drafts",
+    "proposals",
+    "session work in his own surface"
+   ],
+   "id": "prime",
+   "limits": [
+    "cannot hold credentials",
+    "cannot self-equip (vendor-blocked)",
+    "his drafts invent terms \u2014 strip and verify before use",
+    "NOT EQUIPPED until his workplace proof battery passes"
+   ],
+   "name": "OpenClaw Prime",
+   "role": "Hosted worker \u2014 drafting, research, mailbox tasks",
+   "surface": "hosted OpenClaw tenancy (7-tool exec allowlist)"
+  },
+  {
+   "capabilities": [
+    "outreach drafts + sends under standing rules",
+    "client follow-up"
+   ],
+   "id": "hermes",
+   "limits": [
+    "sends follow the honesty rules \u2014 no invented clients, results, or guarantees"
+   ],
+   "name": "Hermes",
+   "role": "Outreach operator (Apex Forge)",
+   "surface": "zane-box service :18807 + phone app; brain = NIM meta/muse-glimmer-30b (model-field PROVEN 2026-10-30)"
+  },
+  {
+   "capabilities": [
+    "edge automation",
+    "phone duties (WO-059 staged)"
+   ],
+   "id": "zeroclaw",
+   "limits": [
+    "loopback bind law",
+    "staged work fires on its WO, not on initiative"
+   ],
+   "name": "ZeroClaw",
+   "role": "Edge runtime / field marshal of the edge fleet",
+   "surface": "S1, loopback :42617, paired"
+  },
+  {
+   "capabilities": [
+    "reasoning/coding work with response-model-field proof"
+   ],
+   "id": "glimmer",
+   "limits": [
+    "work counts only with a model-field proof",
+    "no training run exists \u2014 serving waits on Brandon's tap"
+   ],
+   "name": "Muse Glimmer-30B",
+   "role": "Elite worker model seat",
+   "surface": "NVIDIA NIM (model-field PROVEN) + Colab serving (Brandon's Run-all tap)"
+  },
+  {
+   "capabilities": [
+    "on-device sensing",
+    "phone-local actions"
+   ],
+   "id": "kai-janus",
+   "limits": [
+    "phone runs Tailscale XOR NetBird (single VPN slot) \u2014 sequence network steps"
+   ],
+   "name": "Kai / Janus",
+   "role": "Phone-side edge agents",
+   "surface": "Brandon's Android (Termux/Shizuku)"
+  }
+ ],
+ "note": "The Genesis agent registry \u2014 the master runtime's map of who exists, where they run, what they may do, and what they may never do. Brandon Duda is the certifier: every DONE gate and every Level C act is his. Executor claims sit UNVERIFIED until a receipt is read back.",
+ "version": 1
+}
