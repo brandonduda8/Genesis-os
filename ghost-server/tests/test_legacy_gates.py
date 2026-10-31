@@ -22,6 +22,7 @@ def tree_hash(d):
     return {os.path.basename(p): hashlib.sha256(open(p, "rb").read()).hexdigest() for p in sorted(glob.glob(d + "/*"))}
 
 
+@unittest.skipUnless(os.path.isdir(QUEUE), "needs the sibling genesis-os/ghost/queue (designed layout; Zane review D2)")
 class Migration(unittest.TestCase):
     def setUp(self):
         self.d = tempfile.mkdtemp()
@@ -59,6 +60,38 @@ class Migration(unittest.TestCase):
         self.assertEqual(rep["changed"], ["GHOST-Q-002"])
         self.assertNotEqual(self.reg.get("GHOST-Q-002")["title"], "edited by hand")
         self.assertEqual(self.reg.provenance("GHOST-Q-002")["lineage"][-1]["transform"], "legacy_file_changed")
+
+    def test_duplicate_ids_across_files_are_refused_not_merged(self):
+        q = os.path.join(self.d, "dup")
+        os.makedirs(q)
+        for name, title in (("GHOST-Q-050-a.json", "first"), ("GHOST-Q-050-b.json", "second")):
+            json.dump({"id": "GHOST-Q-050", "title": title, "requires_path": "x", "status": "QUEUED"},
+                      open(os.path.join(q, name), "w"))
+        rep = legacy.migrate(self.reg, q, MAPPING, actor="os:test")
+        self.assertEqual(rep["created"], ["GHOST-Q-050"])
+        self.assertEqual(len(rep["duplicate_ids"]), 1)
+        self.assertEqual(self.reg.get("GHOST-Q-050")["title"], "first")
+
+    def test_real_queue_has_one_file_per_id_and_no_level_c(self):
+        rep = legacy.migrate(self.reg, QUEUE, MAPPING, actor="os:test", repo_root=os.path.dirname(HERE))
+        self.assertEqual(rep["duplicate_ids"], [])
+        self.assertEqual(rep["level_c"], [], "a legitimate queue job was classified Level C (Zane review D1)")
+
+    def test_prose_statuses_are_normalised_and_unverified_states_stay_blocked(self):
+        self.assertEqual(legacy.status_token("QUEUED — work order written 2026-10-31"), "QUEUED")
+        self.assertEqual(legacy.status_token("DEAD-LETTER (attempts exhausted)"), "DEAD-LETTER")
+        self.assertEqual(legacy.status_token("p0 decided"), "")
+        q = os.path.join(self.d, "q3")
+        os.makedirs(q)
+        for n, st in ((60, "QUEUED — written today; delivered for relay"), (61, "DISCHARGED 2026-10-31 (receipt X)"),
+                      (62, "P0 DECIDED (Shape A) + P1 BUILT-UNVERIFIED")):
+            json.dump({"id": f"GHOST-Q-0{n}", "title": "t", "requires_path": "x", "status": st},
+                      open(os.path.join(q, f"GHOST-Q-0{n}-x.json"), "w"))
+        legacy.migrate(self.reg, q, MAPPING, actor="os:test")
+        self.assertEqual(self.reg.get("GHOST-Q-060")["blocked_reason"], "requires-unmapped")  # QUEUED, then unmapped
+        self.assertEqual(self.reg.get("GHOST-Q-061")["blocked_reason"], "legacy-status-discharged-unverified")
+        self.assertEqual(self.reg.get("GHOST-Q-062")["blocked_reason"], "legacy-status-p0-unverified")
+        self.assertIn("Shape A", self.reg.get("GHOST-Q-062")["spec"]["legacy_status"])  # full prose kept
 
     def test_unmapped_ids_are_blocked_not_guessed(self):
         q = os.path.join(self.d, "q2")
@@ -133,6 +166,15 @@ class Gates(unittest.TestCase):
         gate = gates.Gate(self.reg, policy_path=pol, verifier=self.gate.verifier, whoami=lambda: "zane")
         with self.assertRaises(gates.Refused):
             gate.commit("ghost_unblock", job_id="GHOST-Q-001", now=time.time(), grant=self.grant())
+
+    def test_paths_and_slugs_are_not_instructions_but_real_fence_prose_still_is(self):
+        """Zane review D1: GHOST-Q-014's goal path 'college-enrollment-…' made the job Level C at import."""
+        q014 = ("COLLEGE FUNDING COMPLETION — College of DuPage Spring 2027: machine owns investigation, follow-up "
+                "workspace/goals/college-enrollment-college-of-dupage-spring-2027/files/COD_WAIVER_FOLLOWUP.md")
+        self.assertEqual(gates.classify("release_envelope", q014), "A")
+        for fence in ("enroll Brandon in the spring course", "publish the app", "make a payment to COD",
+                      "sign up for a new account"):
+            self.assertEqual(gates.classify("release_envelope", fence), "C", fence)
 
     def test_unknown_kinds_fail_closed_to_level_c(self):
         self.assertEqual(gates.classify("frobnicate"), "C")

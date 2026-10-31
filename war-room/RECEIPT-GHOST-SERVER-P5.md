@@ -10,7 +10,10 @@ zane-box is OWED to Zane.**
 - The files are untouched; a test compares directory hashes before and after.
 - Each lineage source is `ghost/queue/<file>@sha256:<hash>@git:<blob>`.
 - Results:
-  - **10 QUEUED** on structured requirements (13 jobs in total, including Q-017, whose requirement list is empty so it releases to Zane as soon as the server runs).
+  - **10 QUEUED** on structured requirements (13 jobs in total at the time).
+  - **CORRECTION (Zane review D3/D5):** the claim that "Q-017 releases to Zane as soon as the server runs" was false
+    against the real files. The real Q-017 (`-stem`) is the build WO, and its prose status imports it as BLOCKED. My
+    `-v2` file reused the same ID for a different job, so it has been deleted.
   - **3 BLOCKED, each with its reason**:
     - Q-006: `human:relay-packs-landed`;
     - Q-008: `human:brandon-relay`; this is Brandon's hands, never dispatched;
@@ -122,3 +125,30 @@ and attach its `provenance` output.
 - :8888 untouched.
 - No keys provisioned.
 - No service started on any host.
+
+
+## Zane's independent review (2026-10-31): MERGE-WITH-FIXES, and the fixes
+
+| Acceptance item | Zane's grade on zane-box |
+|---|---|
+| 1. Restart survival | **ZANE-VERIFIED** (kill -9, continuous chain, 17 jobs intact; a literal OS reboot not done) |
+| 2. Real heal-window drain | **EXECUTOR-REPORTED-ONLY**. The real router is confirmed and the trio is PARTIAL; NIM needs a key (D4). |
+| 3. Level C refusal | **ZANE-VERIFIED** (exit 3, ESC-0002 written with mode 0600) |
+| 4. Lineage in one query | **ZANE-VERIFIED** |
+| 5. Live board | **ZANE-VERIFIED** |
+| 6. Idle budget on zane-box | **ZANE-VERIFIED**: 27,260 kB RSS and 0.100 % CPU settled. The 0.700 % reading during the first 3 s was a transient. |
+
+The router is confirmed as an HTTP forward proxy (CONNECT and absolute-form). The trio through it gave github 200 and
+pip 200; NIM failed with 410.
+
+| Defect | Fix |
+|---|---|
+| **D1** Q-014 classified Level C | Paths, file names and long kebab slugs are removed before the Level C scan. **"Enroll" stays a fence**, because Brandon's register lists enrollment as a hard fence. Regression test: Q-014's real text is A, while "enroll Brandon in the spring course" is still C. |
+| **D2** suite coupled to layout and file modes | Tests that need the sibling queue now skip with a reason (bare checkout: OK, 9 skipped). Test sites set explicit modes. The README has deploy notes. **The suite passes under umask 002 and under 022.** |
+| **D3** prose legacy statuses | Only the leading status word is read; the prose is kept in the spec. The receipt claim above is corrected. |
+| **D4** NIM leg can't pass | It never sends an unauthenticated request. It reports `nim_key_unconfigured` or `nim_key_missing`. The model is set to the seat proven on Brandon's key, and the key file is `state/keys/nim.key`, which **Zane places** (credential custody is Zane's). |
+| **D5** two Q-017 files | My `-v2` file is deleted and `-stem` kept. The importer now refuses duplicate IDs (tested). |
+| **D6** mapping gaps | Rows added for Q-013–Q-016. Q-005 gains the s1-door alternative. Q-009 is `[]`, per the carve-out. Q-017 maps to the build WO. **Still open:** Q-006 needs its pack receipt path (the new `file:<path>` term supports it), and splitting its independent legs needs two job IDs. Both are Zane's. |
+
+**Result:** 53 tests, OK under both umasks. The run without `cryptography` is OK with skips, failing closed. The real
+migration (18 jobs) has 0 duplicates and 0 Level C.

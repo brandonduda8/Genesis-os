@@ -89,6 +89,10 @@ class Server:
         kind, _, name = term.partition(":")
         if kind == "human":
             return False, f"waits on Brandon ({name})"
+        if kind == "file":
+            path = os.path.normpath(os.path.join(self.cfg.receipts_root, name))
+            inside = path.startswith(os.path.normpath(self.cfg.receipts_root) + os.sep)
+            return (inside and os.path.exists(path), f"{name} {'present' if inside and os.path.exists(path) else 'absent'}")
         if kind == "job":
             j = self.reg.get(name)
             return (bool(j and j["state"] == "DONE-VERIFIED"), f"{name} is {j['state'] if j else 'unknown'}")

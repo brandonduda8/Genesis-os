@@ -4,3 +4,4 @@ __pycache__/
 config/policy.json
 config/trusted_keys.json
 config/policy_charter.json
+tests/_lab_nim.key

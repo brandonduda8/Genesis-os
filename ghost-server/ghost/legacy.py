@@ -26,6 +26,12 @@ MD_FIELD = lambda name: re.compile(rf"\*\*{name}:\*\*\s*(.+)", re.I)  # noqa: E7
 LEGACY_STATUS = {"QUEUED": QUEUED, "DEAD-LETTER": DEAD}
 
 
+def status_token(status: str) -> str:
+    """Leading status word of a legacy status ("QUEUED — work order written …" -> "QUEUED"). Prose is kept in spec."""
+    m = re.match(r"\s*([A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*)", status or "")
+    return m.group(1) if m else ""
+
+
 def _git_blob(path: str) -> str:
     try:
         out = subprocess.run(["git", "hash-object", path], capture_output=True, text=True, timeout=5)
@@ -72,9 +78,16 @@ def migrate(reg: Registry, queue_dir: str, mapping_path: str, *, actor: str, gat
     mapping = json.load(open(mapping_path))
     report: Dict[str, List[str]] = {"created": [], "unchanged": [], "changed": [], "blocked": [], "level_c": []}
     files = sorted(glob.glob(os.path.join(queue_dir, "*.json")) + glob.glob(os.path.join(queue_dir, "Q-*.md")))
+    report["duplicate_ids"] = []
+    seen: Dict[str, str] = {}
     for path in files:
         rec = read_legacy(path)
         jid = rec["job_id"]
+        if jid in seen:  # one ID, one file: a second file never overwrites or merges into the first
+            report["duplicate_ids"].append(f"{jid}:{os.path.basename(path)} (kept {os.path.basename(seen[jid])})")
+            reg.ledger("legacy_duplicate_id", actor, {"job_id": jid, "kept": seen[jid], "refused": path}, jid)
+            continue
+        seen[jid] = path
         rel = os.path.relpath(path, repo_root) if repo_root else path
         source = f"{rel}@sha256:{rec['source_sha256']}" + (f"@git:{rec['git_blob']}" if rec["git_blob"] else "")
         existing = reg.get(jid)
@@ -96,9 +109,10 @@ def migrate(reg: Registry, queue_dir: str, mapping_path: str, *, actor: str, gat
                         "requires_path_text": rec["requires_path"], "legacy_status": rec["status"],
                         "legacy_queued_at": rec["queued_at"], "legacy_source": rel,
                         "legacy_sha256": rec["source_sha256"]}}
-        state, reason = LEGACY_STATUS.get(rec["status"], QUEUED), ""
-        if rec["status"] not in LEGACY_STATUS:
-            state, reason = BLOCKED, f"legacy-status-{rec['status'].lower()}-unverified"
+        token = status_token(rec["status"])
+        state, reason = LEGACY_STATUS.get(token, QUEUED), ""
+        if token not in LEGACY_STATUS:  # nothing is DONE (or ACTIVE) because a file says so: it waits, visibly
+            state, reason = BLOCKED, f"legacy-status-{(token or 'prose').lower()}-unverified"
         elif level == "C":
             state, reason = BLOCKED, "level-c-brandon"
         elif m is None:

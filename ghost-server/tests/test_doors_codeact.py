@@ -29,6 +29,9 @@ class Doors(unittest.TestCase):
     def door(self, proxy_port, **kw):
         return Door("egress", "http_proxy", f"http://127.0.0.1:{proxy_port}", trio=self.trio, **kw)
 
+    def setUp_key(self):
+        pass
+
     def test_healed_only_when_all_three_legs_pass_through_the_door(self):
         px = lab.start_proxy()
         t = self.door(px.server_address[1]).probe_trio()
@@ -80,6 +83,18 @@ class Doors(unittest.TestCase):
         self.assertEqual(len(px.requests), 1)
         self.assertEqual(d.breaker, OPEN)
         self.assertGreaterEqual(d.open_until - clock.t, 900)
+        px.shutdown()
+
+    def test_nim_leg_never_sends_unauthenticated_requests(self):
+        """Zane review D4: an unkeyed NIM leg got HTTP 410; now it reports the missing key and sends nothing."""
+        px = lab.start_proxy()
+        for nim, cls in (({"url": self.trio["nim"]["url"]}, "nim_key_unconfigured"),
+                         ({"url": self.trio["nim"]["url"], "key_file": "/nonexistent/nim.key"}, "nim_key_missing")):
+            d = Door("egress", "http_proxy", f"http://127.0.0.1:{px.server_address[1]}", trio=dict(self.trio, nim=nim))
+            before = len(px.requests)
+            t = d.probe_trio()
+            self.assertEqual((t["legs"]["nim"]["error_class"], t["verdict"]), (cls, "PARTIAL"))
+            self.assertFalse(any(r.startswith("POST") for r in px.requests[before:]))
         px.shutdown()
 
     def test_stats_record_latency_and_error_classes(self):

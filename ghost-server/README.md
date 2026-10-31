@@ -24,6 +24,17 @@ zane-box, and Brandon certifies.
 | 8 | MCP (read-only, stdio) inside the runtime; signed A2A envelopes across machines, store-and-forward | `ghost/mcp.py`, `ghost/envelope.py` |
 | 9 | Double-fork daemon, flock pidfile, boot recovery, keepalive contract, hash-chained evidence ledger | `ghost/server.py`, `ghost/registry.py` |
 
+## Deploy notes (Zane review D2)
+
+- **File modes.** `signing.py` refuses a group- or world-writable `config/trusted_keys.json`, by design. On hosts whose
+  default umask is 002 (zane-box), deploy with `umask 022`, or run `chmod 644 config/trusted_keys.json`. Private keys
+  are 0600.
+- **Layout.** `ghost-server/` sits beside `ghost/queue/`, as in the genesis-os checkout. In a bare checkout, the 9
+  tests that need the real queue **skip with a reason** instead of failing.
+- **Legacy statuses.** Only the leading status word of a queue file is read. `QUEUED` and `DEAD-LETTER` import as
+  themselves. Any other status (ACTIVE, DISCHARGED, P0 …) imports as `BLOCKED-(legacy-status-<word>-unverified)`,
+  because nothing is DONE or ACTIVE just because a file says so. The full prose is kept in `spec.legacy_status`.
+
 ## Zane: verification on zane-box (GHOST-Q-017)
 
 Run everything from `genesis-os/ghost-server`. Nothing below spends money, publishes, or touches :8888.

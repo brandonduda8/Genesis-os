@@ -62,8 +62,18 @@ _EXECUTORS: Dict[str, Callable[..., Any]] = {}
 EXECUTORS = MappingProxyType(_EXECUTORS)  # read-only view; the only writer is register_executor
 
 
+# Paths, file names and long kebab-case slugs are identifiers, not instructions: "college-enrollment-..." in a goal
+# path is not an act of enrolling (Zane review D1). They are removed before the Level C text scan.
+_IDENTIFIER_TOKENS = re.compile(r"\S*[/\\]\S*|\S+\.(?:md|json|py|sh|txt|yaml|yml|csv)\b|\b[a-z0-9]+(?:-[a-z0-9]+){3,}\b",
+                                re.I)
+
+
+def prose(text: str) -> str:
+    return _IDENTIFIER_TOKENS.sub(" ", text or "")
+
+
 def classify(kind: str, text: str = "") -> str:
-    if kind in LEVEL_C_KINDS or LEVEL_C_TEXT.search(text or ""):
+    if kind in LEVEL_C_KINDS or LEVEL_C_TEXT.search(prose(text)):
         return "C"
     if kind in LEVEL_B:
         return "B"
@@ -135,7 +145,7 @@ class Gate:
         user = principal or self.whoami()
         actor = f"os:{user}"
         level = classify(kind, text)
-        if not is_known(kind) and not LEVEL_C_TEXT.search(text or "") and not LEVEL_C_TEXT.search(kind.replace("_", " ")):
+        if not is_known(kind) and not LEVEL_C_TEXT.search(prose(text)) and not LEVEL_C_TEXT.search(kind.replace("_", " ")):
             reason = f"novel action class {kind!r}: no register class covers it; raised once as a policy question"
             esc = self._escalate(kind, job_id, reason, actor, policy_question=True)
             self.reg.ledger("gate_refused", actor, {"kind": kind, "level": "novel", "escalation": esc}, job_id)

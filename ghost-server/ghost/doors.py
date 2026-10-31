@@ -225,7 +225,13 @@ class Door:
             return {"ok": False, "error_class": "unconfigured", "ms": 0}
         try:
             if name == "nim":
-                key = open(cfg["key_file"]).read().strip() if cfg.get("key_file") else ""
+                kf = cfg.get("key_file") or ""
+                if not kf:
+                    return {"ok": False, "error_class": "nim_key_unconfigured", "ms": 0}
+                try:
+                    key = open(kf).read().strip()  # read at call time; never logged or stored
+                except OSError:
+                    return {"ok": False, "error_class": "nim_key_missing", "ms": 0}
                 hdr = {"Content-Type": "application/json", **({"Authorization": f"Bearer {key}"} if key else {})}
                 payload = json.dumps({"model": cfg.get("model", ""), "max_tokens": 1,
                                       "messages": [{"role": "user", "content": "ping"}]}).encode()

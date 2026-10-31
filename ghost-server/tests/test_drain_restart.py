@@ -33,10 +33,12 @@ class Clock:
         return self.t
 
 
-def make_site(tmp, doors=None):
-    """A throwaway copy of genesis-os: the real legacy queue + this ghost-server's mapping, isolated state."""
+def make_site(tmp, doors=None, only=None):
+    """A throwaway copy of genesis-os: the real legacy queue (optionally only some job ids) + this ghost-server's
+    mapping, isolated state."""
     root = os.path.join(tmp, "genesis-os")
-    shutil.copytree(os.path.join(REPO, "ghost", "queue"), os.path.join(root, "ghost", "queue"))
+    keep = None if only is None else (lambda d, names: [n for n in names if not any(n.startswith(j) for j in only)])
+    shutil.copytree(os.path.join(REPO, "ghost", "queue"), os.path.join(root, "ghost", "queue"), ignore=keep)
     os.makedirs(os.path.join(root, "war-room"))
     gs = os.path.join(root, "ghost-server")
     os.makedirs(os.path.join(gs, "config"))
@@ -48,9 +50,15 @@ def make_site(tmp, doors=None):
            "lanes": {"default_cap": 3, "global_cap": 3}, "reach": {}}
     json.dump(cfg, open(os.path.join(gs, "config", "ghost.json"), "w"))
     json.dump(doors or {"doors": []}, open(os.path.join(gs, "config", "doors.json"), "w"))
+    for f in ("ghost.json", "doors.json", "legacy_requires.json"):  # explicit modes: never depend on the umask (D2)
+        os.chmod(os.path.join(gs, "config", f), 0o644)
     return root, gs
 
 
+HAVE_QUEUE = os.path.isdir(os.path.join(REPO, "ghost", "queue"))
+
+
+@unittest.skipUnless(HAVE_QUEUE, "needs the sibling genesis-os/ghost/queue (designed layout; Zane review D2)")
 @unittest.skipUnless(signing.HAVE_CRYPTO, "cryptography required for signed envelopes")
 class DrainThroughHealWindow(unittest.TestCase):
     def test_migrated_legacy_job_drains_end_to_end_through_a_heal_window(self):
@@ -59,11 +67,13 @@ class DrainThroughHealWindow(unittest.TestCase):
         proxy_port = lab.free_port()
         root, gs = make_site(tmp, {"trio": lab.trio_for(up.server_port),
                                    "doors": [{"name": "egress", "kind": "http_proxy",
-                                              "proxy_url": f"http://127.0.0.1:{proxy_port}"}]})
+                                              "proxy_url": f"http://127.0.0.1:{proxy_port}"}]},
+                             only=("GHOST-Q-002", "GHOST-Q-003", "GHOST-Q-004", "GHOST-Q-008"))
         server_pub = signing.keygen(os.path.join(gs, "state", "keys", "zane-box.key"))
         zane_key_path = os.path.join(tmp, "zane.key")
         zane_pub = signing.keygen(zane_key_path)
         json.dump({"peers": {"zane": zane_pub}}, open(os.path.join(gs, "config", "trusted_keys.json"), "w"))
+        os.chmod(os.path.join(gs, "config", "trusted_keys.json"), 0o644)  # signing.py refuses group-writable keys
         clock = Clock()
         srv = Server(Config(os.path.join(gs, "config", "ghost.json")), clock=clock)
         install_release_executor(srv)
@@ -72,9 +82,8 @@ class DrainThroughHealWindow(unittest.TestCase):
                        actor="os:zane", repo_root=root)
 
         # 1. Network dead: the door is DARK. Door-dependent jobs burn no attempts and are not released.
-        #    (GHOST-Q-017 needs no transport, so it correctly releases to Zane even with the network dead.)
         out = srv.tick()
-        self.assertEqual(out["released"], {"GHOST-Q-017": "released"})
+        self.assertEqual(out["released"], {})
         self.assertEqual(srv.reg.door_states()["egress"]["verdict"], "DARK")
         self.assertEqual(srv.reg.get("GHOST-Q-002")["attempts"], 0)
 
@@ -88,10 +97,8 @@ class DrainThroughHealWindow(unittest.TestCase):
         self.assertEqual(srv.reg.door_states()["egress"]["verdict"], "HEALED")
         self.assertEqual(out["released"], {"GHOST-Q-002": "released", "GHOST-Q-003": "released"})
         self.assertEqual(srv.reg.get("GHOST-Q-002")["state"], "RUNNING")
-        self.assertEqual(len(srv.reg.jobs("RUNNING")), 3)  # global WIP cap of 3 reached, not exceeded
-        self.assertEqual(srv.select(clock.t), [])           # nothing more is released while at the cap
         spooled = envelope.pending_out(os.path.join(gs, "state", "spool"), "zane")
-        self.assertEqual(len(spooled), 3)
+        self.assertEqual(len(spooled), 2)
 
         # 3. Zane (the assignee) receives the task, verifies GHOST's signature, does the work, files the receipt,
         #    and returns a signed result envelope through the same store-and-forward spool.
@@ -134,6 +141,29 @@ class DrainThroughHealWindow(unittest.TestCase):
         up.shutdown()
 
 
+@unittest.skipUnless(HAVE_QUEUE, "needs the sibling genesis-os/ghost/queue (designed layout; Zane review D2)")
+@unittest.skipUnless(signing.HAVE_CRYPTO, "cryptography required for signed envelopes")
+class WipCapOnTheRealQueue(unittest.TestCase):
+    def test_full_real_queue_never_exceeds_the_global_cap_of_3(self):
+        tmp = tempfile.mkdtemp()
+        root, gs = make_site(tmp)
+        signing.keygen(os.path.join(gs, "state", "keys", "zane-box.key"))
+        srv = Server(Config(os.path.join(gs, "config", "ghost.json")), clock=Clock())
+        install_release_executor(srv)
+        srv.boot()
+        legacy.migrate(srv.reg, os.path.join(root, "ghost", "queue"), os.path.join(gs, "config", "legacy_requires.json"),
+                       actor="os:zane", repo_root=root)
+        for _ in range(3):
+            srv.tick()
+            self.assertLessEqual(len(srv.reg.jobs("RUNNING")), 3)
+        running = srv.reg.jobs("RUNNING")
+        eligible = [j for j in srv.reg.jobs() if j["requires"] == [] and j["level"] != "C"]
+        self.assertEqual(len(running), min(3, len([j for j in eligible if j["state"] == "RUNNING"])))
+        self.assertTrue(running and all(j["requires"] == [] for j in running))  # no door exists: only transport-free
+        self.assertEqual(srv.select(srv.clock()), [])
+
+
+@unittest.skipUnless(HAVE_QUEUE, "needs the sibling genesis-os/ghost/queue (designed layout; Zane review D2)")
 @unittest.skipUnless(codeact.netns_available(), "CodeAct needs unprivileged netns for this test")
 class RestartSurvival(unittest.TestCase):
     def ghostd(self, gs, *args, **kw):

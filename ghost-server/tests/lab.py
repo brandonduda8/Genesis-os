@@ -99,6 +99,12 @@ def start_proxy(behaviour="ok"):
     return srv
 
 
+LAB_KEY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_lab_nim.key")  # a dummy, not a credential
+if not os.path.exists(LAB_KEY):
+    with open(LAB_KEY, "w") as _f:
+        _f.write("lab-dummy-key-not-a-secret\n")
+
+
 def free_port():
     s = socket.socket()
     s.bind(("127.0.0.1", 0))
@@ -110,4 +116,4 @@ def free_port():
 def trio_for(upstream_port):
     base = f"http://127.0.0.1:{upstream_port}"
     return {"github": {"url": base + "/zen"}, "pip": {"url": base + "/simple/pip/"},
-            "nim": {"url": base + "/v1/chat/completions", "model": "lab"}}
+            "nim": {"url": base + "/v1/chat/completions", "model": "lab", "key_file": LAB_KEY}}
