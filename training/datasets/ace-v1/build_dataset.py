@@ -11,6 +11,9 @@ from pathlib import Path
 
 ROOT = Path('/home/hatch/workspace/genesis-os')
 HERE = Path(__file__).resolve().parent
+import sys as _sys; _sys.path.insert(0, str(HERE.parent))
+from frozen_guard import write_heldout  # noqa: E402  (TS-001: frozen held-outs never change silently)
+FROZEN_HELDOUT_SHA256 = '23452d59cdcbf897a54bbdb3fbea8d89a449efe6c7d6f543b906fe64e91cd632'  # MANIFEST freeze hash; change only with --refreeze + a version bump
 REG = ROOT / 'job-storm-ace' / 'registry.json'
 KB = ROOT / 'job-storm-ace' / 'kb' / 'ace_kb.sqlite'
 FILTER = ROOT / 'job-storm-ace' / 'ace_filter.json'
@@ -90,8 +93,8 @@ def main():
         train_verdicts.append(r)
 
     held_path = HERE / 'heldout' / 'ace-heldout-v1.jsonl'
-    held_path.write_text('\n'.join(json.dumps(r, ensure_ascii=False) for r in held_recs) + '\n')
-    held_sha = hashlib.sha256(held_path.read_bytes()).hexdigest()
+    held_sha = write_heldout(held_path, '\n'.join(json.dumps(r, ensure_ascii=False) for r in held_recs) + '\n',
+                             FROZEN_HELDOUT_SHA256)
 
     # ---- KB postings not in the registry, with a recorded reason ----
     db = sqlite3.connect(KB); db.row_factory = sqlite3.Row
