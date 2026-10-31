@@ -14,6 +14,9 @@ from pathlib import Path
 
 ROOT = Path('/home/hatch/workspace/genesis-os')
 HERE = Path(__file__).resolve().parent
+import sys as _sys; _sys.path.insert(0, str(HERE.parent))
+from frozen_guard import write_heldout  # noqa: E402  (TS-001: frozen held-outs never change silently)
+FROZEN_HELDOUT_SHA256 = '74d68f5329388dbc1f9162f6052bb4f4cb3ecd04303bfab1823d428c1a518f2a'  # MANIFEST freeze hash; change only with --refreeze + a version bump
 QUEUE_DIR = ROOT / 'ghost' / 'queue'
 SWEEP = ROOT / 'war-room' / 'RECEIPT-ACTIVATION-SWEEP-2026-10-31.md'
 ZC = ROOT / 'war-room' / 'RECEIPT-ZEROCLAW-BACKLOG-2026-10-31.md'
@@ -152,8 +155,7 @@ def main():
     r = {'type': 'state_read',
          'instruction': ("GHOST state reading. penguin_keepalive.json records: "
                          f"status now \"{pk.get('status')}\", last_down {pk.get('last_down')}, last_up {pk.get('last_up')}, "
-                         f"consecutive_down {pk.get('consecutive_down')}. What failure class caused the recorded down period?",
-                         ),
+                         f"consecutive_down {pk.get('consecutive_down')}. What failure class caused the recorded down period?"),
          'response': ("UNKNOWN — the state file records the down→up transition and its timestamps but records "
                       "no cause. Any named class (EGRESS / TRANSPORT / FAULT) would be invented from this evidence alone."),
          'source': 'genesis-os/state/penguin_keepalive.json',
@@ -167,8 +169,7 @@ def main():
     r = {'type': 'state_read',
          'instruction': ("GHOST state reading. lane_health.json records EVERY lane DOWN with detail \"blackout\" — "
                          f"{len(down)} lanes including the local ollama lane: {', '.join(sorted(down)[:8])}... "
-                         "What single failure class explains this snapshot?",
-                         ),
+                         "What single failure class explains this snapshot?"),
          'response': ("UNKNOWN — the snapshot records statuses and the shared detail \"blackout\" but no per-lane "
                       "cause and no resolution. Simultaneous failure of every lane including a local one is "
                       "consistent with more than one class (probe-path/egress event vs host event); the record "
@@ -248,8 +249,8 @@ def main():
         r = dict(r); del r['_cid']; r['id'] = f'GHOST-C-{i:03d}'
         train_out.append(r)
     held_path = HERE / 'heldout' / 'ghost-heldout-v1.jsonl'
-    held_path.write_text('\n'.join(json.dumps(r, ensure_ascii=False) for r in held_recs) + '\n')
-    held_sha = hashlib.sha256(held_path.read_bytes()).hexdigest()
+    held_sha = write_heldout(held_path, '\n'.join(json.dumps(r, ensure_ascii=False) for r in held_recs) + '\n',
+                             FROZEN_HELDOUT_SHA256)
 
     # ---- Doctrine doc chunks (verbatim, capped) ----
     docs = []
