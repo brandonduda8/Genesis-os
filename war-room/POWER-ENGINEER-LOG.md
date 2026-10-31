@@ -83,3 +83,34 @@ and not only the output.
    playlists are waiting, so this puts something directly in his hands (§3.2). It outranks infrastructure.
 3. **Training kernels, before Nov 7.** *Why:* the quota is perishable (§3.5). On first access to the datasets I will
    write a P0 plus a qualification-battery runner, so the quota is spent on verifiable runs and not set-up.
+
+---
+
+## Session 2026-10-31 (19:3x UTC), continued
+
+**D-004: Commit the policy register verbatim, and make GHOST enforce it in code.**
+- **Reason:** Brandon supplied the register's text directly in his own channel. It also says, in so many words, that
+  GHOST's gate implements the register. The gate built earlier required a signed receipt for **every** Level B
+  action, which is exactly the per-item tap the doctrine removes.
+- **Change** (Genesis-os#1, `1247b4f`):
+  - Brandon signs **one class charter**, lasting at most 180 days and revocable.
+  - Each class has a code ceiling, so a charter can't stretch a class past it.
+  - Fences stay refused even when a charter names them.
+  - Unknown kinds are refused and escalated once as a `policy_question`.
+- **Tests:** 47/47 pass, including 5 new ones. The run without `cryptography` also passes, failing closed.
+- **Rejected:**
+  - (a) An unsigned allow-list of classes. Anyone with file access could widen it, so it isn't authority.
+  - (b) Keeping per-item receipts only. That defies the register.
+  - (c) Letting the charter define its own kinds. Then a charter could reach a fence; the code ceiling exists to
+    prevent that.
+- **His-hands step:** the class charter is a **signature**, which the register calls capability, not approval. It is
+  signed once on Brandon's device, using `ghostd.py charter-sign`. No key is provisioned by me.
+
+**D-005: The music player (Brandon's request) gets P0 and P1 first, not a rebuild in one go.**
+- Draft PR genesis-player#14:
+  - the design note, with an honest boundary: TIDAL's major-label catalog is licensed and can't be free;
+  - a precision parametric EQ engine with AutoEq Beats correction profiles, 6/6 tests passing locally;
+  - an offline section that is licence-aware, with YouTube Premium Lite used as a taste source only.
+- **Rejected:** pulling audio from YouTube or Premium Lite (ToS and legal risk to Brandon's account); writing UI
+  before knowing his playlist and headphones.
+- **Waiting on Brandon** (his-hands, not approval): the Google Takeout export, and his headphone models.
