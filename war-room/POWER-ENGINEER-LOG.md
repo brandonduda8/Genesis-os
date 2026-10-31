@@ -153,3 +153,34 @@ is green on both CI lanes. Genesis-core#21 is clean. Nothing new from reviewers.
 1. Training-program P0 (assignment 2). The sources landed in `f955752` and `7f146a3`; Nov 7 is the deadline.
 2. Hi-Fi P2 in genesis-player#14: wire the EQ engine into playback. Still waiting on Brandon's Takeout export for P4.
 3. Fix whatever Zane finds when he re-checks GHOST v2.
+
+---
+
+## Check-in 2026-10-31 21:11 UTC: nothing waiting on me, so I took the next ranked move
+
+**D-008: Build the ACE and GHOST training kernels and the base head-to-head (Genesis-os#4, `da84b5e`).**
+- **Why now:** 29.21 GPU-h and 20 TPU-h expire on Nov 7 (§3.5, perishable power), and the autopilot couldn't launch
+  anything because no row was launch-ready (§3.3, unblocking power).
+- **Evidence:** 11 tests OK, including real CPU dry runs of the built kernels and tamper/contamination aborts that
+  happen before any compute.
+- **Judgement calls:**
+  - **Bases are chosen on training-split prompts, not the held-out set.** Choosing on the held-out set and then
+    testing on it is selection bias.
+  - **I built, but did not author, Parts B and C of the batteries.** The spec requires the builder and the battery
+    author to be different people. Proposed: Astra authors, Zane verifies.
+  - **A dataset defect** (list-shaped instructions in GHOST-C-019 and GHOST-HELDOUT-004) is **normalised in memory
+    and reported**, not fixed in the hash-gated files. That fix is Zane's.
+- **Rejected:**
+  - launching from this seat: there is no Kaggle access here, and launching is the autopilot's job;
+  - editing QUEUE.md rows: it's the autopilot's live ledger, so I proposed the changes in the PR instead;
+  - writing the Cody QUAL harness now: it needs compile-and-test execution, which is a separate build.
+
+**Also this session:**
+- genesis-player#14 now has the taste import and the verified-only Audius matcher. Brandon's Takeout shows the current
+  catalog covers about 5% of his plays.
+- The Watch+Pulse SoundCloud widget is in Genesis-os#3.
+
+**Next three moves:**
+1. The TPU/JAX classifier stages for ACE and GHOST, to use the 20 expiring TPU-h. They are designed in the manifests.
+2. Hi-Fi P2: wire the EQ engine into Media3 playback.
+3. Fix whatever Zane's re-checks surface on #1, #3 and #4.
