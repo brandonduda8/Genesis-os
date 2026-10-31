@@ -131,3 +131,25 @@ and not only the output.
   is canonical. My copy of the register was superseded by main's, which also carries the ruling.
 - **Unblocked:** Watch+Pulse source (`ab7f4e7`) and the training datasets and held-outs (`7f146a3`) are on main.
   Assignments 2 and 4 can start their P0s next session, inside the WIP cap.
+
+---
+
+## Check-in 2026-10-31 20:15 UTC
+
+**Board:** Genesis-os#1 (GHOST v2) is clean at `fe36cf1`, waiting on Zane's re-check. #2 is clean. genesis-player#14
+is green on both CI lanes. Genesis-core#21 is clean. Nothing new from reviewers.
+
+**D-007: With the other in-flight items waiting on people, start the newly unblocked Watch+Pulse work.**
+- **Delivered** in Genesis-os#3 (`3e840f5`): Tha Aadity and Ghostlands back in Pulse through SoundCloud's official
+  widget, per ruling A.
+- **Why this one first:** it puts something directly in Brandon's hands (§3.2), and his playlists were explicitly
+  waiting on it.
+- **Evidence:** 8 browser checks on the real assets, and the same test fails on main's player (fail-before).
+- **Rejected:** copying Aurum's resolver into Pulse (forbidden by ruling A); a hidden widget (it hides SoundCloud's
+  branding, so it isn't the sanctioned embed); changing the Java code (not needed).
+- **Owed:** Zane rebuilds the APK, then Brandon does a device check.
+
+**Next three moves:**
+1. Training-program P0 (assignment 2). The sources landed in `f955752` and `7f146a3`; Nov 7 is the deadline.
+2. Hi-Fi P2 in genesis-player#14: wire the EQ engine into playback. Still waiting on Brandon's Takeout export for P4.
+3. Fix whatever Zane finds when he re-checks GHOST v2.
