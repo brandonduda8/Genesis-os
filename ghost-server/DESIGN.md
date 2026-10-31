@@ -128,6 +128,18 @@ Every state-changing action passes `Gate.commit(action)`. The gate resolves thre
 - Tests assert all four properties: the refusal, the ledger row, the escalation, and that registering a C executor
   raises.
 
+**Policy classes** (Brandon's register, `war-room/POLICY-BASED-APPROVALS-2026-10-31.md`). Level B also accepts
+one signed **class charter** in place of a per-item receipt:
+
+- The charter is signed once by an owner key, covers whole register classes, lasts at most 180 days, and is revocable
+  through `config/policy_revoked.json`.
+- Each class has a **code ceiling** (`gates.CLASS_CEILING`). For GHOST, `ghost_operations` covers unblock, requeue,
+  cancel, install, forward and complete. A charter can approve a class but can never widen its ceiling, and it can
+  **never reach a fence**: Level C stays refused even when a charter names it.
+- A kind that no register class covers is refused and escalated once as a `policy_question`, per the register's
+  novel-class rule. It is never executed.
+- Every action allowed under a charter is ledgered with `policy_class` and `charter_id`.
+
 The grant format is byte-compatible with Genesis-core #12 (`{"payload": {v, issuer, action, mission_id, principal,
 nonce, iat, exp}, "signature": b64}`); GHOST carries a `job_id` in the `mission_id` field. One owner keypair therefore
 serves both Omega and GHOST, and the GHOST action names are disjoint from Omega's.

@@ -107,6 +107,15 @@ Without keys, the server stays fail-closed.
   ```
 
   It is valid for at most 300 s, and its nonce can be used once.
+- **Policy classes, the tap-free path** (`war-room/POLICY-BASED-APPROVALS-2026-10-31.md`): Brandon signs **one**
+  class charter on his own device. Every action inside that class then runs without a per-item tap, and fences stay
+  refused:
+
+  ```bash
+  python3 ghostd.py charter-sign --key brandon.key --issuer owner:brandon --class ghost_operations --days 90 > config/policy_charter.json
+  ```
+
+  To revoke the charter, add its `charter_id` to `config/policy_revoked.json`, or delete the file.
 - The receipt format is byte-compatible with Genesis-core's Omega grants, so one owner key could serve both. GHOST does
   **not** depend on Omega, which is not adopted (see Q-010).
 

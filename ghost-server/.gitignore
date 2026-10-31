@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 config/policy.json
 config/trusted_keys.json
+config/policy_charter.json

@@ -14,6 +14,7 @@
     escalations                  Level C requests awaiting Brandon
     keygen PRIVATE_PATH          new Ed25519 key (0600, never overwrites); prints the public key
     sign --key F --issuer I --action A --job J [--principal P]   produce a signed receipt (JSON on stdout)
+    charter-sign --key F --issuer I --class C [--class C] [--days N]   sign ONE class charter (policy register)
     mcp                          read-only MCP stdio server
 """
 from __future__ import annotations
@@ -75,6 +76,11 @@ def main(argv=None) -> int:
         s.add_argument(f, required=True)
     s.add_argument("--principal", default=f"os:{gates.current_user()}")
     s.add_argument("--ttl", type=int, default=120)
+    cs = sub.add_parser("charter-sign")
+    cs.add_argument("--key", required=True)
+    cs.add_argument("--issuer", required=True)
+    cs.add_argument("--class", dest="classes", action="append", required=True, choices=gates.REGISTER_CLASSES)
+    cs.add_argument("--days", type=int, default=90)
     args = ap.parse_args(argv)
 
     if args.cmd == "keygen":
@@ -83,6 +89,12 @@ def main(argv=None) -> int:
     if args.cmd == "sign":
         print(json.dumps(signing.sign(signing.load_private(args.key), issuer=args.issuer, action=args.action,
                                       subject=args.job, principal=args.principal, now=time.time(), ttl_s=args.ttl)))
+        return 0
+
+    if args.cmd == "charter-sign":
+        print(json.dumps(signing.sign_charter(signing.load_private(args.key), issuer=args.issuer,
+                                              classes={c: "all" for c in args.classes}, now=time.time(),
+                                              days=args.days)))
         return 0
 
     cfg = Config(args.config)
@@ -143,7 +155,8 @@ def main(argv=None) -> int:
         return 0
     if args.cmd == "gate":
         gate = gates.Gate(reg, policy_path=cfg.policy, verifier=signing.Verifier.from_file(cfg.trusted_keys),
-                          escalation_dir=os.path.join(cfg.state, "escalations"))
+                          escalation_dir=os.path.join(cfg.state, "escalations"),
+                          charter_path=cfg.charter, revoked_path=cfg.revoked)
         grant = json.load(open(args.grant)) if args.grant else None
         job = reg.get(args.job_id)
         text = f"{job['title']} {job['spec'].get('command_or_ref', '')}" if job else ""

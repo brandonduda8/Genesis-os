@@ -139,3 +139,42 @@ class Verifier:
             raise
         except (InvalidSignature, ValueError, TypeError) as exc:
             raise SignatureDenied(f"envelope signature from {peer!r} invalid") from exc
+
+
+# ---- policy-class charters (POLICY-BASED-APPROVALS-2026-10-31) ------------------------------------------------------
+CHARTER_FIELDS = frozenset(("v", "kind", "charter_id", "issuer", "classes", "iat", "exp"))
+MAX_CHARTER_DAYS = 180
+
+
+def sign_charter(key: "Ed25519PrivateKey", *, issuer: str, classes: Dict[str, Any], now: float,
+                 days: int = 90) -> Dict[str, Any]:
+    """One signature approves whole classes (Brandon's register), instead of one tap per item."""
+    if not (1 <= days <= MAX_CHARTER_DAYS):
+        raise ValueError("charter validity must be 1..180 days")
+    body = {"v": VERSION, "kind": "ghost-policy-charter", "charter_id": secrets.token_hex(8), "issuer": issuer,
+            "classes": classes, "iat": int(now), "exp": int(now) + days * 86400}
+    return {"payload": body, "signature": base64.b64encode(key.sign(encode(body))).decode("ascii")}
+
+
+def _verify_charter(self: "Verifier", charter: Any, *, now: float) -> Dict[str, Any]:
+    if not isinstance(charter, dict) or set(charter) != {"payload", "signature"}:
+        raise SignatureDenied("no signed policy charter")
+    body = charter["payload"]
+    if not isinstance(body, dict) or set(body) != CHARTER_FIELDS or body.get("v") != VERSION \
+            or body.get("kind") != "ghost-policy-charter" or not isinstance(body.get("classes"), dict):
+        raise SignatureDenied("malformed policy charter")
+    if not all(type(body[k]) in (int, float) for k in ("iat", "exp")) or \
+            not (0 < body["exp"] - body["iat"] <= MAX_CHARTER_DAYS * 86400):
+        raise SignatureDenied("invalid charter validity window")
+    if now < body["iat"] - SKEW_S or now > body["exp"]:
+        raise SignatureDenied("policy charter expired or not yet valid")
+    try:
+        self._pub("owner", body["issuer"]).verify(base64.b64decode(charter["signature"], validate=True), encode(body))
+    except SignatureDenied:
+        raise
+    except (InvalidSignature, ValueError, TypeError) as exc:
+        raise SignatureDenied("policy charter signature invalid") from exc
+    return body
+
+
+Verifier.verify_charter = _verify_charter  # type: ignore[attr-defined]

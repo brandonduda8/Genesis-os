@@ -36,6 +36,20 @@ LEVEL_C_TEXT = re.compile(
     r"sign the)\b", re.I)
 
 
+# Brandon's register (war-room/POLICY-BASED-APPROVALS-2026-10-31.md). CODE CEILING per class: a signed charter can
+# approve a class, but it can never stretch a class beyond these kinds, and it can never reach a fence (Level C).
+REGISTER_CLASSES = ("training", "engineering", "ghost_operations", "ace_pipeline", "operational_communications",
+                    "research")
+CLASS_CEILING = {
+    "ghost_operations": frozenset(("ghost_unblock", "ghost_requeue", "ghost_cancel", "ghost_install",
+                                   "ghost_forward", "ghost_complete")),
+}
+
+
+def is_known(kind: str) -> bool:
+    return kind in LEVEL_A or kind in LEVEL_B or kind in LEVEL_C_KINDS
+
+
 class Refused(PermissionError):
     """The gate said no. Level C refusals carry escalation=<id>."""
 
@@ -72,9 +86,13 @@ def current_user() -> str:
 
 class Gate:
     def __init__(self, reg: Registry, *, policy_path: Optional[str] = None, verifier: Optional[Verifier] = None,
-                 escalation_dir: Optional[str] = None, whoami: Callable[[], str] = current_user):
+                 escalation_dir: Optional[str] = None, whoami: Callable[[], str] = current_user,
+                 charter_path: Optional[str] = None, revoked_path: Optional[str] = None):
         self.reg, self.verifier, self.whoami = reg, verifier or Verifier(), whoami
         self.escalation_dir = escalation_dir
+        self.charter = json.load(open(charter_path)) if charter_path and os.path.exists(charter_path) else None
+        self.revoked = frozenset(json.load(open(revoked_path))) if revoked_path and os.path.exists(revoked_path) \
+            else frozenset()
         self.policy = json.load(open(policy_path)) if policy_path and os.path.exists(policy_path) else None
 
     def scopes(self, user: str) -> frozenset:
@@ -82,15 +100,34 @@ class Gate:
             return frozenset(("operate", "observe"))  # dev mode: single operator, recorded as such
         return frozenset(s for s in ("operate", "observe") if user in self.policy.get(s, []))
 
-    def _escalate(self, kind: str, job_id: str, reason: str, actor: str) -> int:
+    def policy_class_for(self, kind: str, now: float) -> Optional[Dict[str, Any]]:
+        """The approved class covering `kind` under a valid, unrevoked charter, or None. Never covers a fence."""
+        if self.charter is None or classify(kind) == "C":
+            return None
+        try:
+            body = self.verifier.verify_charter(self.charter, now=now)
+        except SignatureDenied:
+            return None
+        if body["charter_id"] in self.revoked:
+            return None
+        for cls, kinds in body["classes"].items():
+            if cls in REGISTER_CLASSES and kind in CLASS_CEILING.get(cls, frozenset()) and \
+                    (kinds == "all" or kind in kinds):
+                return {"class": cls, "charter_id": body["charter_id"], "issuer": body["issuer"]}
+        return None
+
+    def _escalate(self, kind: str, job_id: str, reason: str, actor: str, *, policy_question: bool = False) -> int:
         esc = self.reg.escalate(job_id=job_id, action=kind, reason=reason, actor=actor)
         if self.escalation_dir:
             os.makedirs(self.escalation_dir, mode=0o700, exist_ok=True)
             path = os.path.join(self.escalation_dir, f"ESC-{esc:04d}.json")
             with os.fdopen(os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600), "w") as f:
+                note = ("Novel class: asked ONCE as policy (register novel-class rule). Brandon's ruling enters the "
+                        "register; then it is policy, not a recurring tap.") if policy_question else \
+                    "GHOST cannot execute Level C actions; this is a one-touch decision packet for Brandon's tap."
                 f.write(canonical({"esc_id": esc, "job_id": job_id, "action": kind, "reason": reason,
                                    "to": "brandon", "state": "AWAITING-BRANDON",
-                                   "note": "GHOST cannot execute Level C actions; this is a request for Brandon's tap."}))
+                                   "type": "policy_question" if policy_question else "fence", "note": note}))
         return esc
 
     def commit(self, kind: str, *, job_id: str = "", text: str = "", grant: Any = None, now: float,
@@ -98,6 +135,11 @@ class Gate:
         user = principal or self.whoami()
         actor = f"os:{user}"
         level = classify(kind, text)
+        if not is_known(kind) and not LEVEL_C_TEXT.search(text or "") and not LEVEL_C_TEXT.search(kind.replace("_", " ")):
+            reason = f"novel action class {kind!r}: no register class covers it; raised once as a policy question"
+            esc = self._escalate(kind, job_id, reason, actor, policy_question=True)
+            self.reg.ledger("gate_refused", actor, {"kind": kind, "level": "novel", "escalation": esc}, job_id)
+            raise Refused(reason, escalation=esc)
         if level == "C":
             reason = f"Level C action {kind!r} is structurally unavailable to GHOST; escalated to Brandon"
             esc = self._escalate(kind, job_id, reason, actor)
@@ -106,7 +148,14 @@ class Gate:
         if "operate" not in self.scopes(user):
             self.reg.ledger("gate_refused", actor, {"kind": kind, "level": level, "why": "no operate scope"}, job_id)
             raise Refused(f"{actor} lacks the operate scope")
-        if level == "B":
+        policy = None
+        if level == "B" and grant is None:
+            policy = self.policy_class_for(kind, now)
+            if policy is None:
+                why = "no per-item receipt and no valid policy charter covers this class"
+                self.reg.ledger("gate_refused", actor, {"kind": kind, "level": "B", "why": why}, job_id)
+                raise Refused(f"Level B {kind!r}: {why}")
+        elif level == "B":
             try:
                 body = self.verifier.verify_grant(grant, action=kind, subject=job_id, principal=actor, now=now)
             except SignatureDenied as exc:
@@ -121,7 +170,9 @@ class Gate:
             raise Refused(f"no executor for {kind!r}")
         self.reg.ledger("gate_allowed", actor, {"kind": kind, "level": level,
                                                 "signed_by": (grant or {}).get("payload", {}).get("issuer", "")
-                                                if level == "B" else ""}, job_id)
+                                                if level == "B" and grant else "",
+                                                "policy_class": policy["class"] if policy else "",
+                                                "charter_id": policy["charter_id"] if policy else ""}, job_id)
         return fn(self.reg, job_id=job_id, actor=actor, now=now, **args)
 
 

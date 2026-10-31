@@ -40,6 +40,7 @@ class Config:
         self.doors_file, self.policy = rel(c.get("doors", "")), rel(c.get("policy", ""))
         self.trusted_keys, self.receipts_root = rel(c.get("trusted_keys", "")), rel(c.get("receipts_root", ".."))
         self.lane_probe_file = rel(c.get("lane_probes", ""))
+        self.charter, self.revoked = rel(c.get("policy_charter", "")), rel(c.get("policy_revoked", ""))
         self.okrs, self.economics = rel(c.get("okrs", "")), rel(c.get("economics", ""))
         lanes = c.get("lanes", {})
         self.caps, self.default_cap = lanes.get("caps", {}), int(lanes.get("default_cap", 3))
@@ -60,7 +61,8 @@ class Server:
         self.reg = Registry(cfg.db, clock=clock)
         self.verifier = Verifier.from_file(cfg.trusted_keys)
         self.gate = gates.Gate(self.reg, policy_path=cfg.policy, verifier=self.verifier,
-                               escalation_dir=os.path.join(cfg.state, "escalations"))
+                               escalation_dir=os.path.join(cfg.state, "escalations"),
+                               charter_path=cfg.charter, revoked_path=cfg.revoked)
         self.doors = doors if doors is not None else (load_doors(cfg.doors_file, clock) if cfg.doors_file else {})
         self.key = load_private(cfg.key_file) if HAVE_CRYPTO and cfg.key_file and os.path.exists(cfg.key_file) else None
         self.facts: Dict[str, Tuple[bool, float, str]] = {}  # term -> (ok, at, detail)
