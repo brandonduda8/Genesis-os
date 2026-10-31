@@ -116,5 +116,12 @@
     "requires": [],
     "lane": "proofs",
     "assignee": "zane"
+  },
+  "GHOST-Q-018": {
+    "requires": [
+      "human:brandon-relay"
+    ],
+    "lane": "ops",
+    "assignee": "claude"
   }
 }
