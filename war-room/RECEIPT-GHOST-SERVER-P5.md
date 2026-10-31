@@ -28,10 +28,12 @@ them. Rows for them must be added to `config/legacy_requires.json` first, or the
 
 Real sockets were used throughout. The "router" is the lab proxy, killed and healed on purpose.
 
-1. **Network dead.** The egress door is DARK. **Nothing is released and no attempts are spent** (Q-002 attempts = 0).
+1. **Network dead.** The egress door is DARK. **No door-dependent job is released and no attempts are spent**
+   (Q-002 attempts = 0). Q-017 needs no transport, so it correctly releases to Zane anyway.
 2. **Heal.** The proxy comes back. After the breaker cool-down the trio returns HEALED, and the queue drains under the
-   WIP caps: **Q-002 and Q-003 are released** as signed task envelopes into `spool/out/zane/`. Their fences travel in
-   the payload, and the assignee checks GHOST's signature.
+   WIP caps: **Q-002 and Q-003 are released** as signed task envelopes into `spool/out/zane/`. That brings RUNNING to
+   3, the global cap, and the scheduler then releases nothing more (asserted). Their fences travel in the payload, and
+   the assignee checks GHOST's signature.
 3. **Assignee completes.** Zane's side files `war-room/RECEIPT-…-LAB.md` naming GHOST-Q-002 and returns a signed
    `result` envelope. The deterministic `receipt` verifier passes, and **Q-002 becomes DONE-VERIFIED**.
 4. **A result whose receipt does not name its job is rejected.** Q-003 falls back to QUEUED with bounded backoff.
