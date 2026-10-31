@@ -1,0 +1,47 @@
+{
+  "_doc": "GHOST SERVER v2 config. Paths are relative to ghost-server/. Unconfigured hosts are left empty on purpose: an empty host can never probe GREEN, and the board says so.",
+  "identity": {
+    "name": "zane-box",
+    "key_file": "state/keys/zane-box.key"
+  },
+  "db": "state/ghost.db",
+  "spool": "state/spool",
+  "state_dir": "state",
+  "doors": "config/doors.json",
+  "policy": "config/policy.json",
+  "trusted_keys": "config/trusted_keys.json",
+  "receipts_root": "..",
+  "lane_probes": "../master-runtime/lanes.json",
+  "okrs": "config/okrs.json",
+  "economics": "config/economics.json",
+  "lanes": {
+    "default_cap": 3,
+    "global_cap": 3,
+    "caps": {},
+    "priority": [
+      "builds",
+      "proofs",
+      "installs",
+      "sends",
+      "probes",
+      "ops",
+      "batch-inference"
+    ]
+  },
+  "reach": {
+    "s1": {
+      "host": "",
+      "port": 22
+    },
+    "penguin": {
+      "host": "",
+      "port": 22
+    }
+  },
+  "tick_s": 5,
+  "probe_every_s": 600,
+  "reach_every_s": 120,
+  "manual_lease_s": 86400,
+  "policy_charter": "config/policy_charter.json",
+  "policy_revoked": "config/policy_revoked.json"
+}

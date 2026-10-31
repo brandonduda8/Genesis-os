@@ -1,0 +1,3 @@
+{"_doc": "PUBLIC keys only (base64 raw Ed25519). Generate with `python3 ghostd.py keygen <private path>` on the signer's own device. Copy to config/trusted_keys.json (mode 0644, not group/world-writable). No keys are provisioned by this branch.",
+ "owner": {"owner:brandon": "<b64 public key>"},
+ "peers": {"zane-box": "<b64>", "cody": "<b64>", "zane": "<b64>"}}

@@ -1,0 +1,153 @@
+{
+  "_doc": "Reviewed, ID-keyed mapping of legacy free-text requires_path to structured requirements (DESIGN.md \u00a79.5). Terms: door:<name> = trio-healed door; reach:<host> = 5 s TCP reachability probe; lane:<probe> = master-runtime lane probe; human:<gate> = never satisfiable by the server (BLOCKED for Brandon); job:<id> = dependency DONE-VERIFIED; {\"any\": [...]} = OR group. Unlisted IDs import as BLOCKED-(requires-unmapped). Zane confirms each row.",
+  "GHOST-Q-001": {
+    "requires": [
+      "reach:s1",
+      "reach:penguin"
+    ],
+    "lane": "builds",
+    "assignee": "cody"
+  },
+  "GHOST-Q-002": {
+    "requires": [
+      "door:egress"
+    ],
+    "lane": "installs",
+    "assignee": "zane"
+  },
+  "GHOST-Q-003": {
+    "requires": [
+      "door:egress"
+    ],
+    "lane": "installs",
+    "assignee": "zane"
+  },
+  "GHOST-Q-004": {
+    "requires": [
+      "lane:nim-proxy"
+    ],
+    "lane": "proofs",
+    "assignee": "zane"
+  },
+  "GHOST-Q-005": {
+    "requires": [
+      {
+        "any": [
+          "reach:s1",
+          "door:s1"
+        ]
+      }
+    ],
+    "lane": "ops",
+    "assignee": "zeroclaw"
+  },
+  "GHOST-Q-006": {
+    "requires": [
+      "human:relay-packs-landed",
+      {
+        "any": [
+          "reach:s1",
+          "reach:penguin"
+        ]
+      }
+    ],
+    "lane": "installs",
+    "assignee": "zane",
+    "_note": "Zane D6 open: 'packs landed' should be file:<pack receipt path> (term kind supported) once the receipt path is on GitHub; independent S1/penguin legs need two job ids"
+  },
+  "GHOST-Q-007": {
+    "requires": [
+      "job:GHOST-Q-006",
+      {
+        "any": [
+          "door:s1",
+          "door:penguin"
+        ]
+      }
+    ],
+    "lane": "installs",
+    "assignee": "zane"
+  },
+  "GHOST-Q-008": {
+    "requires": [
+      "human:brandon-relay"
+    ],
+    "lane": "proofs",
+    "assignee": "claude"
+  },
+  "GHOST-Q-009": {
+    "requires": [],
+    "lane": "builds",
+    "assignee": "cody",
+    "_note": "Zane D6: WP-A/WP-D are zane-box-local; per-package paths are claimed inside the WO's own drain rule"
+  },
+  "GHOST-Q-010": {
+    "requires": [
+      "human:brandon-home-decision"
+    ],
+    "lane": "ops",
+    "assignee": "zane"
+  },
+  "GHOST-Q-011": {
+    "requires": [
+      {
+        "any": [
+          "human:brandon-relay-opencode-penguin",
+          "reach:penguin"
+        ]
+      }
+    ],
+    "lane": "builds",
+    "assignee": "cody"
+  },
+  "GHOST-Q-012": {
+    "requires": [
+      {
+        "any": [
+          "human:brandon-relay-opencode-penguin",
+          "reach:penguin"
+        ]
+      }
+    ],
+    "lane": "installs",
+    "assignee": "cody"
+  },
+  "GHOST-Q-017": {
+    "requires": [
+      "human:brandon-relay"
+    ],
+    "lane": "builds",
+    "assignee": "claude",
+    "_note": "Q-017 is the build WO (file -stem); the verification is Zane's review, not a separate job id"
+  },
+  "GHOST-Q-018": {
+    "requires": [
+      "human:brandon-relay"
+    ],
+    "lane": "ops",
+    "assignee": "claude"
+  },
+  "GHOST-Q-013": {
+    "requires": [],
+    "lane": "ops",
+    "assignee": "zane",
+    "_note": "no new transport; some recon lanes need Brandon's signed-in sessions (per-lane note, not a gate)"
+  },
+  "GHOST-Q-014": {
+    "requires": [],
+    "lane": "ops",
+    "assignee": "zane",
+    "_note": "identity core (FSA ID, FAFSA e-signature, SSN) stays Brandon's hands"
+  },
+  "GHOST-Q-015": {
+    "requires": [],
+    "lane": "builds",
+    "assignee": "zane"
+  },
+  "GHOST-Q-016": {
+    "requires": [],
+    "lane": "builds",
+    "assignee": "zane",
+    "_note": "P1 needs nothing new; S1 phases become separate jobs when they exist"
+  }
+}

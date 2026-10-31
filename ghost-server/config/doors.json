@@ -1,0 +1,42 @@
+{
+  "_doc": "Doors are Brandon's own machines on Brandon's own networks. ASSUMPTION (DESIGN.md \u00a74): the egress router on :18955 is an HTTP forward proxy (CONNECT for https). Relay doors are disabled until GHOST-Q-006 installs the packs; set proxy_url/token_file then. NIM key: a 0600 file path, never the key itself.",
+  "trio": {
+    "github": {
+      "url": "https://api.github.com/zen"
+    },
+    "pip": {
+      "url": "https://pypi.org/simple/pip/"
+    },
+    "nim": {
+      "url": "https://integrate.api.nvidia.com/v1/chat/completions",
+      "model": "meta/muse-glimmer-30b",
+      "key_file": "state/keys/nim.key",
+      "_note": "Zane review D4: unauthenticated requests are never sent (the leg reports nim_key_unconfigured / nim_key_missing). Zane places Brandon's NIM key at state/keys/nim.key (mode 0600; credential custody is Zane's, never Claude's). Model = the seat proven on Brandon's key (GHOST-Q-004 proof law); llama-3.1-8b-instruct returned HTTP 410."
+    }
+  },
+  "doors": [
+    {
+      "name": "egress",
+      "kind": "http_proxy",
+      "proxy_url": "http://127.0.0.1:18955"
+    },
+    {
+      "name": "direct",
+      "kind": "direct"
+    },
+    {
+      "name": "s1",
+      "kind": "http_proxy",
+      "proxy_url": "",
+      "token_file": "",
+      "enabled": false
+    },
+    {
+      "name": "penguin",
+      "kind": "http_proxy",
+      "proxy_url": "",
+      "token_file": "",
+      "enabled": false
+    }
+  ]
+}

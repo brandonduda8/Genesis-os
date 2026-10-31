@@ -1,0 +1,10 @@
+{
+  "2026-Q4": [
+    {"objective": "GHOST drains real work through real heal windows",
+     "key_results": [
+       {"kr": "Legacy jobs verified (receipt verifier passed)", "metric": "completions", "target": 3},
+       {"kr": "Zero dead letters left unreviewed", "metric": "dead_letters", "target": 0},
+       {"kr": "Mean WIP within Brandon's cap", "metric": "mean_wip", "target": "<= 3"}
+     ]}
+  ]
+}
