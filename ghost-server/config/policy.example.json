@@ -1,0 +1,2 @@
+{"_doc": "Copy to config/policy.json to leave dev mode. Users not listed hold no scope. Level B additionally needs a signed receipt from a key in trusted_keys.json (owner section).",
+ "operate": ["zane"], "observe": ["zane", "genesis-observer"]}

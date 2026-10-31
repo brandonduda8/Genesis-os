@@ -1,0 +1,14 @@
+{
+  "_doc": "Doors are Brandon's own machines on Brandon's own networks. ASSUMPTION (DESIGN.md §4): the egress router on :18955 is an HTTP forward proxy (CONNECT for https). Relay doors are disabled until GHOST-Q-006 installs the packs; set proxy_url/token_file then. NIM key: a 0600 file path, never the key itself.",
+  "trio": {
+    "github": {"url": "https://api.github.com/zen"},
+    "pip": {"url": "https://pypi.org/simple/pip/"},
+    "nim": {"url": "https://integrate.api.nvidia.com/v1/chat/completions", "model": "meta/llama-3.1-8b-instruct", "key_file": ""}
+  },
+  "doors": [
+    {"name": "egress", "kind": "http_proxy", "proxy_url": "http://127.0.0.1:18955"},
+    {"name": "direct", "kind": "direct"},
+    {"name": "s1", "kind": "http_proxy", "proxy_url": "", "token_file": "", "enabled": false},
+    {"name": "penguin", "kind": "http_proxy", "proxy_url": "", "token_file": "", "enabled": false}
+  ]
+}

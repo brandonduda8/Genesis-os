@@ -1,0 +1,120 @@
+{
+  "_doc": "Reviewed, ID-keyed mapping of legacy free-text requires_path to structured requirements (DESIGN.md \u00a79.5). Terms: door:<name> = trio-healed door; reach:<host> = 5 s TCP reachability probe; lane:<probe> = master-runtime lane probe; human:<gate> = never satisfiable by the server (BLOCKED for Brandon); job:<id> = dependency DONE-VERIFIED; {\"any\": [...]} = OR group. Unlisted IDs import as BLOCKED-(requires-unmapped). Zane confirms each row.",
+  "GHOST-Q-001": {
+    "requires": [
+      "reach:s1",
+      "reach:penguin"
+    ],
+    "lane": "builds",
+    "assignee": "cody"
+  },
+  "GHOST-Q-002": {
+    "requires": [
+      "door:egress"
+    ],
+    "lane": "installs",
+    "assignee": "zane"
+  },
+  "GHOST-Q-003": {
+    "requires": [
+      "door:egress"
+    ],
+    "lane": "installs",
+    "assignee": "zane"
+  },
+  "GHOST-Q-004": {
+    "requires": [
+      "lane:nim-proxy"
+    ],
+    "lane": "proofs",
+    "assignee": "zane"
+  },
+  "GHOST-Q-005": {
+    "requires": [
+      "reach:s1"
+    ],
+    "lane": "ops",
+    "assignee": "zeroclaw"
+  },
+  "GHOST-Q-006": {
+    "requires": [
+      "human:relay-packs-landed",
+      {
+        "any": [
+          "reach:s1",
+          "reach:penguin"
+        ]
+      }
+    ],
+    "lane": "installs",
+    "assignee": "zane"
+  },
+  "GHOST-Q-007": {
+    "requires": [
+      "job:GHOST-Q-006",
+      {
+        "any": [
+          "door:s1",
+          "door:penguin"
+        ]
+      }
+    ],
+    "lane": "installs",
+    "assignee": "zane"
+  },
+  "GHOST-Q-008": {
+    "requires": [
+      "human:brandon-relay"
+    ],
+    "lane": "proofs",
+    "assignee": "claude"
+  },
+  "GHOST-Q-009": {
+    "requires": [
+      {
+        "any": [
+          "reach:penguin",
+          "reach:s1"
+        ]
+      }
+    ],
+    "lane": "builds",
+    "assignee": "cody"
+  },
+  "GHOST-Q-010": {
+    "requires": [
+      "human:brandon-home-decision"
+    ],
+    "lane": "ops",
+    "assignee": "zane"
+  },
+  "GHOST-Q-011": {
+    "requires": [
+      {
+        "any": [
+          "human:brandon-relay-opencode-penguin",
+          "reach:penguin"
+        ]
+      }
+    ],
+    "lane": "builds",
+    "assignee": "cody"
+  },
+  "GHOST-Q-012": {
+    "requires": [
+      {
+        "any": [
+          "human:brandon-relay-opencode-penguin",
+          "reach:penguin"
+        ]
+      }
+    ],
+    "lane": "installs",
+    "assignee": "cody"
+  },
+  "GHOST-Q-017": {
+    "requires": [],
+    "lane": "proofs",
+    "assignee": "zane"
+  }
+}
