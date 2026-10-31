@@ -1,6 +1,3 @@
-<!-- Provenance: text supplied verbatim by Brandon in the standing Claude channel on 2026-10-31 and committed by Claude
-     unchanged below this comment. Implemented in code by GHOST SERVER v2 (Genesis-os#1, commit 1247b4f: class charters,
-     code ceilings, fences refused, novel classes escalated as policy questions). -->
 # POLICY-BASED APPROVALS — Brandon's doctrine, 2026-10-31
 
 **Brandon's order (2026-10-31 ~14:15 CDT):** "I don't want things to be
@@ -70,6 +67,20 @@ ONCE, framed as policy ("this class of thing, this recommended
 ruling, these bounds"), never as a queue of individual items. His
 answer enters this register the same day. If a proposed class touches
 a hard fence, it is not a class — it is a fence item, packeted.
+
+## Product policy rulings
+
+- **Q-POL-001 — SoundCloud playback (Brandon ruled "A", 2026-10-31
+  ~14:31 CDT; question raised by Claude as Power Autonomous
+  Engineer):** new Genesis apps play SoundCloud audio ONLY through
+  SoundCloud's official embed/widget. Aurum's existing stream
+  resolver (SoundCloud's own web-player key) is grandfathered —
+  it stays in Aurum and is NOT reused in any new product. No
+  SoundCloud developer account is created under this ruling
+  (option B not taken); the scraped-key pattern does not spread
+  (option C rejected). Consequence for Watch+Pulse v2: SoundCloud
+  playlists (Tha Aadity, Ghostlands) return via the official embed
+  path, not a copied resolver.
 
 ## Where this doctrine binds
 

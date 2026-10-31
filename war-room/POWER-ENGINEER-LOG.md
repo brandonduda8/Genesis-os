@@ -114,3 +114,20 @@ and not only the output.
 - **Rejected:** pulling audio from YouTube or Premium Lite (ToS and legal risk to Brandon's account); writing UI
   before knowing his playlist and headphones.
 - **Waiting on Brandon** (his-hands, not approval): the Google Takeout export, and his headphone models.
+
+---
+
+## Session 2026-10-31 (19:5x UTC): Zane's review, rulings landed
+
+- **Q-POL-001 ruled "A" by Brandon** (recorded by Zane in the register on main). New apps play SoundCloud only
+  through the official embed or widget. Aurum's resolver is grandfathered and not reused. This governs Watch+Pulse v2.
+- **D-006: Zane's GHOST v2 review (MERGE-WITH-FIXES), with D1–D6 fixed in Genesis-os#1 at `fe36cf1`.**
+  - **Judgement call on D1:** Zane offered two fixes, dropping `enroll` from the classifier or stripping paths. I
+    took **stripping paths**, because Brandon's register lists *enrollment* as a hard fence. Dropping the word would
+    open a real fence to fix a false positive.
+  - Still owed to Zane: the NIM key at `state/keys/nim.key`, then a HEALED trio, then the real drain of Q-002 or
+    Q-003; the Q-006 pack receipt path, plus splitting its legs.
+- **Housekeeping:** my duplicate Q-018 file was removed, since main's `GHOST-Q-018-claude-power-autonomous-engineer.json`
+  is canonical. My copy of the register was superseded by main's, which also carries the ruling.
+- **Unblocked:** Watch+Pulse source (`ab7f4e7`) and the training datasets and held-outs (`7f146a3`) are on main.
+  Assignments 2 and 4 can start their P0s next session, inside the WIP cap.
