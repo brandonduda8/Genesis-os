@@ -1,0 +1,6 @@
+src/com/genesis/watchpulse/Ui.java
+src/com/genesis/watchpulse/MainActivity.java
+src/com/genesis/watchpulse/PulseActivity.java
+src/com/genesis/watchpulse/WatchActivity.java
+src/com/genesis/watchpulse/ZoneActivity.java
+gen/com/genesis/watchpulse/R.java
