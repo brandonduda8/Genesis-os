@@ -44,8 +44,8 @@
     {
       "who": "zane",
       "class": "VERIFY",
-      "ask": "Re-check GHOST v2 fixes D1–D6 at fe36cf1; place the NIM key at state/keys/nim.key; drain Q-002 or Q-003 through a real heal window",
-      "why": "Acceptance item 2 is still executor-reported only",
+      "ask": "GHOST v2 is MERGED to main (5b958ed, 53/53 tests pass on main). Post-merge: deploy it on zane-box, place the NIM key at state/keys/nim.key, and drain Q-002 or Q-003 through a real heal window",
+      "why": "Merged without a recorded review; acceptance item 2 is still executor-reported only until it runs on zane-box",
       "source": "https://github.com/brandonduda8/Genesis-os/pull/1",
       "source_label": "Genesis-os#1"
     },

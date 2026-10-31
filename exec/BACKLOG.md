@@ -5,8 +5,8 @@ then unblocking power, reversibility, perishable resources, and finishing before
 
 | # | Item | Why it ranks here | Class | Blocked on |
 |---|---|---|---|---|
-| E-1 | **Merge train.** Zane reviews and merges the reviewed stacks, in order: Omega (#14 → #17 → #18 → #19 → #20 → #21), then GHOST v2 (Genesis-os#1). | 70+ unmerged drafts are the bottleneck. Nothing is LIVE until it merges and deploys. | B (merge after independent verification, per the Engineering class) | Zane |
-| E-2 | **One registry.** GHOST v2 becomes the ops registry of record. Omega missions and training runs appear in it as linked jobs; the master runtime reads it. Retire duplicate state, without rewriting working stores. | The Phase 1 "one authoritative registry" requirement | A/B | E-1 (GHOST merged) |
+| E-1 | **Merge train.** Zane reviews and merges the reviewed stacks, in order: Omega (#14 → #17 → #18 → #19 → #20 → #21), then GHOST v2 (Genesis-os#1, **MERGED 2026-10-31 as 5b958ed**). | 70+ unmerged drafts are the bottleneck. Nothing is LIVE until it merges and deploys. | B (merge after independent verification, per the Engineering class) | Zane |
+| E-2 | **One registry.** GHOST v2 becomes the ops registry of record. Omega missions and training runs appear in it as linked jobs; the master runtime reads it. Retire duplicate state, without rewriting working stores. | The Phase 1 "one authoritative registry" requirement | A/B | unblocked (GHOST merged); needs the zane-box deploy |
 | E-3 | **Board on a schedule** on zane-box, as a GHOST job: baseline nightly, board hourly. Publish it to Brandon as a private page. | Real telemetry where he looks | B | E-1 |
 | E-4 | **Training lane:** launch the h2h, then the ACE and GHOST LoRA kernels (Genesis-os#4), before 2026-11-07. | Perishable quota: about 29 GPU-h and 20 TPU-h | Training class | the autopilot on zane-box |
 | E-5 | **Aurum Hi-Fi P2:** wire the EQ engine into Media3, add the headphone picker. Then rebuild the catalog from the Audius match. | In Brandon's hands; he uses it daily | A | Audius run (Zane) for the catalog half |
