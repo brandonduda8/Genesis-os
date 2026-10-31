@@ -184,3 +184,20 @@ is green on both CI lanes. Genesis-core#21 is clean. Nothing new from reviewers.
 1. The TPU/JAX classifier stages for ACE and GHOST, to use the 20 expiring TPU-h. They are designed in the manifests.
 2. Hi-Fi P2: wire the EQ engine into Media3 playback.
 3. Fix whatever Zane's re-checks surface on #1, #3 and #4.
+
+---
+
+## 2026-10-31 ~21:55 UTC: WO-MASTER-TROUBLESHOOTER-001 received (primary holder)
+
+**D-009: Satisfy the WO's acceptance with a fault I could work end to end from this seat (Genesis-os#5, `2faa453`).**
+- **Choice of fault:** TS-001, the list-shaped GHOST dataset instructions found during D-008. It is current, mine, and
+  fixable from evidence.
+- **Rejected:** the egress stall. The WO itself says it only qualifies through its workaround, and its probes are
+  zane-box-only.
+- **Mechanism:** a trailing comma creates a 1-tuple, which serialises as a JSON list.
+- **Latent fault found:** the builders rewrite frozen held-out sets every run.
+- **Judgement call:** keep the frozen v1 bytes and add a guard, instead of "fixing" the frozen file. Re-freezing is a
+  version decision for Zane (doctrine 5: state preservation).
+- **Tabletop:** cites records and says UNKNOWN where they are silent. The held-out OCE case is cited by ID only and
+  the file is marked not-for-training, so the tabletop itself can't contaminate a future dataset.
+- **Status:** all three acceptance items are STAGED. Zane verifies, then Brandon certifies.
