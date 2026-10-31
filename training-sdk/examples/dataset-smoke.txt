@@ -1,0 +1,2 @@
+gensdk smoke dataset — a placeholder artifact that exists so the
+job-spec hash gate has something real to verify. Not training data.

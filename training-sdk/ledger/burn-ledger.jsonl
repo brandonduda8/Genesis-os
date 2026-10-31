@@ -1,0 +1,1 @@
+{"amount": 0.0, "job": "gensdk-smoke", "kind": "smoke", "note": "append + read-back verification entry (amount 0; excluded from totals)", "provider": "gensdk", "ts": "2026-10-31T12:19:43+00:00", "unit": "n/a"}

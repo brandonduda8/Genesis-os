@@ -1,0 +1,4 @@
+Signer #1 certificate DN: CN=Genesis WatchPulse, O=Genesis, C=US
+Signer #1 certificate SHA-256 digest: 20224a4e8c7b803798b812be94bd265b3d0bed1d6cc936b2c179790e9619b953
+Signer #1 certificate SHA-1 digest: d81a4fd53befd62577067a2dbab5def7105702ed
+Signer #1 certificate MD5 digest: a362416c4ec0ae7c61a79f6f5bce54bc

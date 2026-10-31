@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AURUM">
+<link rel="manifest" href="/aurum.webmanifest">
+<link rel="apple-touch-icon" href="/aurum-icon-192.png">
+<title>AURUM — BRKNHARTED Player</title>
+<style>
+:root{
+  --bg:#0a0a0c; --panel:#121215; --panel2:#1a1a1f; --line:#26262c;
+  --txt:#f2f0eb; --dim:#9a97a3; --red:#e5322d; --red-dk:#8f1a17;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+  height:100%; overscroll-behavior-y:contain}
+#app{max-width:760px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;
+  padding-bottom:150px}
+header{position:sticky;top:0;z-index:20;background:rgba(10,10,12,.92);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:14px 16px 10px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .gem{width:30px;height:30px;border-radius:8px;
+  background:conic-gradient(from 200deg,var(--red),var(--red-dk),#3a0d0c,var(--red));
+  box-shadow:0 0 18px rgba(229,50,45,.45)}
+.brand h1{font-size:20px;letter-spacing:.35em;margin:0;font-weight:800}
+.brand small{display:block;font-size:10px;letter-spacing:.28em;color:var(--dim);font-weight:600}
+#search{margin-top:12px;width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--line);
+  background:var(--panel);color:var(--txt);font-size:16px;outline:none} /* P2-19: 16px stops iOS auto-zoom */
+#search:focus{border-color:var(--red)}
+#tabs{display:flex;gap:8px;overflow-x:auto;padding:12px 16px 4px;scrollbar-width:none}
+#tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:12px 16px;border-radius:999px;border:1px solid var(--line); /* P2-18: ≥44px touch target */
+  background:var(--panel);color:var(--dim);font-size:13px;font-weight:700;letter-spacing:.04em;
+  cursor:pointer;white-space:nowrap}
+.tab.on{background:var(--red);border-color:var(--red);color:#fff;
+  box-shadow:0 0 14px rgba(229,50,45,.35)}
+#why{padding:8px 18px 0;font-size:12.5px;color:var(--dim);font-style:italic;display:none}
+#list{padding:6px 8px 0}
+.row{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:12px;cursor:pointer}
+.row:active{background:var(--panel2)}
+.row.playing{background:var(--panel2);outline:1px solid var(--red-dk)}
+.row img{width:52px;height:52px;border-radius:10px;object-fit:cover;background:var(--panel2);flex:0 0 auto}
+.row .meta{min-width:0;flex:1}
+.row .t{font-size:14.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .a{font-size:12.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row.playing .t{color:var(--red)}
+.whyline{font-size:12px;color:var(--dim);font-style:italic;margin-top:2px;
+  white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.eq{display:none;gap:2.5px;align-items:flex-end;height:18px;flex:0 0 auto}
+.row.playing .eq{display:flex}
+.eq i{width:3px;background:var(--red);border-radius:2px;animation:eq 1s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:.2s}.eq i:nth-child(3){animation-delay:.45s}
+@keyframes eq{0%,100%{height:6px}50%{height:18px}}
+.albumsec{margin:4px 2px 14px}
+.albumhead{padding:10px 10px 2px;display:flex;align-items:baseline;gap:8px}
+.albumhead .an{font-size:16px;font-weight:800;letter-spacing:.02em}
+.albumhead .aa{font-size:12px;color:var(--dim)}
+.albumhead .ac{margin-left:auto;font-size:11px;color:var(--dim);font-variant-numeric:tabular-nums}
+#empty{padding:40px 20px;text-align:center;color:var(--dim);font-size:14px}
+.fsempty{padding:16px;text-align:center;color:var(--dim);font-size:13px}
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(14,14,17,.96);
+  backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+#bar .inner{max-width:760px;margin:0 auto}
+#seekrow{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--dim);font-variant-numeric:tabular-nums}
+#seek{flex:1;appearance:none;-webkit-appearance:none;height:4px;border-radius:4px;background:var(--line);outline:none}
+#seek::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;
+  background:var(--red);box-shadow:0 0 10px rgba(229,50,45,.6);cursor:pointer}
+#seek::-moz-range-thumb{width:15px;height:15px;border:none;border-radius:50%;background:var(--red)}
+#now{display:flex;align-items:center;gap:12px;margin-top:8px;cursor:pointer}
+#now img{width:54px;height:54px;border-radius:10px;object-fit:cover;background:var(--panel2)}
+#now .meta{flex:1;min-width:0}
+#now .t{font-size:14.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#now .a{font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ctrl{display:flex;align-items:center;gap:6px}
+.cbtn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);
+  color:var(--txt);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cbtn.main{width:56px;height:56px;background:var(--red);border-color:var(--red);font-size:21px;color:#fff;
+  box-shadow:0 0 18px rgba(229,50,45,.5)}
+.cbtn.voted{border-color:var(--red);box-shadow:0 0 10px rgba(229,50,45,.5)}
+#status{font-size:11px;color:var(--dim);text-align:center;padding:6px 0 0;min-height:20px}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid var(--line);border-top-color:var(--red);
+  border-radius:50%;animation:sp 0.8s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+/* ---- P2: fullscreen now-playing ---- */
+#fs{position:fixed;inset:0;z-index:50;background:var(--bg);display:none;
+  flex-direction:column;align-items:center;overflow-y:auto;
+  padding:calc(14px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom))}
+#fs.open{display:flex}
+#fsclose{align-self:flex-end;background:none;border:none;color:var(--dim);font-size:22px;cursor:pointer;padding:12px} /* P2-18: ≥44px hit area */
+#fsart{width:min(72vw,340px);aspect-ratio:1;border-radius:18px;object-fit:cover;background:var(--panel2);
+  box-shadow:0 12px 60px rgba(229,50,45,.25);margin-top:6px}
+#fstitle{font-size:21px;font-weight:800;margin-top:16px;text-align:center;padding:0 8px}
+#fsartist{font-size:14px;color:var(--dim);margin-top:4px}
+#fswhy{font-size:12.5px;color:var(--dim);font-style:italic;margin-top:8px;text-align:center;
+  max-width:420px;display:none}
+#fsseekrow{display:flex;align-items:center;gap:10px;width:100%;max-width:520px;margin-top:16px;
+  font-size:11px;color:var(--dim);font-variant-numeric:tabular-nums}
+#fsseek{flex:1;appearance:none;-webkit-appearance:none;height:5px;border-radius:4px;background:var(--line);outline:none}
+#fsseek::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;
+  background:var(--red);box-shadow:0 0 12px rgba(229,50,45,.6);cursor:pointer}
+#fsseek::-moz-range-thumb{width:18px;height:18px;border:none;border-radius:50%;background:var(--red)}
+#fsctrl{margin-top:14px;gap:10px}
+#fsrow2{display:flex;gap:10px;margin-top:12px;align-items:center}
+#sleep.on{border-color:var(--red);box-shadow:0 0 10px rgba(229,50,45,.5)}
+#fsupnext{width:100%;max-width:520px;margin-top:18px}
+#fsuphead{font-size:12px;letter-spacing:.22em;color:var(--dim);font-weight:700;margin-bottom:6px}
+.uprow{display:flex;align-items:center;gap:10px;padding:8px 6px;border-radius:10px;cursor:pointer}
+.uprow:active{background:var(--panel2)}
+.uprow img{width:40px;height:40px;border-radius:8px;object-fit:cover;background:var(--panel2)}
+.uprow .t{font-size:13.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uprow .a{font-size:11.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uprow .n{font-size:11px;color:var(--dim);width:18px;text-align:right;font-variant-numeric:tabular-nums}
+/* ---- Apollo Max: conversational panel ---- */
+#apollo{display:none;padding:10px 14px 0}
+#amsgs{display:flex;flex-direction:column;gap:10px;max-height:52vh;overflow-y:auto;padding:4px 2px}
+.am{max-width:88%;padding:10px 13px;border-radius:14px;font-size:14px;line-height:1.45;white-space:pre-wrap;word-wrap:break-word}
+.am.apo{background:var(--panel2);border:1px solid var(--line);align-self:flex-start}
+.am.me{background:var(--red-dk);align-self:flex-end}
+.am.sys{align-self:center;font-size:12px;color:var(--dim);font-style:italic;background:none;padding:4px}
+.acard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 12px;align-self:stretch}
+.acard .ah{font-size:12px;letter-spacing:.18em;color:var(--dim);font-weight:700;margin-bottom:8px}
+.arow{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line)}
+.arow:first-of-type{border-top:none}
+.arow img{width:42px;height:42px;border-radius:8px;object-fit:cover;background:var(--panel2);flex:0 0 auto}
+.arow .t{font-size:13.5px;font-weight:700}
+.arow .a{font-size:12px;color:var(--dim)}
+.arow .w{font-size:11.5px;color:var(--dim);font-style:italic;margin-top:1px}
+.abtn{margin-top:10px;width:100%;padding:11px;border-radius:12px;border:none;background:var(--red);
+  color:#fff;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:.03em}
+.abtn:active{opacity:.85}
+.abtn.done{background:var(--panel2);color:var(--dim)}
+#amchips{display:flex;gap:8px;overflow-x:auto;padding:10px 2px 4px;scrollbar-width:none}
+#amchips::-webkit-scrollbar{display:none}
+.achip{flex:0 0 auto;padding:12px 16px;border-radius:999px;border:1px solid var(--line);background:var(--panel); /* P2-18: ≥44px touch target */
+  color:var(--txt);font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.achip:active{background:var(--panel2)}
+#amform{display:flex;gap:8px;padding:8px 0 4px}
+#amin{flex:1;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--panel);
+  color:var(--txt);font-size:16px;outline:none} /* P2-19: 16px stops iOS auto-zoom */
+#amin:focus{border-color:var(--red)}
+#amsend{padding:0 20px;border-radius:12px;border:none;background:var(--red);color:#fff;
+  font-size:15px;font-weight:800;cursor:pointer}
+#amsend:disabled{opacity:.5}
+.typing{color:var(--dim);font-style:italic;font-size:13px}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="brand"><div class="gem"></div>
+      <div><h1>AURUM</h1><small>BRKNHARTED</small></div>
+    </div>
+    <input id="search" type="search" placeholder="Search tracks or artists…" autocomplete="off" aria-label="Search tracks or artists">
+  </header>
+  <div id="tabs" role="tablist" aria-label="Library views"></div>
+  <div id="why"></div>
+  <div id="list"></div>
+  <div id="apollo">
+    <div id="amsgs"></div>
+    <div id="amchips"></div>
+    <form id="amform"><input id="amin" type="text" placeholder="Ask Apollo — playlists, moods, why this track…" autocomplete="off" maxlength="500"><button id="amsend" type="submit">➤</button></form>
+  </div>
+</div>
+<div id="bar">
+  <div class="inner">
+    <div id="seekrow"><span id="cur">0:00</span><input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek"><span id="dur">0:00</span></div>
+    <div id="now" title="Open now playing">
+      <img id="art" alt="">
+      <div class="meta"><div class="t" id="ntitle">Pick a track</div><div class="a" id="nartist">Loading…</div></div>
+      <div class="ctrl">
+        <button class="cbtn" id="prev" aria-label="Previous">⏮</button>
+        <button class="cbtn main" id="play" aria-label="Play">▶</button>
+        <button class="cbtn" id="next" aria-label="Next">⏭</button>
+        <button class="cbtn" id="shuffle" aria-label="Shuffle" style="opacity:.45">🔀</button>
+      </div>
+    </div>
+    <div id="status" role="status"></div>
+  </div>
+</div>
+<div id="fs" aria-hidden="true" role="dialog" aria-label="Now playing">
+  <button id="fsclose" aria-label="Close">✕</button>
+  <img id="fsart" alt="">
+  <div id="fstitle">Pick a track</div>
+  <div id="fsartist"></div>
+  <div id="fswhy"></div>
+  <div id="fsseekrow"><span id="fscur">0:00</span><input id="fsseek" type="range" min="0" max="1000" value="0" aria-label="Seek"><span id="fsdur">0:00</span></div>
+  <div class="ctrl" id="fsctrl">
+    <button class="cbtn" id="fslike" aria-label="Like">👍</button>
+    <button class="cbtn" id="fsprev" aria-label="Previous">⏮</button>
+    <button class="cbtn main" id="fsplay" aria-label="Play">▶</button>
+    <button class="cbtn" id="fsnext" aria-label="Next">⏭</button>
+    <button class="cbtn" id="fsdislike" aria-label="Dislike">👎</button>
+  </div>
+  <div id="fsrow2">
+    <button class="cbtn" id="fsshuffle" aria-label="Shuffle" style="opacity:.45">🔀</button>
+    <button class="cbtn" id="sleep" aria-label="Sleep timer">🌙</button>
+  </div>
+  <div id="fsupnext"><div id="fsuphead">UP NEXT</div><div id="fsuplist"></div></div>
+</div>
+<audio id="audio" preload="none"></audio>
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const audio=$("audio"), listEl=$("list"), tabsEl=$("tabs"), whyEl=$("why"), statusEl=$("status");
+let DB={tracks:[],playlists:[],for_you:[]};
+let view="all", queue=[], qi=-1, filter="", shuffle=false, playGen=0, failPending=0, skipStreak=0;
+
+const PLACE="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52"><rect width="52" height="52" rx="10" fill="#1a1a1f"/><text x="26" y="33" font-size="20" text-anchor="middle" fill="#e5322d">◆</text></svg>');
+
+function fmt(s){ if(!isFinite(s)||s<0) return "0:00"; s=Math.floor(s);
+  return Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); }
+
+function setPlay(paused){ // glyph + screen-reader label stay in sync
+  const g=paused?"▶":"⏸", l=paused?"Play":"Pause";
+  $("play").textContent=g; $("play").setAttribute("aria-label",l);
+  $("fsplay").textContent=g; $("fsplay").setAttribute("aria-label",l);
+}
+
+function setStatus(html){ statusEl.innerHTML=html||""; }
+
+/* ---------- P1: albums (real `album` field only — never invented) ---------- */
+function albumGroups(){
+  const map=new Map();
+  DB.tracks.forEach(t=>{
+    if(!t.album) return;
+    if(!map.has(t.album)) map.set(t.album,{name:t.album,tracks:[]});
+    map.get(t.album).tracks.push(t);
+  });
+  return [...map.values()];
+}
+function albumArtist(g){
+  const arts=[...new Set(g.tracks.map(t=>t.artist))];
+  return arts.length===1?arts[0]:"Various artists";
+}
+
+async function load(){
+  setStatus('<span class="spin"></span>Loading library…');
+  const r=await fetch("/api/aurum/tracks");
+  if(!r.ok){ // P2-9: a 404/502 is not a connection problem — say so distinctly
+    setStatus("The library answered with an error ("+r.status+").");
+    $("nartist").textContent="Library unavailable"; return;
+  }
+  DB=await r.json();
+  buildTabs();
+  setView("all");
+  setStatus("");
+  $("nartist").textContent=DB.tracks.length+" tracks · "+DB.playlists.length+" playlists";
+  restoreResume(); // P3
+}
+function buildTabs(){
+  const tabs=[["all","All Tracks"],["albums","Albums"],["foryou","For You"],["apollo","✦ Apollo"]];
+  DB.playlists.forEach(p=>tabs.push(["pl:"+p.name,p.name]));
+  tabsEl.innerHTML="";
+  tabs.forEach(([k,label])=>{
+    const b=document.createElement("button");
+    b.className="tab"+(k===view?" on":"");
+    b.textContent=label; b.dataset.k=k; b.setAttribute("role","tab");
+    b.setAttribute("aria-selected",k===view?"true":"false");
+    b.onclick=()=>setView(k);
+    tabsEl.appendChild(b);
+  });
+}
+function setView(k){
+  view=k; filter=""; $("search").value="";
+  document.querySelectorAll(".tab").forEach(t=>{
+    t.classList.toggle("on",t.dataset.k===k);
+    t.setAttribute("aria-selected",t.dataset.k===k?"true":"false");
+  });
+  render();
+}
+function currentList(){
+  let items;
+  if(view==="all") items=DB.tracks;
+  else if(view==="foryou") items=DB.for_you;
+  else if(view==="albums") items=albumGroups().flatMap(g=>g.tracks);
+  else items=DB.tracks.filter(t=>(t.playlists||[]).includes(view.slice(3)));
+  if(filter){
+    const f=filter.toLowerCase();
+    items=items.filter(t=>(t.title+" "+t.artist).toLowerCase().includes(f));
+  }
+  return items;
+}
+function rowEl(t, items, i){
+  const d=document.createElement("div");
+  d.className="row"+(queue[qi]&&queue[qi].id===t.id?" playing":"");
+  d.innerHTML='<img loading="lazy" alt="">'+
+    '<div class="meta"><div class="t"></div><div class="a"></div></div>'+
+    '<div class="eq"><i></i><i></i><i></i></div>';
+  const img=d.querySelector("img");
+  img.src=t.artwork_url||PLACE; img.onerror=function(){this.src=PLACE};
+  img.alt=t.title+" — cover art";
+  d.querySelector(".t").textContent=t.title;
+  d.querySelector(".a").textContent=t.artist;
+  if(view==="foryou"&&t.why){ // P6: reasons inline on the row
+    const w=document.createElement("div");
+    w.className="whyline"; w.textContent="✦ "+t.why;
+    d.querySelector(".meta").appendChild(w);
+  } else if(t.why) d.title=t.why;
+  d.onclick=()=>playFrom(items,i);
+  return d;
+}
+function render(){
+  const ap=view==="apollo"; // Apollo Max conversational panel
+  $("apollo").style.display=ap?"block":"none";
+  listEl.style.display=ap?"none":"";
+  whyEl.style.display="none";
+  if(ap) return;
+  const items=currentList();
+  listEl.innerHTML="";
+  if(!items.length){ listEl.innerHTML='<div id="empty">'+(filter?"No matches for that search.":"Nothing here yet.")+"</div>"; return; }
+  const frag=document.createDocumentFragment();
+  if(view==="albums"){
+    let flat=0;
+    albumGroups().forEach(g=>{
+      const tracks=filter?g.tracks.filter(t=>(t.title+" "+t.artist).toLowerCase().includes(filter.toLowerCase())):g.tracks;
+      if(!tracks.length) return;
+      const sec=document.createElement("div"); sec.className="albumsec";
+      const head=document.createElement("div"); head.className="albumhead";
+      head.innerHTML='<span class="an"></span><span class="aa"></span><span class="ac"></span>';
+      head.querySelector(".an").textContent=g.name;
+      head.querySelector(".aa").textContent=albumArtist(g);
+      head.querySelector(".ac").textContent=tracks.length+" tracks";
+      sec.appendChild(head);
+      tracks.forEach(t=>sec.appendChild(rowEl(t,tracks,tracks.indexOf(t))));
+      frag.appendChild(sec);
+      flat+=tracks.length;
+    });
+    if(!flat){ listEl.innerHTML='<div id="empty">No album tags yet — tracks get grouped here as albums are tagged.</div>'; return; }
+  } else {
+    items.forEach((t,i)=>frag.appendChild(rowEl(t,items,i)));
+  }
+  listEl.appendChild(frag);
+}
+function playFrom(items,i){
+  // A restored resume position belongs ONLY to the restored track. Tapping a
+  // different row must not inherit another track's seek point (2026-09-28).
+  // P1-1: playCurrent() now owns the pendingSeek reset; the same-track case
+  // (toggle-after-restore, re-tap of the current row) opts in to keep it.
+  keepSeekOnce=(queue.length>0&&qi>=0&&items[i]&&queue[qi]&&items[i].id===queue[qi].id);
+  queue=items; qi=i; skipStreak=0; saveResume();
+  if(shuffle) shuffleSync(); // P1-2: keep the shuffle order anchored to the new queue
+  playCurrent();
+}
+/* ---------- P8: re-resolve Audius streams before skipping ---------- */
+const AUD_HOSTS=["https://discoveryprovider.audius.co","https://api.audius.co"];
+let reresolvedGen=-1;
+function audiusId(url){ const m=/\/tracks\/([A-Za-z0-9]+)\/stream/.exec(url||""); return m?m[1]:null; }
+function tryReresolve(g){
+  const t=queue[qi]; if(!t||!t.stream_url||reresolvedGen===g) return false;
+  const id=audiusId(t.stream_url); if(!id) return false;
+  const alt=AUD_HOSTS.map(h=>h+"/v1/tracks/"+id+"/stream?app_name=aurum_player")
+    .find(u=>!t.stream_url.startsWith(u.split("/v1")[0]));
+  if(!alt) return false;
+  reresolvedGen=g; failPending=0;
+  setStatus("Stream hiccup — retrying…");
+  t.stream_url=alt; // remember the working host for this session
+  audio.src=alt;
+  audio.play().catch(()=>failTrack(g,"Couldn't play this one"));
+  return true;
+}
+function failTrack(g, msg){
+  if(g!==playGen) return;
+  if(tryReresolve(g)) return; // P8: one re-resolve attempt before skipping
+  if(failPending===g) return;
+  failPending=g;
+  if(++skipStreak>=5){ playGen++; setStatus("Several tracks in a row won't play — stopped. Tap a track to try again."); setPlay(true); document.title="AURUM — BRKNHARTED Player"; return; }
+  setStatus(msg+" — skipping…");
+  setTimeout(()=>{ if(g===playGen) next(); },800);
+}
+function playCurrent(){
+  const t=queue[qi]; if(!t) return;
+  stopFade(); // P1-3: a track change cancels any in-flight sleep fade
+  if(!keepSeekOnce) pendingSeek=0; // P1-1: resume seeks are opt-in per track
+  keepSeekOnce=false;
+  const g=++playGen; failPending=0;
+  if(!t.stream_url){ failTrack(g, "No stream saved for this one yet"); return; }
+  setStatus('<span class="spin"></span>Loading…');
+  audio.src=t.stream_url;
+  audio.play().catch(e=>failTrack(g, "Couldn't play this one"));
+  audio.removeEventListener("loadedmetadata", applyResumeSeek); // stale seek from a failed track must not leak into this one
+  if(pendingSeek>0){ // P3: resume position
+    resumeTarget=pendingSeek; pendingSeek=0;
+    audio.addEventListener("loadedmetadata", applyResumeSeek);
+  }
+  $("art").src=t.artwork_url||PLACE; $("art").onerror=function(){this.src=PLACE}; $("art").alt=t.title+" — cover art";
+  $("ntitle").textContent=t.title; $("nartist").textContent=t.artist;
+  setPlay(false);
+  document.title="▶ "+t.title+" — AURUM";
+  if("mediaSession" in navigator){ try{
+    navigator.mediaSession.metadata=new MediaMetadata({title:t.title||"Unknown", artist:t.artist||"Aurum", album:t.album||"AURUM", artwork:[{src:t.artwork_url||PLACE, sizes:"512x512"}]});
+  }catch(e){} }
+  if(t.why){ whyEl.style.display="block"; whyEl.textContent="✦ "+t.why; }
+  else whyEl.style.display="none";
+  render(); syncFS();
+}
+/* P1-2: real shuffle order — next() advances through the shuffled pass, prev()
+   walks the shuffle history (also fixes P2-7), UP NEXT renders from it. */
+let shuffleOrder=[], shufflePos=0;
+function shuffleSync(){
+  shuffleOrder=queue.map((_,i)=>i);
+  for(let i=shuffleOrder.length-1;i>0;i--){ // Fisher–Yates
+    const j=Math.floor(Math.random()*(i+1));
+    const t2=shuffleOrder[i]; shuffleOrder[i]=shuffleOrder[j]; shuffleOrder[j]=t2;
+  }
+  const anchor=qi>=0&&qi<queue.length?qi:0;
+  const k=shuffleOrder.indexOf(anchor);
+  if(k>0){ shuffleOrder[k]=shuffleOrder[0]; shuffleOrder[0]=anchor; } // current track first
+  shufflePos=0;
+}
+function next(){ if(!queue.length) return;
+  if(shuffle&&queue.length>1){
+    if(shufflePos+1>=shuffleOrder.length) shuffleSync(); // fresh pass, current track first
+    if(shuffleOrder.length>1){ shufflePos++; qi=shuffleOrder[shufflePos]; }
+  } else qi=(qi+1)%queue.length;
+  saveResume(); playCurrent(); }
+function prev(){ if(!queue.length) return;
+  if(audio.currentTime>3){ audio.currentTime=0; return; }
+  if(shuffle&&queue.length>1){
+    if(shufflePos>0){ shufflePos--; qi=shuffleOrder[shufflePos]; } // walk shuffle history
+    /* else: at the start of the shuffle pass — replay the current track */
+  } else qi=(qi-1+queue.length)%queue.length;
+  saveResume(); playCurrent(); }
+function toggle(){
+  if(!queue.length){ const l=currentList();
+    if(l.length) playFrom(l,0); else setStatus("Nothing to play yet — the library is empty."); return; }
+  if(audio.paused){
+    if(!audio.currentSrc){ playFrom(queue,qi<0?0:qi); return; } // P0-1: a restored resume never set audio.src — playFrom does
+    audio.play().then(()=>{ setPlay(false); syncFS(); }).catch(()=>setStatus("Couldn't start playback."));
+  }
+  else { audio.pause(); setPlay(true); cancelSleep(); saveResume(); syncFS(); }
+}
+/* ---------- P3: resume queue + position ---------- */
+const RKEY="aurum.resume.v1";
+let pendingSeek=0, lastSave=0, resumeTarget=0, keepSeekOnce=false;
+function applyResumeSeek(){ // named so a stale seek from a failed track can be detached
+  audio.removeEventListener("loadedmetadata", applyResumeSeek);
+  const ps=resumeTarget; resumeTarget=0;
+  try{ if(audio.duration&&ps<audio.duration) audio.currentTime=ps; }catch(e){}
+}
+function saveResume(){
+  if(!queue.length||qi<0) return;
+  try{ localStorage.setItem(RKEY, JSON.stringify({q:queue.map(t=>t.id), qi:qi,
+    t:Math.floor(audio.currentTime||0), ts:Date.now()})); }catch(e){}
+}
+function restoreResume(){
+  let r=null;
+  try{ r=JSON.parse(localStorage.getItem(RKEY)||"null"); }catch(e){}
+  if(!r||!Array.isArray(r.q)||!r.q.length) return; // P2-9: wrong-shape resume skips silently instead of throwing a misleading "connection" error
+  const byId={};
+  DB.tracks.forEach(t=>byId[t.id]=t);
+  (DB.for_you||[]).forEach(t=>{ if(!byId[t.id]) byId[t.id]=t; });
+  const q=r.q.map(id=>byId[id]).filter(Boolean);
+  if(!q.length) return;
+  queue=q; qi=Math.min(r.qi||0, q.length-1); pendingSeek=r.t||0;
+  const t=queue[qi];
+  $("art").src=t.artwork_url||PLACE; $("art").onerror=function(){this.src=PLACE}; $("art").alt=t.title+" — cover art";
+  $("ntitle").textContent=t.title;
+  $("nartist").textContent=t.artist+(pendingSeek>0?" · resumes at "+fmt(pendingSeek):"");
+  document.title="AURUM — BRKNHARTED Player";
+  render();
+}
+/* ---------- P4: like / dislike -> Apollo taste events ---------- */
+const voted={};
+function rate(rating){
+  const t=queue[qi]; if(!t) return;
+  setStatus("Sending…");
+  fetch("/api/aurum/rate",{method:"POST",
+    headers:{"Content-Type":"application/json","X-Workshop":"1"},
+    body:JSON.stringify({track_id:t.id,artist:t.artist,title:t.title,rating:rating})})
+    .then(r=>r.json().then(d=>({s:r.status,d:d})))
+    .then(({s,d})=>{
+      if(s===200&&d.ok){ voted[t.id]=rating;
+        setStatus(rating==="like"?"👍 Liked — Apollo noted it.":"👎 Disliked — Apollo noted it.");
+      } else setStatus("Couldn't save that — try again.");
+      syncFS();
+    })
+    .catch(()=>setStatus("Couldn't reach Apollo."));
+}
+/* ---------- P2: fullscreen now-playing + Up Next ---------- */
+function openFS(){ $("fs").classList.add("open"); $("fs").setAttribute("aria-hidden","false"); syncFS(); }
+function closeFS(){ $("fs").classList.remove("open"); $("fs").setAttribute("aria-hidden","true"); }
+function syncFS(){
+  const t=queue[qi];
+  if(t){
+    $("fsart").src=t.artwork_url||PLACE; $("fsart").onerror=function(){this.src=PLACE};
+    $("fsart").alt=t.title+" — cover art";
+    $("fstitle").textContent=t.title; $("fsartist").textContent=t.artist;
+    if(t.why){ $("fswhy").style.display="block"; $("fswhy").textContent="✦ "+t.why; }
+    else $("fswhy").style.display="none";
+    $("fslike").classList.toggle("voted", voted[t.id]==="like");
+    $("fsdislike").classList.toggle("voted", voted[t.id]==="dislike");
+  }
+  setPlay(audio.paused);
+  $("fsshuffle").style.opacity=shuffle?1:.45;
+  const upcoming=shuffle?Math.max(0,shuffleOrder.length-shufflePos-1):Math.max(0,queue.length-qi-1);
+  $("fsuphead").textContent=shuffle?("UP NEXT · SHUFFLE ("+upcoming+" upcoming)"):"UP NEXT";
+  const up=$("fsuplist"); up.innerHTML="";
+  for(let k=1;k<=8&&k<=upcoming;k++){ // P1-2: under shuffle, render the real shuffle order
+    const sp=shufflePos+k, idx=shuffle?shuffleOrder[sp]:qi+k;
+    const nt=queue[idx];
+    if(!nt) continue;
+    const d=document.createElement("div"); d.className="uprow";
+    d.innerHTML='<span class="n"></span><img loading="lazy" alt=""><div class="meta"><div class="t"></div><div class="a"></div></div>';
+    d.querySelector(".n").textContent=k;
+    const img=d.querySelector("img"); img.src=nt.artwork_url||PLACE;
+    img.onerror=function(){this.src=PLACE}; img.alt=nt.title+" — cover art";
+    d.querySelector(".t").textContent=nt.title;
+    d.querySelector(".a").textContent=nt.artist;
+    d.onclick=()=>{ // P1-2: jump within the rendered order; P1-1: playCurrent clears any stale pendingSeek
+      if(shuffle) shufflePos=sp;
+      qi=idx; skipStreak=0; saveResume(); playCurrent(); };
+    up.appendChild(d);
+  }
+  if(!up.children.length) up.innerHTML='<div class="fsempty">Queue\'s empty — pick something.</div>';
+}
+/* ---------- P7: sleep timer with fade ---------- */
+const SLEEPS=[0,15,30,45,60]; let sleepIdx=0, sleepId=0, sleepFadeGen=0, sleepFading=false;
+function stopFade(){ // P1-3: kill any in-flight fade and restore volume
+  sleepFadeGen++; sleepFading=false;
+  try{ if(audio.volume<1) audio.volume=1; }catch(e){}
+}
+function cycleSleep(){
+  sleepIdx=(sleepIdx+1)%SLEEPS.length;
+  clearTimeout(sleepId); sleepId=0; stopFade();
+  const m=SLEEPS[sleepIdx];
+  const b=$("sleep");
+  if(m>0){ sleepId=setTimeout(sleepFire, m*60000); b.classList.add("on"); b.textContent="🌙"+m;
+    setStatus("Sleep in "+m+" min 🌙"); }
+  else { b.classList.remove("on"); b.textContent="🌙"; setStatus("Sleep timer off"); }
+}
+function cancelSleep(){
+  if(sleepIdx>0){ sleepIdx=0; clearTimeout(sleepId); sleepId=0;
+    const b=$("sleep"); b.classList.remove("on"); b.textContent="🌙"; }
+  stopFade(); // P1-3: also kill a fade that is already running
+}
+function sleepFire(){
+  sleepIdx=0; sleepId=0;
+  const g=++sleepFadeGen; sleepFading=true; // P1-3: fade generation
+  const b=$("sleep"); b.classList.remove("on"); b.textContent="🌙";
+  setStatus("Fading out… 🌙");
+  const step=()=>{
+    if(g!==sleepFadeGen) return; // P1-3: track changed or sleep re-armed — this fade is dead
+    if(audio.paused){ audio.volume=1; sleepFading=false; setStatus(""); return; }
+    if(audio.volume>0.06){ try{audio.volume=Math.max(0,audio.volume-0.06);}catch(e){}
+      sleepId=setTimeout(step,500); }
+    else { audio.pause(); try{audio.volume=1;}catch(e){} sleepFading=false; setPlay(true);
+      saveResume(); syncFS(); setStatus(""); }
+  };
+  step();
+}
+/* ---------- wiring ---------- */
+$("play").onclick=toggle; $("next").onclick=next; $("prev").onclick=prev;
+$("fsplay").onclick=toggle; $("fsnext").onclick=next; $("fsprev").onclick=prev;
+$("shuffle").onclick=$("fsshuffle").onclick=()=>{
+  shuffle=!shuffle;
+  $("shuffle").style.opacity=shuffle?1:.45; $("fsshuffle").style.opacity=shuffle?1:.45;
+  if(shuffle) shuffleSync(); // P1-2: build the shuffle order when shuffle turns on
+  setStatus(shuffle?"Shuffle on 🔀":"Shuffle off"); syncFS(); };
+$("fslike").onclick=()=>rate("like");
+$("fsdislike").onclick=()=>rate("dislike");
+$("sleep").onclick=cycleSleep;
+$("fsclose").onclick=closeFS;
+$("now").onclick=e=>{ if(!e.target.closest("button")) openFS(); };
+/* NOTE: audio.onended is assigned once below with telemetry (endCurTrack) — no earlier plain assignment. */
+/* P0-2: stall watchdog — a stream that accepts the connection but never sends
+   bytes (or stalls mid-stream) never fires onerror and leaves play() pending,
+   wedging the queue on "Loading…" forever. The timer is generation-guarded:
+   a captured g that no longer equals playGen (user hit next/prev meanwhile) no-ops. */
+let stallTimer=0;
+function clearStall(){ if(stallTimer){ clearTimeout(stallTimer); stallTimer=0; } }
+function armStall(g){
+  clearStall();
+  stallTimer=setTimeout(()=>{ stallTimer=0; if(g===playGen) failTrack(g,"Stream stalled"); },18000);
+}
+audio.onerror=()=>failTrack(playGen, "Stream failed");
+audio.onwaiting=()=>armStall(playGen);
+audio.onstalled=()=>armStall(playGen);
+audio.oncanplay=()=>clearStall();
+audio.onplaying=()=>{ clearStall(); setStatus(""); skipStreak=0; };
+audio.onpause=()=>{ saveResume(); };
+function syncSeek(){
+  const v=audio.duration?Math.round(audio.currentTime/audio.duration*1000):0;
+  $("seek").value=v; $("fsseek").value=v;
+  $("cur").textContent=fmt(audio.currentTime); $("dur").textContent=fmt(audio.duration);
+  $("fscur").textContent=fmt(audio.currentTime); $("fsdur").textContent=fmt(audio.duration);
+}
+audio.ontimeupdate=()=>{
+  syncSeek();
+  const now=Date.now(); // P3: throttled autosave while playing
+  if(now-lastSave>15000){ lastSave=now; saveResume(); }
+};
+audio.onloadedmetadata=()=>{ $("dur").textContent=fmt(audio.duration); $("fsdur").textContent=fmt(audio.duration); };
+$("seek").oninput=e=>{ if(audio.duration) audio.currentTime=e.target.value/1000*audio.duration; };
+$("fsseek").oninput=e=>{ if(audio.duration) audio.currentTime=e.target.value/1000*audio.duration; };
+$("search").oninput=e=>{ filter=e.target.value.trim(); render(); };
+document.addEventListener("pagehide", saveResume);
+document.addEventListener("visibilitychange", ()=>{ if(document.hidden) saveResume(); });
+if("mediaSession" in navigator){ try{
+  navigator.mediaSession.setActionHandler("play", toggle);
+  navigator.mediaSession.setActionHandler("pause", toggle);
+  navigator.mediaSession.setActionHandler("previoustrack", prev);
+  navigator.mediaSession.setActionHandler("nexttrack", next);
+}catch(e){} }
+document.addEventListener("keydown",e=>{
+  if(/^(INPUT|TEXTAREA|BUTTON|SELECT)$/.test(e.target.tagName)) return; // Space on a focused button already clicks it — don't double-fire
+  if(e.code==="Space"){ e.preventDefault(); toggle(); }
+  if(e.key==="ArrowRight") next(); if(e.key==="ArrowLeft") prev();
+  if(e.key==="Escape"){ // P2-14: typing in the Apollo input — blur, don't slam the fullscreen shut
+    if(/^(INPUT|TEXTAREA)$/.test(e.target.tagName)) e.target.blur(); else closeFS(); }
+});
+if("serviceWorker" in navigator){ // P5: installable PWA
+  window.addEventListener("load", ()=>{ navigator.serviceWorker.register("/aurum-sw.js").catch(()=>{}); });
+}
+/* ================= Apollo Max ================= */
+const WSH={"Content-Type":"application/json","X-Workshop":"1"};
+function apoDevice(){
+  let d=null;
+  try{ d=localStorage.getItem("aurum.device.v1"); }catch(e){}
+  if(!d){ d="dev-"+Math.random().toString(36).slice(2,10)+Date.now().toString(36);
+    try{ localStorage.setItem("aurum.device.v1",d); }catch(e){} }
+  return d;
+}
+let apoEvents=[];
+try{ apoEvents=JSON.parse(localStorage.getItem("aurum.events.v1")||"[]"); }catch(e){ apoEvents=[]; }
+function apoSaveEvents(){ try{ localStorage.setItem("aurum.events.v1",JSON.stringify(apoEvents.slice(-500))); }catch(e){} }
+function apoEvent(ev,t){
+  if(!t||!t.id) return;
+  apoEvents.push({event:ev,track_id:String(t.id),artist:String(t.artist||""),
+    title:String(t.title||""),at:new Date().toISOString()});
+  if(apoEvents.length>500) apoEvents=apoEvents.slice(-500);
+  apoSaveEvents();
+}
+let apoFlushing=false;
+async function apoFlush(){
+  if(apoFlushing||!apoEvents.length) return;
+  apoFlushing=true;
+  const batch=apoEvents.slice(0,200);
+  try{
+    const r=await fetch("/api/aurum/history",{method:"POST",headers:WSH,
+      body:JSON.stringify({device_id:apoDevice(),events:batch})});
+    const j=await r.json();
+    if(r.ok&&j&&j.ok) apoEvents=apoEvents.slice(batch.length);
+  }catch(e){ /* offline: keep the queue, retry later */ }
+  apoSaveEvents(); apoFlushing=false;
+}
+setInterval(apoFlush,30000);
+document.addEventListener("visibilitychange",()=>{ if(document.hidden){ apoFlush(); } });
+document.addEventListener("pagehide",()=>{ apoFlush(); });
+/* playback telemetry: play / skip / completion (a play alone is never a preference signal) */
+let curTrack=null;
+function endCurTrack(how){
+  const c=curTrack; curTrack=null; if(!c) return;
+  const dur=audio.duration, pos=audio.currentTime;
+  if(how==="ended"||(dur>0&&pos/dur>=0.8)){ apoEvent("completion",c); return; }
+  if(how==="switch"&&dur>30&&pos>5&&pos/dur<0.5) apoEvent("skip",c);
+}
+const _playCurrent=playCurrent;
+playCurrent=function(){
+  const t=queue[qi];
+  if(curTrack&&(!t||t.id!==curTrack.id)) endCurTrack("switch");
+  _playCurrent();
+  if(t&&(!curTrack||curTrack.id!==t.id)){ curTrack={id:t.id,artist:t.artist,title:t.title}; apoEvent("play",t); }
+  else if(t&&curTrack&&curTrack.id===t.id){ /* same track restarted: no new play event */ }
+};
+audio.onended=()=>{ endCurTrack("ended"); next(); };
+/* ---------- conversational panel ---------- */
+let apoBusy=false, apoGreeted=false;
+const APO_CHIPS=["✦ Make me a phoenix-arc playlist","Something darker but melodic","▶ Play Bang by Diggy Graves","Why this track?","What's fresh?"];
+function apoAddMsg(cls,text){
+  const d=document.createElement("div"); d.className="am "+cls; d.textContent=text;
+  $("amsgs").appendChild(d); $("amsgs").scrollTop=$("amsgs").scrollHeight; return d;
+}
+function apoTrackRow(t){
+  const d=document.createElement("div"); d.className="arow";
+  const img=document.createElement("img"); img.src=t.artwork_url||PLACE;
+  img.onerror=function(){this.src=PLACE}; img.alt="";
+  const m=document.createElement("div");
+  const tt=document.createElement("div"); tt.className="t"; tt.textContent=t.title||"Unknown";
+  const aa=document.createElement("div"); aa.className="a"; aa.textContent=t.artist||"";
+  m.appendChild(tt); m.appendChild(aa);
+  if(t.why){ const w=document.createElement("div"); w.className="w"; w.textContent="✦ "+t.why; m.appendChild(w); }
+  d.appendChild(img); d.appendChild(m); return d;
+}
+function findTrack(id){ // catalog first, For You picks as fallback (dead-card guard)
+  return DB.tracks.find(x=>String(x.id)===String(id))||
+    (DB.for_you||[]).find(x=>String(x.id)===String(id));
+}
+function apoResolve(ids){
+  const out=[];
+  (ids||[]).forEach(id=>{
+    const t=findTrack(id);
+    if(t) out.push(t);
+  });
+  return out;
+}
+function apoApplyAction(a,btn){
+  const tracks=apoResolve(a.track_ids);
+  if(!tracks.length){ apoAddMsg("sys","Those picks didn't clear verification on my end — try again?"); return; }
+  if(a.op==="play"){
+    queue=tracks; qi=0; skipStreak=0; saveResume();
+    if(shuffle) shuffleSync(); // P1-2: queue replaced — rebuild the shuffle order
+    playCurrent(); // P1-1: playCurrent clears any stale pendingSeek (only the restore path opts in)
+    btn.textContent="▶ Playing"; btn.classList.add("done"); btn.disabled=true;
+    apoAddMsg("sys","Playing "+tracks[0].artist+" — "+tracks[0].title+".");
+  }else if(a.op==="queue_up_next"){
+    if(qi<0||!queue.length){ queue=tracks.concat(queue); qi=0; }
+    else queue.splice(qi+1,0,...tracks);
+    if(shuffle) shuffleSync(); // P1-2: splice shifted indices — rebuild the shuffle order
+    saveResume(); render(); syncFS();
+    btn.textContent="＋ Queued "+tracks.length+" up next"; btn.classList.add("done"); btn.disabled=true;
+    apoAddMsg("sys","Queued "+tracks.length+" track"+(tracks.length>1?"s":"")+" up next — your queue keeps its order after them.");
+  }
+}
+function apoCard(a){
+  const card=document.createElement("div"); card.className="acard";
+  const head=document.createElement("div"); head.className="ah";
+  head.textContent=a.op==="play"?"APOLLO SAYS PLAY":"QUEUED UP NEXT";
+  card.appendChild(head);
+  (a.tracks||[]).forEach(t=>{
+    const full=findTrack(t.track_id);
+    card.appendChild(apoTrackRow(Object.assign({},t,{title:t.title||(full&&full.title),
+      artist:t.artist||(full&&full.artist),artwork_url:(full&&full.artwork_url)||PLACE})));
+  });
+  const btn=document.createElement("button"); btn.className="abtn";
+  btn.textContent=a.op==="play"?"▶ Play now":"＋ Queue up next";
+  btn.onclick=()=>apoApplyAction(a,btn);
+  card.appendChild(btn);
+  $("amsgs").appendChild(card); $("amsgs").scrollTop=$("amsgs").scrollHeight;
+}
+function apoPendingCard(p){
+  const t=(p.tracks&&p.tracks[0])||{};
+  apoAddMsg("sys","Awaiting your tap: "+(t.artist||"")+" — "+(t.title||"")+". It's in your drops card; nothing changes until you approve.");
+}
+async function apoSend(text){
+  text=(text||"").trim(); if(!text||apoBusy) return;
+  apoBusy=true; $("amsend").disabled=true;
+  apoAddMsg("me",text);
+  const typing=apoAddMsg("apo","…"); typing.classList.add("typing");
+  const np=queue[qi];
+  const ctx={};
+  if(np) ctx.now_playing={track_id:String(np.id),artist:np.artist||"",title:np.title||""};
+  if(queue.length>qi+1) ctx.queue_tail=queue.slice(qi+1,qi+6).map(t=>String(t.id));
+  try{
+    const r=await fetch("/api/aurum/chat",{method:"POST",headers:WSH,
+      body:JSON.stringify({client_request_id:(crypto.randomUUID?crypto.randomUUID():"rid-"+Date.now()+"-"+Math.random().toString(36).slice(2)),
+        message:text,input:"text",context:ctx})});
+    typing.remove();
+    if(!r.ok){ apoAddMsg("sys","Apollo's unreachable right now — try again in a bit. Your words are safe."); return; }
+    const j=await r.json();
+    if(j.reply) apoAddMsg("apo",String(j.reply));
+    if(j.brain==="fallback") apoAddMsg("sys","(running on the local fallback — answers may be simpler)");
+    (j.actions||[]).forEach(a=>{
+      if(a.op==="play"||a.op==="queue_up_next") apoCard(a);
+      else apoAddMsg("sys","Noted: "+a.op+".");
+    });
+    (j.pending||[]).forEach(apoPendingCard);
+    if(j.intent==="clarify"&&!(j.actions||[]).length&&!j.reply)
+      apoAddMsg("apo","Tell me the shape of it — a mood, an artist, or say 'what's fresh'.");
+  }catch(e){
+    typing.remove();
+    apoAddMsg("sys","Couldn't reach Apollo — check your connection and try again.");
+  }finally{ apoBusy=false; $("amsend").disabled=false; }
+}
+function apoInit(){
+  if(apoGreeted) return; apoGreeted=true;
+  $("amchips").innerHTML="";
+  APO_CHIPS.forEach(c=>{
+    const b=document.createElement("button"); b.className="achip"; b.textContent=c;
+    b.onclick=()=>apoSend(c.replace(/^✦ |^▶ /,"")); $("amchips").appendChild(b);
+  });
+  apoAddMsg("apo","I'm Apollo — tell me a mood, an artist, or an arc like ember → ashes → phoenix, and I'll build you something playable, with reasons. Your ear stays the final gate.");
+}
+const _setView=setView;
+setView=function(k){ _setView(k); if(k==="apollo") apoInit(); };
+$("amform").addEventListener("submit",e=>{ e.preventDefault(); const v=$("amin").value; $("amin").value=""; apoSend(v); });
+/* ================= /Apollo Max ================= */
+load().catch(()=>{ setStatus("Couldn't reach the library. Check your connection."); $("nartist").textContent="Library unavailable"; });
+</script>
+</body>
+</html>
