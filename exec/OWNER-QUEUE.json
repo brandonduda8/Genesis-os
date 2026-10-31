@@ -1,15 +1,85 @@
 {
   "_doc": "Items only a person can do. Declared by agents and shown on the Executive Board. EVERY item must link its source, or the board rejects it. Remove an item when it is done; the git history keeps the record.",
   "items": [
-    {"who": "brandon", "class": "HANDS", "ask": "Add the Net Forge permission rule to Claude Code settings: allow Bash(npm create netforge@latest:*), Bash(npm test) and Bash(npm run play). Or say 'Zane runs it'.", "why": "Unblocks the first playable Genesis game. Typing approval in chat doesn't reach the permission system.", "source": "https://github.com/brandonduda8/Genesis-core/pull/27", "source_label": "Genesis-core#27 §3"},
-    {"who": "brandon", "class": "DECISION", "ask": "Open the micro-cap lab PR (one click). Creating it from the session was refused.", "why": "Puts the paper-trading lab up for review", "source": "https://github.com/brandonduda8/Genesis-core/compare/claude/universe-start...claude/microcap-lab?expand=1", "source_label": "compare view"},
-    {"who": "brandon", "class": "HANDS", "ask": "After Zane rebuilds the APK: open Pulse, choose Tha Aadity, tap a track, and confirm it plays audibly and auto-advances", "why": "The only proof that counts for the SoundCloud widget is your phone", "source": "https://github.com/brandonduda8/Genesis-os/pull/3", "source_label": "Genesis-os#3"},
-    {"who": "brandon", "class": "HANDS", "ask": "Sign ONE GHOST policy charter (ghost_operations, 90 days) on your own device", "why": "Turns per-item approvals into the tap-free classes of your register", "source": "https://github.com/brandonduda8/Genesis-os/pull/1", "source_label": "Genesis-os#1 README 'Keys'"},
-    {"who": "brandon", "class": "DECISION", "ask": "Authorize the S1 read-only preflight (G0) run, then G1–G5 one gate at a time", "why": "The OS-separated mission ledger can only be proven on S1", "source": "https://github.com/brandonduda8/Genesis-core/pull/20", "source_label": "Genesis-core#20"},
-    {"who": "zane", "class": "VERIFY", "ask": "Re-check GHOST v2 fixes D1–D6 at fe36cf1; place the NIM key at state/keys/nim.key; drain Q-002 or Q-003 through a real heal window", "why": "Acceptance item 2 is still executor-reported only", "source": "https://github.com/brandonduda8/Genesis-os/pull/1", "source_label": "Genesis-os#1"},
-    {"who": "zane", "class": "RUN", "ask": "Rebuild the Watch+Pulse APK (assets changed only)", "why": "Unblocks Brandon's device check", "source": "https://github.com/brandonduda8/Genesis-os/pull/3", "source_label": "Genesis-os#3"},
-    {"who": "zane", "class": "RUN", "ask": "Autopilot: launch ghost-h2h-v1 and ace-h2h-v1, rebuild the train kernels with the winners, then launch them", "why": "29 GPU-h + 20 TPU-h expire 2026-11-07T00:00Z", "source": "https://github.com/brandonduda8/Genesis-os/pull/4", "source_label": "Genesis-os#4"},
-    {"who": "zane", "class": "VERIFY", "ask": "Re-run ghost-v1/build_dataset.py (the guard should refuse); decide whether to refreeze as v1.1", "why": "WO-MASTER-TROUBLESHOOTER-001 acceptance", "source": "https://github.com/brandonduda8/Genesis-os/pull/5", "source_label": "Genesis-os#5"},
-    {"who": "zane", "class": "RUN", "ask": "Run tools/audius_match.py over Brandon's taste profile from a host with normal egress", "why": "Shows how many of his artists have official Audius accounts (the catalog rebuild)", "source": "https://github.com/brandonduda8/genesis-player/pull/14", "source_label": "genesis-player#14"}
+    {
+      "who": "brandon",
+      "class": "HANDS",
+      "ask": "Play EMBERWATCH (genesis-arena) yourself: run the 3 commands in RECEIPT-NETFORGE-001 on a computer with Node 22, or ask Zane to serve it on zane-box with --no-open",
+      "why": "Scaffold, bot playtest and a headless play all PASS; 'done' is you playing it",
+      "source": "https://github.com/brandonduda8/Genesis-core/pull/27",
+      "source_label": "Genesis-core#27 receipt"
+    },
+    {
+      "who": "brandon",
+      "class": "DECISION",
+      "ask": "Open the micro-cap lab PR (one click). Creating it from the session was refused.",
+      "why": "Puts the paper-trading lab up for review",
+      "source": "https://github.com/brandonduda8/Genesis-core/compare/claude/universe-start...claude/microcap-lab?expand=1",
+      "source_label": "compare view"
+    },
+    {
+      "who": "brandon",
+      "class": "HANDS",
+      "ask": "After Zane rebuilds the APK: open Pulse, choose Tha Aadity, tap a track, and confirm it plays audibly and auto-advances",
+      "why": "The only proof that counts for the SoundCloud widget is your phone",
+      "source": "https://github.com/brandonduda8/Genesis-os/pull/3",
+      "source_label": "Genesis-os#3"
+    },
+    {
+      "who": "brandon",
+      "class": "HANDS",
+      "ask": "Sign ONE GHOST policy charter (ghost_operations, 90 days) on your own device",
+      "why": "Turns per-item approvals into the tap-free classes of your register",
+      "source": "https://github.com/brandonduda8/Genesis-os/pull/1",
+      "source_label": "Genesis-os#1 README 'Keys'"
+    },
+    {
+      "who": "brandon",
+      "class": "DECISION",
+      "ask": "Authorize the S1 read-only preflight (G0) run, then G1–G5 one gate at a time",
+      "why": "The OS-separated mission ledger can only be proven on S1",
+      "source": "https://github.com/brandonduda8/Genesis-core/pull/20",
+      "source_label": "Genesis-core#20"
+    },
+    {
+      "who": "zane",
+      "class": "VERIFY",
+      "ask": "Re-check GHOST v2 fixes D1–D6 at fe36cf1; place the NIM key at state/keys/nim.key; drain Q-002 or Q-003 through a real heal window",
+      "why": "Acceptance item 2 is still executor-reported only",
+      "source": "https://github.com/brandonduda8/Genesis-os/pull/1",
+      "source_label": "Genesis-os#1"
+    },
+    {
+      "who": "zane",
+      "class": "RUN",
+      "ask": "Rebuild the Watch+Pulse APK (assets changed only)",
+      "why": "Unblocks Brandon's device check",
+      "source": "https://github.com/brandonduda8/Genesis-os/pull/3",
+      "source_label": "Genesis-os#3"
+    },
+    {
+      "who": "zane",
+      "class": "RUN",
+      "ask": "Autopilot: launch ghost-h2h-v1 and ace-h2h-v1, rebuild the train kernels with the winners, then launch them",
+      "why": "29 GPU-h + 20 TPU-h expire 2026-11-07T00:00Z",
+      "source": "https://github.com/brandonduda8/Genesis-os/pull/4",
+      "source_label": "Genesis-os#4"
+    },
+    {
+      "who": "zane",
+      "class": "VERIFY",
+      "ask": "Re-run ghost-v1/build_dataset.py (the guard should refuse); decide whether to refreeze as v1.1",
+      "why": "WO-MASTER-TROUBLESHOOTER-001 acceptance",
+      "source": "https://github.com/brandonduda8/Genesis-os/pull/5",
+      "source_label": "Genesis-os#5"
+    },
+    {
+      "who": "zane",
+      "class": "RUN",
+      "ask": "Run tools/audius_match.py over Brandon's taste profile from a host with normal egress",
+      "why": "Shows how many of his artists have official Audius accounts (the catalog rebuild)",
+      "source": "https://github.com/brandonduda8/genesis-player/pull/14",
+      "source_label": "genesis-player#14"
+    }
   ]
 }

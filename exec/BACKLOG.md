@@ -10,7 +10,7 @@ then unblocking power, reversibility, perishable resources, and finishing before
 | E-3 | **Board on a schedule** on zane-box, as a GHOST job: baseline nightly, board hourly. Publish it to Brandon as a private page. | Real telemetry where he looks | B | E-1 |
 | E-4 | **Training lane:** launch the h2h, then the ACE and GHOST LoRA kernels (Genesis-os#4), before 2026-11-07. | Perishable quota: about 29 GPU-h and 20 TPU-h | Training class | the autopilot on zane-box |
 | E-5 | **Aurum Hi-Fi P2:** wire the EQ engine into Media3, add the headphone picker. Then rebuild the catalog from the Audius match. | In Brandon's hands; he uses it daily | A | Audius run (Zane) for the catalog half |
-| E-6 | **Net Forge first game** (Genesis-core#27 §3) | First real Universe product | A | Brandon's permission rule, or Zane |
+| E-6 | **Net Forge first game** (Genesis-core#27 §3). Scaffold, playtest and headless play PASS (RECEIPT-NETFORGE-001); next is the agent-driven Genesis change | First real Universe product | A | Brandon playing it |
 | E-7 | **GHOST revenue ops (Phase 3).** Prospect, deliverable and payment records with verified-receipt-only revenue. Reuse ACE (Genesis-core#8) and Genesis Pay (#3/#4); don't rebuild them. | Income first, but only on verified payments | A (build) / C (any send or payment) | E-1 and E-2 |
 | E-8 | **Board hardening:** a baseline schema and integrity check (audit finding 8); a live re-check of draft `mergeable_state` (finding 10) | Audit leftovers | A | — |
 | E-9 | **LLM routing test** from a host that can reach NIM, Groq and OpenRouter | Phase 1 budget-aware routing is NOT TESTED | A | a host with provider egress |
