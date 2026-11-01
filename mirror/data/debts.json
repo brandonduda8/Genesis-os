@@ -1,0 +1,231 @@
+{
+ "_law": "No source, no debt. Brandon's list holds only LEVEL_C / HANDS / DECISION. Done needs evidence; the git history is the record.",
+ "debts": [
+  {
+   "id": "B-1",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "what": "Play EMBERWATCH yourself (3 commands in RECEIPT-NETFORGE-001), or ask Zane to serve it on zane-box with --no-open",
+   "why": "Built and headless-played; DONE is you playing it",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-NETFORGE-001.md",
+   "status": "open",
+   "kind": "HANDS"
+  },
+  {
+   "id": "B-2",
+   "debtor": "brandon",
+   "creditor": "claude",
+   "what": "Open the micro-cap lab PR (one click; session creation was refused)",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-core/compare/claude/universe-start...claude/microcap-lab?expand=1",
+   "status": "open",
+   "kind": "DECISION"
+  },
+  {
+   "id": "B-3",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "what": "After Zane's APK rebuild: Pulse \u2192 Tha Aadity \u2192 tap a track; confirm audible + auto-advance",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/3",
+   "status": "open",
+   "kind": "HANDS"
+  },
+  {
+   "id": "B-4",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "what": "Charter-signing sitting: sign ghost_operations (90 days) on your own device; the minion charters follow the same sitting",
+   "why": "Turns per-item approvals into the tap-free classes the minions run under",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/1",
+   "status": "open",
+   "kind": "LEVEL_C"
+  },
+  {
+   "id": "B-5",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "what": "Authorize the S1 read-only preflight (G0); the mirror primary rides S1",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-core/pull/20",
+   "status": "open",
+   "kind": "DECISION"
+  },
+  {
+   "id": "Z-1",
+   "debtor": "zane",
+   "creditor": "operation",
+   "what": "Deploy GHOST v2 (main 5b958ed) on zane-box; place state/keys/nim.key; drain Q-002 or Q-003 through a real heal window",
+   "why": "Merged without a recorded review; every minion stands on this deploy",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/1",
+   "status": "open"
+  },
+  {
+   "id": "Z-2",
+   "debtor": "zane",
+   "creditor": "brandon",
+   "what": "Rebuild the Watch+Pulse APK (assets changed only)",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/3",
+   "status": "open"
+  },
+  {
+   "id": "Z-3",
+   "debtor": "zane",
+   "creditor": "operation",
+   "what": "Autopilot: launch ghost-h2h-v1 + ace-h2h-v1, rebuild kernels with the winners, launch them",
+   "why": "29 GPU-h + 20 TPU-h expire 2026-11-07T00:00Z",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/4",
+   "status": "open",
+   "due": "2026-11-07"
+  },
+  {
+   "id": "Z-4",
+   "debtor": "zane",
+   "creditor": "operation",
+   "what": "Re-run ghost-v1/build_dataset.py (the guard should refuse); decide on refreezing as v1.1",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/5",
+   "status": "open"
+  },
+  {
+   "id": "Z-5",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "Run tools/audius_match.py over the taste profile from a host with egress",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/genesis-player/pull/14",
+   "status": "open"
+  },
+  {
+   "id": "Z-6",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "Publish the Genesis MCP v2 server source (127.0.0.1:8770) to a repo or name its path",
+   "why": "All five fabric services must clone its pattern; no third shape",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/7",
+   "status": "open"
+  },
+  {
+   "id": "Z-7",
+   "debtor": "zane",
+   "creditor": "operation",
+   "what": "Vault production root on the prune-exempt shelf; import Emberwatch there; verify the CC0 reading and flip rights_clean",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/7",
+   "status": "open"
+  },
+  {
+   "id": "Z-8",
+   "debtor": "zane",
+   "creditor": "operation",
+   "what": "Rebuild Emberwatch on zane-box (npm run play -- --no-open) and file the playtest output",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-NETFORGE-KIT-INSPECTION-001.md",
+   "status": "open"
+  },
+  {
+   "id": "Z-9",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "Publish your operator state to mirror/data/operator-zane.json: current todo, open verifications, standards in force",
+   "why": "The operator's mirror is data, not chat memory; the skeleton holds only what Claude can see",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "Z-10",
+   "debtor": "zane",
+   "creditor": "operation",
+   "what": "Run mirror/probe.py --write on zane-box, S1 and penguin so routing has probes, not hope",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "A-1",
+   "debtor": "astra",
+   "creditor": "claude",
+   "what": "Rule on \u00a73 'original': rights-clean AND genesis-made (Claude's reading) vs rights-clean alone",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-NETFORGE-KIT-INSPECTION-001.md",
+   "status": "open"
+  },
+  {
+   "id": "A-2",
+   "debtor": "astra",
+   "creditor": "claude",
+   "what": "Review the mirror / mesh / minion skeleton design",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "C-1",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "Genesis edition of Emberwatch: remove earn.stake + losable gear, drop the token wording, new name; npm test re-proves it",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-NETFORGE-KIT-INSPECTION-001.md",
+   "status": "open"
+  },
+  {
+   "id": "C-2",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "Build the five fabric services once Z-6 lands",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/7",
+   "status": "open"
+  },
+  {
+   "id": "C-3",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "Board hardening E-8: baseline schema + integrity check; live mergeable re-check",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/6",
+   "status": "open"
+  },
+  {
+   "id": "C-4",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "S1 mirror-primary package: checkout + manifest timer + reconcile-on-return script, staged for B-5",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "C-5",
+   "debtor": "claude",
+   "creditor": "brandon",
+   "what": "Draft the minion charters (one per roster entry) for the B-4 signing sitting, with GHOST action ceilings proposed for each class",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  }
+ ]
+}

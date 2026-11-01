@@ -1,0 +1,57 @@
+{
+ "vantage": "claude-cloud",
+ "at": "2026-11-01T00:01:41Z",
+ "host": "vm",
+ "legs": {
+  "github": {
+   "ok": true,
+   "checks": [
+    {
+     "url": "https://api.github.com",
+     "ok": true,
+     "status": 200
+    }
+   ]
+  },
+  "package": {
+   "ok": true,
+   "checks": [
+    {
+     "url": "https://registry.npmjs.org/",
+     "ok": true,
+     "status": 200
+    },
+    {
+     "url": "https://pypi.org/simple/",
+     "ok": true,
+     "status": 200
+    }
+   ]
+  },
+  "model": {
+   "ok": false,
+   "checks": [
+    {
+     "url": "https://integrate.api.nvidia.com/v1/models",
+     "ok": false,
+     "error": "Tunnel connection failed: 403 Forbidden"
+    },
+    {
+     "url": "https://api.groq.com/openai/v1/models",
+     "ok": false,
+     "error": "Tunnel connection failed: 403 Forbidden"
+    },
+    {
+     "url": "https://openrouter.ai/api/v1/models",
+     "ok": false,
+     "error": "Tunnel connection failed: 403 Forbidden"
+    }
+   ]
+  },
+  "docker": {
+   "ok": false,
+   "version": null,
+   "error": "failed to connect to the docker API at unix:///var/run/docker.sock; check if the path is correct and if the daemon is ru"
+  }
+ }
+}

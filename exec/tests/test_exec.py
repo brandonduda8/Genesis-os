@@ -179,8 +179,9 @@ class Board(unittest.TestCase):
         self.assertIn("[#1](https://github.com/brandonduda8/Genesis-os/pull/1)", md)
         self.assertNotRegex(md, r"\$\s?\d")  # no dollar figure appears anywhere
 
-    def test_committed_owner_queue_is_valid_and_fully_sourced(self):
-        q = bd.load_owner_queue(os.path.join(HERE, "OWNER-QUEUE.json"))
+    def test_committed_debts_register_feeds_the_board_fully_sourced(self):
+        q = bd.load_owner_queue(os.path.join(os.path.dirname(HERE), "mirror", "data", "debts.json"))
+        self.assertGreater(len(q["items"]), 0)
         self.assertEqual(q["rejected"], [])
         self.assertTrue(all(it["source"].startswith("https://github.com/brandonduda8/") for it in q["items"]))
 

@@ -1,0 +1,59 @@
+{
+ "_law": "What is in force. Items Claude cannot read are graded UNVERIFIED with where they live.",
+ "in_force": [
+  {
+   "id": "WO-PLATINUM-MIRROR-MESH-MINIONS-001",
+   "rank": "PLATINUM (governs infrastructure)",
+   "grade": "VERIFIED",
+   "where": "relayed in Claude's session 2026-10-31; text not yet in a repo"
+  },
+  {
+   "id": "WO-UNIFIED-GAME-BUSINESS-001",
+   "rank": "product (governs product)",
+   "grade": "UNVERIFIED",
+   "where": "v2 relayed to Claude; v3 'rates set' not seen by Claude"
+  },
+  {
+   "id": "Genesis Economy Constitution",
+   "rank": "law (ratified 2026-10-31)",
+   "grade": "UNVERIFIED",
+   "where": "not in a repo Claude can reach; Article V named as refused mechanics"
+  },
+  {
+   "id": "WO-AGENT-MONEY-GAME-001 (the League)",
+   "rank": "product",
+   "grade": "UNVERIFIED",
+   "where": "not seen by Claude"
+  },
+  {
+   "id": "WO-MASTER-TROUBLESHOOTER-001",
+   "rank": "doctrine",
+   "grade": "VERIFIED",
+   "where": "Genesis-os war-room (merged #5)"
+  },
+  {
+   "id": "GHOST program",
+   "rank": "infrastructure",
+   "grade": "VERIFIED",
+   "where": "Genesis-os main 5b958ed; deploy owed (Z-1)"
+  },
+  {
+   "id": "WO-GENESIS-NODE-CLONE-001",
+   "rank": "infrastructure",
+   "grade": "UNVERIFIED",
+   "where": "not seen by Claude"
+  },
+  {
+   "id": "Training program",
+   "rank": "expiring power",
+   "grade": "UNVERIFIED",
+   "where": "autopilot on zane-box; kernels in Genesis-os#4"
+  },
+  {
+   "id": "GENESIS-EXEC-001 + policy register 2026-10-31",
+   "rank": "standing authority",
+   "grade": "VERIFIED",
+   "where": "exec/ (Genesis-os#6); register text relayed"
+  }
+ ]
+}

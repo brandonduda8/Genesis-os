@@ -1,0 +1,99 @@
+{
+ "_law": "Declared powers are claims; the router reads probes/ only (fresh-probe law).",
+ "vantages": [
+  {
+   "id": "zane-box",
+   "role": "state + verification; GHOST host",
+   "declared_powers": [
+    "fleet_state",
+    "verification"
+   ],
+   "declared_blind": [
+    "egress walled 2026-10-31 (HTTPS + VPN, one root cause)"
+   ],
+   "declared_grade": "UNVERIFIED"
+  },
+  {
+   "id": "s1",
+   "role": "designated primary power server",
+   "declared_powers": [
+    "github",
+    "package",
+    "docker",
+    "starnet_hub"
+   ],
+   "declared_blind": [
+    "last beacon seen by Claude: 2026-10-24T22:15Z"
+   ],
+   "declared_grade": "UNVERIFIED"
+  },
+  {
+   "id": "penguin",
+   "role": "Brandon's home network",
+   "declared_powers": [
+    "docker",
+    "home_network"
+   ],
+   "declared_blind": [],
+   "declared_grade": "UNVERIFIED"
+  },
+  {
+   "id": "phone",
+   "role": "Brandon's pocket",
+   "declared_powers": [
+    "home_network",
+    "device_proof"
+   ],
+   "declared_blind": [
+    "Shizuku only when up"
+   ],
+   "declared_grade": "UNVERIFIED"
+  },
+  {
+   "id": "claude-cloud",
+   "role": "Claude Code cloud session",
+   "declared_powers": [
+    "github",
+    "package"
+   ],
+   "declared_blind": [
+    "no fleet state",
+    "model APIs refused by proxy",
+    "ephemeral: container is reclaimed"
+   ],
+   "declared_grade": "VERIFIED"
+  },
+  {
+   "id": "astra",
+   "role": "planning / review seat",
+   "declared_powers": [
+    "review"
+   ],
+   "declared_blind": [
+    "no execution"
+   ],
+   "declared_grade": "UNVERIFIED"
+  },
+  {
+   "id": "kaggle-colab",
+   "role": "GPU/TPU lanes",
+   "declared_powers": [
+    "gpu",
+    "tpu"
+   ],
+   "declared_blind": [
+    "quota expires 2026-11-07"
+   ],
+   "declared_grade": "UNVERIFIED"
+  },
+  {
+   "id": "brandon",
+   "role": "the only Level C vantage",
+   "declared_powers": [
+    "level_c"
+   ],
+   "declared_blind": [],
+   "declared_grade": "VERIFIED"
+  }
+ ]
+}

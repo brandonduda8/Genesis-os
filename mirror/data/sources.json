@@ -1,0 +1,70 @@
+{
+ "_law": "What the mirror carries today. NOT MIRRORED = it lives elsewhere and this mirror cannot see it; never shown as current.",
+ "sources": [
+  {
+   "what": "open-debts register",
+   "status": "MIRRORED",
+   "path": "debts.json"
+  },
+  {
+   "what": "vantage routing table + probes",
+   "status": "MIRRORED",
+   "path": "routing.json, vantages.json, probes/"
+  },
+  {
+   "what": "minion roster",
+   "status": "MIRRORED",
+   "path": "roster.json"
+  },
+  {
+   "what": "WO conflicts",
+   "status": "MIRRORED",
+   "path": "conflicts.json"
+  },
+  {
+   "what": "PR state (all repos)",
+   "status": "LIVE at Brief build",
+   "path": "exec/board.py collect_prs"
+  },
+  {
+   "what": "test baseline",
+   "status": "MIRRORED when exec/state/baseline.json is supplied",
+   "path": "exec/"
+  },
+  {
+   "what": "GHOST queue + drain log",
+   "status": "NOT MIRRORED",
+   "lives": "zane-box GHOST registry (after Z-1 deploy)"
+  },
+  {
+   "what": "training queue + burn ledger",
+   "status": "NOT MIRRORED",
+   "lives": "zane-box training/QUEUE.md + autopilot"
+  },
+  {
+   "what": "receipts tree + war-room live docs",
+   "status": "PARTIAL",
+   "lives": "Genesis-os war-room (in repo); zane-box war-room copies not synced"
+  },
+  {
+   "what": "HEAT / POWER / MONEY boards",
+   "status": "NOT MIRRORED",
+   "lives": "zane-box"
+  },
+  {
+   "what": "Zane's operator state",
+   "status": "NOT MIRRORED",
+   "lives": "Zane (debt Z-9)"
+  },
+  {
+   "what": "fleet-history archive",
+   "status": "NOT MIRRORED",
+   "lives": "unknown to Claude"
+  },
+  {
+   "what": "personal-corpus data",
+   "status": "NEVER",
+   "lives": "local-only law: manifests and hashes only, never contents"
+  }
+ ]
+}
