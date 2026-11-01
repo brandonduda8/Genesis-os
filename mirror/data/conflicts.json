@@ -68,7 +68,7 @@
     "Game WO \u00a77 + Article V (no wager mechanics)"
    ],
    "issue": "Net Forge's engine and its AGENTS.md require earn.stake (a buy-in into a reward pool) in every game; no configuration removes the wager",
-   "recommendation": "Option A: a scoped Genesis fork of the engine as the Forge Floor's first mission; fall back to another engine if it sprawls; Emberwatch stays internal reference only",
+   "recommendation": "Option A: a scoped Genesis fork of the engine as the Forge Floor's first mission; fall back to another engine if it sprawls; Emberwatch stays internal reference only | RULED: Option A (Brandon, via WO-CLAUDE-MASTER-BUILD-001)",
    "owner": "brandon"
   }
  ]

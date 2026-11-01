@@ -285,7 +285,8 @@
    "why": "Net Forge refuses to build any game without a wager stake",
    "since": "2026-11-01",
    "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md",
-   "status": "open"
+   "status": "done",
+   "done_evidence": "WO-CLAUDE-MASTER-BUILD-001 WS3 names 'ruling B-7, Option A' (the Genesis fork of Net Forge), relayed 2026-10-31 22:09 CDT"
   },
   {
    "id": "A-4",
@@ -303,6 +304,35 @@
    "what": "Creation Station pattern: a loadout manifest + a green/red checklist script (Forge Floor #1 first); Super Las Vegas skeleton as Origami folds (Wall first, from real scanner feeds, paper labeled paper)",
    "since": "2026-11-01",
    "source": "https://github.com/brandonduda8/Genesis-core/pull/28",
+   "status": "open"
+  },
+  {
+   "id": "Z-13",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "Publish Amendment 2 (the PIN Protocol) and WO-COMMS-001 where Claude can read them; then verify fabric PR #9 and run the real stop drill on S1",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/9",
+   "status": "open",
+   "why": "fabric v1 engineered from the master WO's component list; reconciliations are listed in fabric/DESIGN.md \u00a76"
+  },
+  {
+   "id": "A-5",
+   "debtor": "astra",
+   "creditor": "claude",
+   "what": "Publish the A-1 stop POLICY and the A-2 mirror amendments package (war-room/astra-max-design/) to a reachable repo",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/9",
+   "status": "open",
+   "why": "the stop mechanism shipped first; it must be reconciled to her policy"
+  },
+  {
+   "id": "C-8",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "WS3 Forge fork: sizing note first, then stake removal end to end with the Article V refusal battery; stop and file a sprawl report if the estimate is exceeded",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md",
    "status": "open"
   }
  ]
