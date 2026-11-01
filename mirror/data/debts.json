@@ -334,6 +334,37 @@
    "since": "2026-11-01",
    "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md",
    "status": "open"
+  },
+  {
+   "id": "Z-15",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "FD-004 Order 3: publish the legacy GitHub helper source (path + sha256), the exact failing import traceback, and the accepted handoff-bus engineering spec to a repo Claude can read, or share the folder via Remote Control",
+   "why": "the helper and handoff_bus_poll.py live only on zane-box (~/workspace/genesis-os/tools); no reachable repo or shared folder holds them (searched 2026-11-01)",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "A-6",
+   "debtor": "astra",
+   "creditor": "claude",
+   "what": "FD-004 Order 2: file the independent review record for subscription-status `status` (method source/manifest, scope, test evidence) where Claude can read it, so Claude can verify as the second principal",
+   "why": "Claude is eligible (did not build or review it); without the artifacts any verification would be evidence-only and must be labeled so",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "B-8",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "kind": "HANDS",
+   "what": "FD-004 Order 1: after the secrets check of empire-handoffs, adjust the Muse fine-grained token to Contents: Read-only on brandonduda8/empire-handoffs only, through GitHub's own settings",
+   "why": "credential changes are yours; no write, no broader scope, no disclosure",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
   }
  ]
 }

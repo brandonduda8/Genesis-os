@@ -78,6 +78,12 @@
    "rank": "build program (WS1 fabric, WS2 stop, WS3 fork, WS4 stations/city, WS5 mirror)",
    "grade": "VERIFIED",
    "where": "relayed 2026-10-31 22:09 CDT; WS1+WS2 BUILT in Genesis-os#9"
+  },
+  {
+   "id": "FD-004 (founder directive)",
+   "rank": "authorization: Orders 1-4, $0",
+   "grade": "VERIFIED",
+   "where": "relayed 2026-11-01; Claude's scope = Order 3 minimum import fix (prepare only, no deploy) + Order 2 verification if eligible; Order 4 verification matrix adopted"
   }
  ]
 }

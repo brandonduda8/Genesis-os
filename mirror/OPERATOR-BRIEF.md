@@ -1,7 +1,7 @@
 # OPERATOR'S BRIEF
 
-<!-- mirror-digest: 589095d5d2200f08392921fa939a062c7fba2855ba6bfe148bd092911990aa6b -->
-_Built 2026-11-01 03:22 UTC from mirror digest `589095d5d2200f08` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
+<!-- mirror-digest: e59c46e28aaa9ba09074808e1c8319849a665f0e9af9d52790bb887ed10c33d2 -->
+_Built 2026-11-01 14:49 UTC from mirror digest `e59c46e28aaa9ba0` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
 
 ## 1. What is being built (in force)
 
@@ -20,10 +20,11 @@ _Built 2026-11-01 03:22 UTC from mirror digest `589095d5d2200f08` over 8 data fi
 | WO-STARNET-MAX-001 | infrastructure + product | VERIFIED | relayed 2026-10-31; inventory part 1 in starnet/STARNET-INVENTORY.md |
 | WO-CREATION-STATIONS-001 + Super Las Vegas build start | product | VERIFIED | relayed 2026-10-31 21:04 CDT; Nighthawk = StarNet flagship (amends STARNET-MAX §4) |
 | WO-CLAUDE-MASTER-BUILD-001 | build program (WS1 fabric, WS2 stop, WS3 fork, WS4 stations/city, WS5 mirror) | VERIFIED | relayed 2026-10-31 22:09 CDT; WS1+WS2 BUILT in Genesis-os#9 |
+| FD-004 (founder directive) | authorization: Orders 1-4, $0 | VERIFIED | relayed 2026-11-01; Claude's scope = Order 3 minimum import fix (prepare only, no deploy) + Order 2 verification if eligible; Order 4 verification matrix adopted |
 
 ## 2. Open debts (who owes whom)
 
-### Brandon owes (6)
+### Brandon owes (7)
 
 | Id | To | What | Since | Due | Source |
 |---|---|---|---|---|---|
@@ -33,8 +34,9 @@ _Built 2026-11-01 03:22 UTC from mirror digest `589095d5d2200f08` over 8 data fi
 | B-4 | operation | Charter-signing sitting: sign ghost_operations (90 days) on your own device; the minion charters follow the same sitting | 2026-10-31 |  | [link](https://github.com/brandonduda8/Genesis-os/pull/1) |
 | B-5 | operation | Authorize the S1 read-only preflight (G0); the mirror primary rides S1 | 2026-10-31 |  | [link](https://github.com/brandonduda8/Genesis-core/pull/20) |
 | B-6 | operation | Name the StarNet App (the flagship is named: Nighthawk, ruling 2026-10-31 21:04 CDT) | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami) |
+| B-8 | operation | FD-004 Order 1: after the secrets check of empire-handoffs, adjust the Muse fine-grained token to Contents: Read-only on brandonduda8/empire-handoffs only, through GitHub's own settings | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
 
-### Zane owes (13)
+### Zane owes (14)
 
 | Id | To | What | Since | Due | Source |
 |---|---|---|---|---|---|
@@ -51,8 +53,9 @@ _Built 2026-11-01 03:22 UTC from mirror digest `589095d5d2200f08` over 8 data fi
 | Z-11 | claude | STARNET-INVENTORY part 2: list the S1 StarNet tree (hub, station, vortex, heartbeat, display :8788, anchor :8888 read-only) and file each component's state to mirror/data/starnet.json | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/blob/claude/mirror-mesh/starnet/STARNET-INVENTORY.md) |
 | Z-12 | brandon | Serve Fold One where Brandon can open it: run origami.feeds.mirror_feed --every 30 and serve the folded app on S1 or penguin | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami) |
 | Z-13 | claude | Publish Amendment 2 (the PIN Protocol) and WO-COMMS-001 where Claude can read them; then verify fabric PR #9 and run the real stop drill on S1 | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/pull/9) |
+| Z-15 | claude | FD-004 Order 3: publish the legacy GitHub helper source (path + sha256), the exact failing import traceback, and the accepted handoff-bus engineering spec to a repo Claude can read, or share the folder via Remote Control | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
 
-### Astra owes (5)
+### Astra owes (6)
 
 | Id | To | What | Since | Due | Source |
 |---|---|---|---|---|---|
@@ -61,6 +64,7 @@ _Built 2026-11-01 03:22 UTC from mirror digest `589095d5d2200f08` over 8 data fi
 | A-3 | claude | Confirm the canonical Article V refused-mechanics list (Origami refuses at the canvas from it) | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami) |
 | A-4 | brandon | Recommend on B-7 (the Forge Floor engine) and rule on K-6 (StarNet's 8 money/outbound classes) | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md) |
 | A-5 | claude | Publish the A-1 stop POLICY and the A-2 mirror amendments package (war-room/astra-max-design/) to a reachable repo | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/pull/9) |
+| A-6 | claude | FD-004 Order 2: file the independent review record for subscription-status `status` (method source/manifest, scope, test evidence) where Claude can read it, so Claude can verify as the second principal | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
 
 ### Claude owes (8)
 
@@ -97,19 +101,19 @@ _Built 2026-11-01 03:22 UTC from mirror digest `589095d5d2200f08` over 8 data fi
 | s1 | designated primary power server | **none** | unknown | github, package, docker, starnet_hub (UNVERIFIED) |
 | penguin | Brandon's home network | **none** | unknown | docker, home_network (UNVERIFIED) |
 | phone | Brandon's pocket | **none** | unknown | home_network, device_proof (UNVERIFIED) |
-| claude-cloud | Claude Code cloud session | 2026-11-01T00:01:41Z (200 min ago, STALE) | github, package | github, package (VERIFIED) |
+| claude-cloud | Claude Code cloud session | 2026-11-01T00:01:41Z (887 min ago, STALE) | github, package | github, package (VERIFIED) |
 | astra | planning / review seat | **none** | unknown | review (UNVERIFIED) |
 | kaggle-colab | GPU/TPU lanes | **none** | unknown | gpu, tpu (UNVERIFIED) |
 | brandon | the only Level C vantage | **none** | unknown | level_c (VERIFIED) |
 
 | Work class | Routes to now | Substitutions |
 |---|---|---|
-| repo_work | **HOLD** | claude-cloud: probe stale (200 min old); s1: no probe on record; zane-box: no probe on record |
-| package_build | **HOLD** | claude-cloud: probe stale (200 min old); s1: no probe on record; penguin: no probe on record |
+| repo_work | **HOLD** | claude-cloud: probe stale (887 min old); s1: no probe on record; zane-box: no probe on record |
+| package_build | **HOLD** | claude-cloud: probe stale (887 min old); s1: no probe on record; penguin: no probe on record |
 | container_work | **HOLD** | s1: no probe on record; penguin: no probe on record |
 | model_call | **HOLD** | s1: no probe on record; penguin: no probe on record; zane-box: no probe on record |
 | home_network_proof | **HOLD** | penguin: no probe on record; phone: no probe on record |
-| verification | **HOLD** | zane-box: no probe on record; s1: no probe on record; claude-cloud: probe stale (200 min old) |
+| verification | **HOLD** | zane-box: no probe on record; s1: no probe on record; claude-cloud: probe stale (887 min old) |
 | gpu_training | **HOLD** | kaggle-colab: no probe on record |
 | level_c | **brandon** | - |
 
@@ -148,7 +152,7 @@ _No minion is running from this repo. Charters are unsigned until Brandon's sitt
 
 ## 8. Live PRs
 
-_LIVE, read 2026-11-01T03:22:37Z: 92 open, 2 ready for review._
+_LIVE, read 2026-11-01T14:49:25Z: 92 open, 2 ready for review._
 - READY: Agent-x [#20](https://github.com/brandonduda8/Agent-x/pull/20) Claude agent kit: Genesis departments, guardrail hooks, Cody MCP, revenue + Star
 - READY: astra-zane-bridge [#115](https://github.com/brandonduda8/astra-zane-bridge/pull/115) WO-STARNET-002 + WO-GENESIS-PLATFORM-001: StarNet install & departments, Genesis
 
