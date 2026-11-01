@@ -71,6 +71,20 @@ class Server:
         self.last_ledger_hb, self.stopping = 0.0, False
         lane_cfg = _load(cfg.lane_probe_file)
         self.lane_probes = {p["name"]: p for p in lane_cfg.get("probes", [])}
+        self.estop, self.estop_error, self.estop_last = None, None, None
+        es = cfg.raw.get("estop")
+        if es:  # emergency stop, path 2: ghostd reads the stop directory itself, independent of the fabric
+            try:
+                import sys as _sys
+                fab = es.get("fabric_path") or os.path.join(cfg.root, "..", "fabric")
+                _sys.path.insert(0, os.path.normpath(fab if os.path.isabs(fab) else os.path.join(cfg.root, fab)))
+                from genesis_fabric.identity import Registry as FabricRegistry
+                from genesis_fabric.stop import Guard
+                rel = lambda p: p if os.path.isabs(p) else os.path.normpath(os.path.join(cfg.root, p))  # noqa: E731
+                with open(rel(es["registry"])) as fh:
+                    self.estop = Guard(es.get("identity", cfg.name), FabricRegistry(json.load(fh)), rel(es["dir"]), clock)
+            except Exception as exc:  # configured but unverifiable: FAIL CLOSED (hold every release)
+                self.estop_error = f"{type(exc).__name__}: {exc}"
 
     # ------------------------------------------------------------------ boot / recovery
     def boot(self) -> Dict[str, Any]:
@@ -245,6 +259,9 @@ class Server:
                                      apply=self.apply_result, ack_key=self.key)
         self.poll_runs()
         released = {}
+        hold = self.estop_hold()
+        if hold:
+            return {"inbox": inbox, "released": released, "estop": hold}
         for jid in self.select(now):
             try:
                 released[jid] = self.release(jid, now)
@@ -255,6 +272,22 @@ class Server:
             self.reg.ledger("heartbeat", f"ghostd:{self.cfg.name}", metrics.self_usage())
             self.last_ledger_hb = now
         return {"inbox": inbox, "released": released}
+
+    def estop_hold(self) -> Optional[str]:
+        """None = run. A reason string = hold every release this tick (ledgered once per change)."""
+        if self.cfg.raw.get("estop") is None:
+            return None
+        if self.estop is None:
+            reason = f"estop configured but unverifiable, failing closed: {self.estop_error}"
+        else:
+            halted, cmd = self.estop.state()
+            reason = (f"HALTED by {cmd['nonce'][:8]} {cmd['scope']['type']}:{cmd['scope'].get('target')}: "
+                      f"{cmd['reason']}") if halted else None
+        if reason != self.estop_last:
+            self.reg.ledger("estop_hold" if reason else "estop_release", f"ghostd:{self.cfg.name}",
+                            {"reason": reason or "no stop in force"})
+            self.estop_last = reason
+        return reason
 
     def run_forever(self) -> None:
         signal.signal(signal.SIGTERM, lambda *_: setattr(self, "stopping", True))
