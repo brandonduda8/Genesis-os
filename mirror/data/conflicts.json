@@ -1,0 +1,75 @@
+{
+ "_law": "When two WOs pull against each other, Claude flags it here with a recommendation instead of choosing silently.",
+ "conflicts": [
+  {
+   "id": "K-1",
+   "between": [
+    "WO-UNIFIED-GAME-BUSINESS-001 \u00a73",
+    "WO \u00a73 wording vs the vault's rule"
+   ],
+   "issue": "'ORIGINAL when player-facing assets are rights-clean' would make all-CC0-stock Emberwatch original with zero original work",
+   "recommendation": "ORIGINAL = genesis-made AND rights-clean (implemented in the vault); Astra rules (A-1)",
+   "owner": "astra"
+  },
+  {
+   "id": "K-2",
+   "between": [
+    "Net Forge survivor template",
+    "Game WO \u00a77 + Constitution Article V"
+   ],
+   "issue": "the template's earn.stake buy-in pool is a wager structure and its coins are '1 coin = 1 token'",
+   "recommendation": "strip stake + losable gear in the Genesis edition (C-1) before any city or storefront use",
+   "owner": "claude"
+  },
+  {
+   "id": "K-3",
+   "between": [
+    "Mirror primary on S1 (this WO \u00a71)",
+    "S1 access (Genesis-core#20 gates)"
+   ],
+   "issue": "S1's last beacon seen by Claude was 2026-10-24; the mirror primary cannot land before G0 is authorized and S1 answers",
+   "recommendation": "replica-first: the repo + zane-box carry the mirror now; S1 promotion rides B-5",
+   "owner": "brandon"
+  },
+  {
+   "id": "K-4",
+   "between": [
+    "Minion roster (this WO \u00a74)",
+    "GHOST CLASS_CEILING"
+   ],
+   "issue": "only ghost_operations has an action ceiling; training/research/engineering/comms minions cannot be chartered to act through GHOST yet",
+   "recommendation": "C-5 proposes ceilings per class; Brandon signs them in the B-4 sitting",
+   "owner": "claude"
+  },
+  {
+   "id": "K-5",
+   "between": [
+    "WO-STARNET-MAX \u00a75 (stream StarNet live into the app)",
+    "StarNet reconciliation decision #8 (nothing polls :8787; StarNet status enters only as adapter receipts)"
+   ],
+   "issue": "a live app polling StarNet directly would open the port the fleet decided never to forward",
+   "recommendation": "the app reads the mirror feed; S1 receipts write mirror/data/starnet.json (implemented in Fold One)",
+   "owner": "claude"
+  },
+  {
+   "id": "K-6",
+   "between": [
+    "StarNet's 55 built-in agent classes",
+    "Platinum minion law + Level C"
+   ],
+   "issue": "8 classes act on money, sends, accounts or logged-in sites",
+   "recommendation": "bench them or run them draft-only under GHOST charters; StarNet's own leash is a second lock, not the first",
+   "owner": "astra"
+  },
+  {
+   "id": "K-7",
+   "between": [
+    "WO-CREATION-STATIONS-001 \u00a71 (the Forge Floor ships Net Forge titles)",
+    "Game WO \u00a77 + Article V (no wager mechanics)"
+   ],
+   "issue": "Net Forge's engine and its AGENTS.md require earn.stake (a buy-in into a reward pool) in every game; no configuration removes the wager",
+   "recommendation": "Option A: a scoped Genesis fork of the engine as the Forge Floor's first mission; fall back to another engine if it sprawls; Emberwatch stays internal reference only | RULED: Option A (Brandon, via WO-CLAUDE-MASTER-BUILD-001)",
+   "owner": "brandon"
+  }
+ ]
+}
