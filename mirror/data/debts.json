@@ -226,6 +226,55 @@
    "since": "2026-10-31",
    "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
    "status": "open"
+  },
+  {
+   "id": "B-6",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "kind": "DECISION",
+   "what": "Name the flagship StarNet agent and the StarNet App (placeholder: 'StarNet Live')",
+   "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami",
+   "why": "WO-STARNET-MAX \u00a74: the fleet proposes, Brandon names",
+   "since": "2026-11-01",
+   "status": "open"
+  },
+  {
+   "id": "Z-11",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "STARNET-INVENTORY part 2: list the S1 StarNet tree (hub, station, vortex, heartbeat, display :8788, anchor :8888 read-only) and file each component's state to mirror/data/starnet.json",
+   "source": "https://github.com/brandonduda8/Genesis-os/blob/claude/mirror-mesh/starnet/STARNET-INVENTORY.md",
+   "why": "Part 1 (upstream source) is done; live state needs S1",
+   "since": "2026-11-01",
+   "status": "open"
+  },
+  {
+   "id": "Z-12",
+   "debtor": "zane",
+   "creditor": "brandon",
+   "what": "Serve Fold One where Brandon can open it: run origami.feeds.mirror_feed --every 30 and serve the folded app on S1 or penguin",
+   "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami",
+   "why": "Built and proved headless; DONE is Brandon watching it on his phone",
+   "since": "2026-11-01",
+   "status": "open"
+  },
+  {
+   "id": "A-3",
+   "debtor": "astra",
+   "creditor": "claude",
+   "what": "Confirm the canonical Article V refused-mechanics list (Origami refuses at the canvas from it)",
+   "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami",
+   "since": "2026-11-01",
+   "status": "open"
+  },
+  {
+   "id": "C-6",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "Origami next folds: visual canvas over fold-sheets; the OSS block research pass with a licence row per block before any block joins",
+   "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami",
+   "since": "2026-11-01",
+   "status": "open"
   }
  ]
 }

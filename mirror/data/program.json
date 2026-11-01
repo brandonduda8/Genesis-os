@@ -54,6 +54,18 @@
    "rank": "standing authority",
    "grade": "VERIFIED",
    "where": "exec/ (Genesis-os#6); register text relayed"
+  },
+  {
+   "id": "WO-ORIGAMI-001",
+   "rank": "product (app engine)",
+   "grade": "VERIFIED",
+   "where": "relayed 2026-10-31; v0 built in Genesis-core claude/origami-fold-one"
+  },
+  {
+   "id": "WO-STARNET-MAX-001",
+   "rank": "infrastructure + product",
+   "grade": "VERIFIED",
+   "where": "relayed 2026-10-31; inventory part 1 in starnet/STARNET-INVENTORY.md"
   }
  ]
 }

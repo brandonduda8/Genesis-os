@@ -1,7 +1,7 @@
 # OPERATOR'S BRIEF
 
-<!-- mirror-digest: d8cd67cd7de5a2b586941e063ce12ae79962da3814dd0c45e7a697b293c2e903 -->
-_Built 2026-11-01 00:06 UTC from mirror digest `d8cd67cd7de5a2b5` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
+<!-- mirror-digest: 30c52af02fa637ffdecbb86edc78804de86fd1cc24d258078724833656d8af3e -->
+_Built 2026-11-01 00:37 UTC from mirror digest `30c52af02fa637ff` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
 
 ## 1. What is being built (in force)
 
@@ -16,10 +16,12 @@ _Built 2026-11-01 00:06 UTC from mirror digest `d8cd67cd7de5a2b5` over 8 data fi
 | WO-GENESIS-NODE-CLONE-001 | infrastructure | UNVERIFIED | not seen by Claude |
 | Training program | expiring power | UNVERIFIED | autopilot on zane-box; kernels in Genesis-os#4 |
 | GENESIS-EXEC-001 + policy register 2026-10-31 | standing authority | VERIFIED | exec/ (Genesis-os#6); register text relayed |
+| WO-ORIGAMI-001 | product (app engine) | VERIFIED | relayed 2026-10-31; v0 built in Genesis-core claude/origami-fold-one |
+| WO-STARNET-MAX-001 | infrastructure + product | VERIFIED | relayed 2026-10-31; inventory part 1 in starnet/STARNET-INVENTORY.md |
 
 ## 2. Open debts (who owes whom)
 
-### Brandon owes (5)
+### Brandon owes (6)
 
 | Id | To | What | Since | Due | Source |
 |---|---|---|---|---|---|
@@ -28,8 +30,9 @@ _Built 2026-11-01 00:06 UTC from mirror digest `d8cd67cd7de5a2b5` over 8 data fi
 | B-3 | operation | After Zane's APK rebuild: Pulse → Tha Aadity → tap a track; confirm audible + auto-advance | 2026-10-31 |  | [link](https://github.com/brandonduda8/Genesis-os/pull/3) |
 | B-4 | operation | Charter-signing sitting: sign ghost_operations (90 days) on your own device; the minion charters follow the same sitting | 2026-10-31 |  | [link](https://github.com/brandonduda8/Genesis-os/pull/1) |
 | B-5 | operation | Authorize the S1 read-only preflight (G0); the mirror primary rides S1 | 2026-10-31 |  | [link](https://github.com/brandonduda8/Genesis-core/pull/20) |
+| B-6 | operation | Name the flagship StarNet agent and the StarNet App (placeholder: 'StarNet Live') | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami) |
 
-### Zane owes (10)
+### Zane owes (12)
 
 | Id | To | What | Since | Due | Source |
 |---|---|---|---|---|---|
@@ -43,15 +46,18 @@ _Built 2026-11-01 00:06 UTC from mirror digest `d8cd67cd7de5a2b5` over 8 data fi
 | Z-8 | operation | Rebuild Emberwatch on zane-box (npm run play -- --no-open) and file the playtest output | 2026-10-31 |  | [link](https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-NETFORGE-KIT-INSPECTION-001.md) |
 | Z-9 | claude | Publish your operator state to mirror/data/operator-zane.json: current todo, open verifications, standards in force | 2026-10-31 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
 | Z-10 | operation | Run mirror/probe.py --write on zane-box, S1 and penguin so routing has probes, not hope | 2026-10-31 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
+| Z-11 | claude | STARNET-INVENTORY part 2: list the S1 StarNet tree (hub, station, vortex, heartbeat, display :8788, anchor :8888 read-only) and file each component's state to mirror/data/starnet.json | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/blob/claude/mirror-mesh/starnet/STARNET-INVENTORY.md) |
+| Z-12 | brandon | Serve Fold One where Brandon can open it: run origami.feeds.mirror_feed --every 30 and serve the folded app on S1 or penguin | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami) |
 
-### Astra owes (2)
+### Astra owes (3)
 
 | Id | To | What | Since | Due | Source |
 |---|---|---|---|---|---|
 | A-1 | claude | Rule on §3 'original': rights-clean AND genesis-made (Claude's reading) vs rights-clean alone | 2026-10-31 |  | [link](https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-NETFORGE-KIT-INSPECTION-001.md) |
 | A-2 | claude | Review the mirror / mesh / minion skeleton design | 2026-10-31 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
+| A-3 | claude | Confirm the canonical Article V refused-mechanics list (Origami refuses at the canvas from it) | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami) |
 
-### Claude owes (5)
+### Claude owes (6)
 
 | Id | To | What | Since | Due | Source |
 |---|---|---|---|---|---|
@@ -60,6 +66,7 @@ _Built 2026-11-01 00:06 UTC from mirror digest `d8cd67cd7de5a2b5` over 8 data fi
 | C-3 | operation | Board hardening E-8: baseline schema + integrity check; live mergeable re-check | 2026-10-31 |  | [link](https://github.com/brandonduda8/Genesis-os/pull/6) |
 | C-4 | operation | S1 mirror-primary package: checkout + manifest timer + reconcile-on-return script, staged for B-5 | 2026-10-31 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
 | C-5 | brandon | Draft the minion charters (one per roster entry) for the B-4 signing sitting, with GHOST action ceilings proposed for each class | 2026-10-31 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
+| C-6 | operation | Origami next folds: visual canvas over fold-sheets; the OSS block research pass with a licence row per block before any block joins | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami) |
 
 ## 3. Expiring power
 
@@ -71,6 +78,8 @@ _Built 2026-11-01 00:06 UTC from mirror digest `d8cd67cd7de5a2b5` over 8 data fi
 - **K-2** (Net Forge survivor template vs Game WO §7 + Constitution Article V): the template's earn.stake buy-in pool is a wager structure and its coins are '1 coin = 1 token'. **Recommend:** strip stake + losable gear in the Genesis edition (C-1) before any city or storefront use (owner: claude)
 - **K-3** (Mirror primary on S1 (this WO §1) vs S1 access (Genesis-core#20 gates)): S1's last beacon seen by Claude was 2026-10-24; the mirror primary cannot land before G0 is authorized and S1 answers. **Recommend:** replica-first: the repo + zane-box carry the mirror now; S1 promotion rides B-5 (owner: brandon)
 - **K-4** (Minion roster (this WO §4) vs GHOST CLASS_CEILING): only ghost_operations has an action ceiling; training/research/engineering/comms minions cannot be chartered to act through GHOST yet. **Recommend:** C-5 proposes ceilings per class; Brandon signs them in the B-4 sitting (owner: claude)
+- **K-5** (WO-STARNET-MAX §5 (stream StarNet live into the app) vs StarNet reconciliation decision #8 (nothing polls :8787; StarNet status enters only as adapter receipts)): a live app polling StarNet directly would open the port the fleet decided never to forward. **Recommend:** the app reads the mirror feed; S1 receipts write mirror/data/starnet.json (implemented in Fold One) (owner: claude)
+- **K-6** (StarNet's 55 built-in agent classes vs Platinum minion law + Level C): 8 classes act on money, sends, accounts or logged-in sites. **Recommend:** bench them or run them draft-only under GHOST charters; StarNet's own leash is a second lock, not the first (owner: astra)
 
 ## 5. Vantage mesh (routing reads probes, not topology)
 
@@ -80,7 +89,7 @@ _Built 2026-11-01 00:06 UTC from mirror digest `d8cd67cd7de5a2b5` over 8 data fi
 | s1 | designated primary power server | **none** | unknown | github, package, docker, starnet_hub (UNVERIFIED) |
 | penguin | Brandon's home network | **none** | unknown | docker, home_network (UNVERIFIED) |
 | phone | Brandon's pocket | **none** | unknown | home_network, device_proof (UNVERIFIED) |
-| claude-cloud | Claude Code cloud session | 2026-11-01T00:01:41Z (4 min ago) | github, package | github, package (VERIFIED) |
+| claude-cloud | Claude Code cloud session | 2026-11-01T00:01:41Z (35 min ago) | github, package | github, package (VERIFIED) |
 | astra | planning / review seat | **none** | unknown | review (UNVERIFIED) |
 | kaggle-colab | GPU/TPU lanes | **none** | unknown | gpu, tpu (UNVERIFIED) |
 | brandon | the only Level C vantage | **none** | unknown | level_c (VERIFIED) |
@@ -131,7 +140,7 @@ _No minion is running from this repo. Charters are unsigned until Brandon's sitt
 
 ## 8. Live PRs
 
-_LIVE, read 2026-11-01T00:06:34Z: 89 open, 2 ready for review._
+_LIVE, read 2026-11-01T00:37:13Z: 90 open, 2 ready for review._
 - READY: Agent-x [#20](https://github.com/brandonduda8/Agent-x/pull/20) Claude agent kit: Genesis departments, guardrail hooks, Cody MCP, revenue + Star
 - READY: astra-zane-bridge [#115](https://github.com/brandonduda8/astra-zane-bridge/pull/115) WO-STARNET-002 + WO-GENESIS-PLATFORM-001: StarNet install & departments, Genesis
 

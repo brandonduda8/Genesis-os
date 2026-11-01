@@ -40,6 +40,26 @@
    "issue": "only ghost_operations has an action ceiling; training/research/engineering/comms minions cannot be chartered to act through GHOST yet",
    "recommendation": "C-5 proposes ceilings per class; Brandon signs them in the B-4 sitting",
    "owner": "claude"
+  },
+  {
+   "id": "K-5",
+   "between": [
+    "WO-STARNET-MAX \u00a75 (stream StarNet live into the app)",
+    "StarNet reconciliation decision #8 (nothing polls :8787; StarNet status enters only as adapter receipts)"
+   ],
+   "issue": "a live app polling StarNet directly would open the port the fleet decided never to forward",
+   "recommendation": "the app reads the mirror feed; S1 receipts write mirror/data/starnet.json (implemented in Fold One)",
+   "owner": "claude"
+  },
+  {
+   "id": "K-6",
+   "between": [
+    "StarNet's 55 built-in agent classes",
+    "Platinum minion law + Level C"
+   ],
+   "issue": "8 classes act on money, sends, accounts or logged-in sites",
+   "recommendation": "bench them or run them draft-only under GHOST charters; StarNet's own leash is a second lock, not the first",
+   "owner": "astra"
   }
  ]
 }
