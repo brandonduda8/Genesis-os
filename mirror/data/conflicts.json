@@ -60,6 +60,16 @@
    "issue": "8 classes act on money, sends, accounts or logged-in sites",
    "recommendation": "bench them or run them draft-only under GHOST charters; StarNet's own leash is a second lock, not the first",
    "owner": "astra"
+  },
+  {
+   "id": "K-7",
+   "between": [
+    "WO-CREATION-STATIONS-001 \u00a71 (the Forge Floor ships Net Forge titles)",
+    "Game WO \u00a77 + Article V (no wager mechanics)"
+   ],
+   "issue": "Net Forge's engine and its AGENTS.md require earn.stake (a buy-in into a reward pool) in every game; no configuration removes the wager",
+   "recommendation": "Option A: a scoped Genesis fork of the engine as the Forge Floor's first mission; fall back to another engine if it sprawls; Emberwatch stays internal reference only",
+   "owner": "brandon"
   }
  ]
 }

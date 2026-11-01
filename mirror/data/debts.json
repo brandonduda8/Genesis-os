@@ -181,10 +181,10 @@
    "id": "C-1",
    "debtor": "claude",
    "creditor": "operation",
-   "what": "Genesis edition of Emberwatch: remove earn.stake + losable gear, drop the token wording, new name; npm test re-proves it",
+   "what": "Genesis edition of Emberwatch: remove earn.stake + losable gear, drop the token wording, new name; npm test re-proves it (BLOCKED: Net Forge requires earn.stake to build; see RECEIPT-FORGE-FLOOR-001, B-7)",
    "why": "",
    "since": "2026-10-31",
-   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-NETFORGE-KIT-INSPECTION-001.md",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md",
    "status": "open"
   },
   {
@@ -232,7 +232,7 @@
    "debtor": "brandon",
    "creditor": "operation",
    "kind": "DECISION",
-   "what": "Name the flagship StarNet agent and the StarNet App (placeholder: 'StarNet Live')",
+   "what": "Name the StarNet App (the flagship is named: Nighthawk, ruling 2026-10-31 21:04 CDT)",
    "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami",
    "why": "WO-STARNET-MAX \u00a74: the fleet proposes, Brandon names",
    "since": "2026-11-01",
@@ -274,6 +274,35 @@
    "what": "Origami next folds: visual canvas over fold-sheets; the OSS block research pass with a licence row per block before any block joins",
    "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami",
    "since": "2026-11-01",
+   "status": "open"
+  },
+  {
+   "id": "B-7",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "kind": "DECISION",
+   "what": "Forge Floor engine: A) Genesis fork of Net Forge with the stake removed (Claude recommends, scoped first) / C) a different engine / D) Net Forge as an internal bench only",
+   "why": "Net Forge refuses to build any game without a wager stake",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md",
+   "status": "open"
+  },
+  {
+   "id": "A-4",
+   "debtor": "astra",
+   "creditor": "brandon",
+   "what": "Recommend on B-7 (the Forge Floor engine) and rule on K-6 (StarNet's 8 money/outbound classes)",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md",
+   "status": "open"
+  },
+  {
+   "id": "C-7",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "Creation Station pattern: a loadout manifest + a green/red checklist script (Forge Floor #1 first); Super Las Vegas skeleton as Origami folds (Wall first, from real scanner feeds, paper labeled paper)",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-core/pull/28",
    "status": "open"
   }
  ]

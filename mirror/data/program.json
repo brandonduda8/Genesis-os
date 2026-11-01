@@ -66,6 +66,12 @@
    "rank": "infrastructure + product",
    "grade": "VERIFIED",
    "where": "relayed 2026-10-31; inventory part 1 in starnet/STARNET-INVENTORY.md"
+  },
+  {
+   "id": "WO-CREATION-STATIONS-001 + Super Las Vegas build start",
+   "rank": "product",
+   "grade": "VERIFIED",
+   "where": "relayed 2026-10-31 21:04 CDT; Nighthawk = StarNet flagship (amends STARNET-MAX \u00a74)"
   }
  ]
 }

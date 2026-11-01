@@ -165,5 +165,13 @@
    "embryo_grade": "VERIFIED",
    "resume": "worktree + task id; a killed run leaves a STOPPED-AT receipt"
   }
- ]
+ ],
+ "_flagship": {
+  "name": "Nighthawk",
+  "seat": "StarNet on S1",
+  "role": "runs the creation stations' floor, tends the city, coordinates the residents; Brandon's conversational agent through the app",
+  "not": "a deadline watcher: administrative watching stays with the background minions",
+  "state": "NOT BUILT: needs a StarNet seat on S1 + a model-field-proven brain + a signed charter",
+  "ruling": "Brandon, 2026-10-31 21:04 CDT"
+ }
 }
