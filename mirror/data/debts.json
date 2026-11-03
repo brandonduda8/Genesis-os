@@ -27,7 +27,7 @@
    "id": "B-3",
    "debtor": "brandon",
    "creditor": "operation",
-   "what": "After Zane's APK rebuild: Pulse \u2192 Tha Aadity \u2192 tap a track; confirm audible + auto-advance",
+   "what": "After Zane's APK rebuild: Pulse → Tha Aadity → tap a track; confirm audible + auto-advance",
    "why": "",
    "since": "2026-10-31",
    "source": "https://github.com/brandonduda8/Genesis-os/pull/3",
@@ -161,7 +161,7 @@
    "id": "A-1",
    "debtor": "astra",
    "creditor": "claude",
-   "what": "Rule on \u00a73 'original': rights-clean AND genesis-made (Claude's reading) vs rights-clean alone",
+   "what": "Rule on §3 'original': rights-clean AND genesis-made (Claude's reading) vs rights-clean alone",
    "why": "",
    "since": "2026-10-31",
    "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-NETFORGE-KIT-INSPECTION-001.md",
@@ -181,7 +181,7 @@
    "id": "C-1",
    "debtor": "claude",
    "creditor": "operation",
-   "what": "Genesis edition of Emberwatch: remove earn.stake + losable gear, drop the token wording, new name; npm test re-proves it (BLOCKED: Net Forge requires earn.stake to build; see RECEIPT-FORGE-FLOOR-001, B-7)",
+   "what": "Genesis edition of Emberwatch: remove earn.stake + losable gear, drop the token wording, new name; npm test re-proves it (B-7 ruled A, the Genesis fork; carried by C-8)",
    "why": "",
    "since": "2026-10-31",
    "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md",
@@ -234,7 +234,7 @@
    "kind": "DECISION",
    "what": "Name the StarNet App (the flagship is named: Nighthawk, ruling 2026-10-31 21:04 CDT)",
    "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami",
-   "why": "WO-STARNET-MAX \u00a74: the fleet proposes, Brandon names",
+   "why": "WO-STARNET-MAX §4: the fleet proposes, Brandon names",
    "since": "2026-11-01",
    "status": "open"
   },
@@ -314,7 +314,7 @@
    "since": "2026-11-01",
    "source": "https://github.com/brandonduda8/Genesis-os/pull/9",
    "status": "open",
-   "why": "fabric v1 engineered from the master WO's component list; reconciliations are listed in fabric/DESIGN.md \u00a76"
+   "why": "fabric v1 engineered from the master WO's component list; reconciliations are listed in fabric/DESIGN.md §6"
   },
   {
    "id": "A-5",
@@ -364,6 +364,65 @@
    "why": "credential changes are yours; no write, no broader scope, no disclosure",
    "since": "2026-11-01",
    "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "B-9",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "kind": "HANDS",
+   "what": "Install the AURUM-signed Aurum 2.2 (Zane delivered it 2026-11-02) next to the Aurum 2.2 Preview, move the library (transfer file or Takeout re-import), and give your verdict. Keep the Preview until 2.2 is accepted",
+   "why": "2.2 is DELIVERED; DONE is your verdict on the phone",
+   "since": "2026-11-03",
+   "source": "https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.2/docs/AURUM-2.2-HANDOFF.md",
+   "status": "open"
+  },
+  {
+   "id": "B-10",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "kind": "DECISION",
+   "what": "Rule the build sequence: 1) Aurum 2.3 playlists + sound, 2) Shipyard read-only board PWA, 3) StarNet NOW slice, 4) Shipyard mission demo, then the music MCP tools (Claude's proposal; Claude starts 1 until you rule)",
+   "why": "one builder, four app orders (WO-005, StarNet build order, ChatGPT 003/004/2.3)",
+   "since": "2026-11-03",
+   "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
+   "status": "open"
+  },
+  {
+   "id": "C-9",
+   "debtor": "claude",
+   "creditor": "brandon",
+   "what": "Aurum 2.3 on genesis-player claude/aurum-2.3: persistent local playlists (offline, no AI, export/import) and measured sound improvements (EQ/presets, opt-in loudness); CI battery; unsigned release to Vault 04 for Zane",
+   "since": "2026-11-03",
+   "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
+   "status": "open"
+  },
+  {
+   "id": "C-10",
+   "debtor": "claude",
+   "creditor": "brandon",
+   "what": "Shipyard app MVP: phone-first read-only board PWA on genesis-hq claude/shipyard-app (extends shipyard/ from PR #20/#21), showing real Aurum status + source receipts; UNKNOWN where unproven",
+   "since": "2026-11-03",
+   "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
+   "status": "open"
+  },
+  {
+   "id": "C-11",
+   "debtor": "claude",
+   "creditor": "brandon",
+   "what": "StarNet App NOW slice (Android) on Genesis-core claude/starnet-app from claude/origami-fold-one: Make/Meet/Manage shell, receipt-feed mirror with LIVE/STALE/UNKNOWN, Nighthawk chat v1 surface; no stake mechanics",
+   "since": "2026-11-03",
+   "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
+   "status": "open"
+  },
+  {
+   "id": "Z-16",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "For Shipyard and StarNet: name an approved private (loopback/authenticated mesh) host to serve the PWA, and give a read-only receipt-feed export or endpoint plus a way to mint canonical mission IDs through Anchor/Router",
+   "why": "Claude's container cannot reach the Genesis hosts; without these the board shows UNKNOWN/read-only",
+   "since": "2026-11-03",
+   "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
    "status": "open"
   }
  ]
