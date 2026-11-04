@@ -402,7 +402,7 @@
    "id": "C-10",
    "debtor": "claude",
    "creditor": "brandon",
-   "what": "Shipyard app MVP: phone-first read-only board PWA on genesis-hq claude/shipyard-app (extends shipyard/ from PR #20/#21), showing real Aurum status + source receipts; UNKNOWN where unproven",
+   "what": "Shipyard app MVP: phone-first read-only board PWA on genesis-hq claude/shipyard-app (extends shipyard/ from PR #20/#21), showing real Aurum status + source receipts; UNKNOWN where unproven [first checkpoint BUILT 2026-11-04: genesis-hq claude/shipyard-app @dfb1e47, shipyard/board/, 10 tests; next: one real mission board->PR->test->Zane]",
    "since": "2026-11-03",
    "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
    "status": "open"
