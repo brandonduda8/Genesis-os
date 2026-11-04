@@ -1,7 +1,7 @@
 # OPERATOR'S BRIEF
 
-<!-- mirror-digest: eac9d54f53ba927b823c177e5318879ae3721c87e1c32c315ec61a0053eb4067 -->
-_Built 2026-11-03 02:36 UTC from mirror digest `eac9d54f53ba927b` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
+<!-- mirror-digest: 4f787ea071c43d4a60ea51c6c8422afefb8ffc14d80e580fa0dd487c8042162a -->
+_Built 2026-11-04 03:15 UTC from mirror digest `4f787ea071c43d4a` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
 
 ## 1. What is being built (in force)
 
@@ -38,7 +38,7 @@ _Built 2026-11-03 02:36 UTC from mirror digest `eac9d54f53ba927b` over 8 data fi
 | B-9 | operation | Install the AURUM-signed Aurum 2.2 (Zane delivered it 2026-11-02) next to the Aurum 2.2 Preview, move the library (transfer file or Takeout re-import), and give your verdict. Keep the Preview until 2.2 is accepted | 2026-11-03 |  | [link](https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.2/docs/AURUM-2.2-HANDOFF.md) |
 | B-10 | operation | Rule the build sequence: 1) Aurum 2.3 playlists + sound, 2) Shipyard read-only board PWA, 3) StarNet NOW slice, 4) Shipyard mission demo, then the music MCP tools (Claude's proposal; Claude starts 1 until you rule) | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
 
-### Zane owes (15)
+### Zane owes (16)
 
 | Id | To | What | Since | Due | Source |
 |---|---|---|---|---|---|
@@ -57,6 +57,7 @@ _Built 2026-11-03 02:36 UTC from mirror digest `eac9d54f53ba927b` over 8 data fi
 | Z-13 | claude | Publish Amendment 2 (the PIN Protocol) and WO-COMMS-001 where Claude can read them; then verify fabric PR #9 and run the real stop drill on S1 | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/pull/9) |
 | Z-15 | claude | FD-004 Order 3: publish the legacy GitHub helper source (path + sha256), the exact failing import traceback, and the accepted handoff-bus engineering spec to a repo Claude can read, or share the folder via Remote Control | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
 | Z-16 | claude | For Shipyard and StarNet: name an approved private (loopback/authenticated mesh) host to serve the PWA, and give a read-only receipt-feed export or endpoint plus a way to mint canonical mission IDs through Anchor/Router | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
+| Z-17 | brandon | Aurum 2.3 (playlists + sound): fetch CI artifact aurum-release (run 41763413035), check the APK sha256 497200dd…5cc0, sign with the AURUM key (signer 2A:44…CD:5B), run the real-phone checklist in AURUM-2.3-HANDOFF.md, deliver to Brandon | 2026-11-04 |  | [link](https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.3/docs/AURUM-2.3-HANDOFF.md) |
 
 ### Astra owes (6)
 
@@ -69,7 +70,7 @@ _Built 2026-11-03 02:36 UTC from mirror digest `eac9d54f53ba927b` over 8 data fi
 | A-5 | claude | Publish the A-1 stop POLICY and the A-2 mirror amendments package (war-room/astra-max-design/) to a reachable repo | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/pull/9) |
 | A-6 | claude | FD-004 Order 2: file the independent review record for subscription-status `status` (method source/manifest, scope, test evidence) where Claude can read it, so Claude can verify as the second principal | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
 
-### Claude owes (11)
+### Claude owes (10)
 
 | Id | To | What | Since | Due | Source |
 |---|---|---|---|---|---|
@@ -81,7 +82,6 @@ _Built 2026-11-03 02:36 UTC from mirror digest `eac9d54f53ba927b` over 8 data fi
 | C-6 | operation | Origami next folds: visual canvas over fold-sheets; the OSS block research pass with a licence row per block before any block joins | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami) |
 | C-7 | operation | Creation Station pattern: a loadout manifest + a green/red checklist script (Forge Floor #1 first); Super Las Vegas skeleton as Origami folds (Wall first, from real scanner feeds, paper labeled paper) | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/pull/28) |
 | C-8 | operation | WS3 Forge fork: sizing note first, then stake removal end to end with the Article V refusal battery; stop and file a sprawl report if the estimate is exceeded | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md) |
-| C-9 | brandon | Aurum 2.3 on genesis-player claude/aurum-2.3: persistent local playlists (offline, no AI, export/import) and measured sound improvements (EQ/presets, opt-in loudness); CI battery; unsigned release to Vault 04 for Zane | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
 | C-10 | brandon | Shipyard app MVP: phone-first read-only board PWA on genesis-hq claude/shipyard-app (extends shipyard/ from PR #20/#21), showing real Aurum status + source receipts; UNKNOWN where unproven | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
 | C-11 | brandon | StarNet App NOW slice (Android) on Genesis-core claude/starnet-app from claude/origami-fold-one: Make/Meet/Manage shell, receipt-feed mirror with LIVE/STALE/UNKNOWN, Nighthawk chat v1 surface; no stake mechanics | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
 
@@ -107,19 +107,19 @@ _Built 2026-11-03 02:36 UTC from mirror digest `eac9d54f53ba927b` over 8 data fi
 | s1 | designated primary power server | **none** | unknown | github, package, docker, starnet_hub (UNVERIFIED) |
 | penguin | Brandon's home network | **none** | unknown | docker, home_network (UNVERIFIED) |
 | phone | Brandon's pocket | **none** | unknown | home_network, device_proof (UNVERIFIED) |
-| claude-cloud | Claude Code cloud session | 2026-11-01T00:01:41Z (3035 min ago, STALE) | github, package | github, package (VERIFIED) |
+| claude-cloud | Claude Code cloud session | 2026-11-01T00:01:41Z (4513 min ago, STALE) | github, package | github, package (VERIFIED) |
 | astra | planning / review seat | **none** | unknown | review (UNVERIFIED) |
 | kaggle-colab | GPU/TPU lanes | **none** | unknown | gpu, tpu (UNVERIFIED) |
 | brandon | the only Level C vantage | **none** | unknown | level_c (VERIFIED) |
 
 | Work class | Routes to now | Substitutions |
 |---|---|---|
-| repo_work | **HOLD** | claude-cloud: probe stale (3035 min old); s1: no probe on record; zane-box: no probe on record |
-| package_build | **HOLD** | claude-cloud: probe stale (3035 min old); s1: no probe on record; penguin: no probe on record |
+| repo_work | **HOLD** | claude-cloud: probe stale (4513 min old); s1: no probe on record; zane-box: no probe on record |
+| package_build | **HOLD** | claude-cloud: probe stale (4513 min old); s1: no probe on record; penguin: no probe on record |
 | container_work | **HOLD** | s1: no probe on record; penguin: no probe on record |
 | model_call | **HOLD** | s1: no probe on record; penguin: no probe on record; zane-box: no probe on record |
 | home_network_proof | **HOLD** | penguin: no probe on record; phone: no probe on record |
-| verification | **HOLD** | zane-box: no probe on record; s1: no probe on record; claude-cloud: probe stale (3035 min old) |
+| verification | **HOLD** | zane-box: no probe on record; s1: no probe on record; claude-cloud: probe stale (4513 min old) |
 | gpu_training | **HOLD** | kaggle-colab: no probe on record |
 | level_c | **brandon** | - |
 

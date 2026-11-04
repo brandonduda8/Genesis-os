@@ -395,7 +395,8 @@
    "what": "Aurum 2.3 on genesis-player claude/aurum-2.3: persistent local playlists (offline, no AI, export/import) and measured sound improvements (EQ/presets, opt-in loudness); CI battery; unsigned release to Vault 04 for Zane",
    "since": "2026-11-03",
    "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
-   "status": "open"
+   "status": "done",
+   "done_evidence": "BUILT + emulator-TESTED: genesis-player claude/aurum-2.3 @07ce72c, CI run 41763413035 (battery 32/32, instrumented 9/9); unsigned aurum-2.3-release-unsigned.apk sha256 497200dd7ec1c97f6934c9c2ebb24eb22a0a0d18a3b68b7f6a06388290fd5cc0; handoff in Vault 04 (2026-11-04)"
   },
   {
    "id": "C-10",
@@ -423,6 +424,16 @@
    "why": "Claude's container cannot reach the Genesis hosts; without these the board shows UNKNOWN/read-only",
    "since": "2026-11-03",
    "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
+   "status": "open"
+  },
+  {
+   "id": "Z-17",
+   "debtor": "zane",
+   "creditor": "brandon",
+   "what": "Aurum 2.3 (playlists + sound): fetch CI artifact aurum-release (run 41763413035), check the APK sha256 497200dd…5cc0, sign with the AURUM key (signer 2A:44…CD:5B), run the real-phone checklist in AURUM-2.3-HANDOFF.md, deliver to Brandon",
+   "why": "Claude's container cannot download CI artifacts; signing is Zane's",
+   "since": "2026-11-04",
+   "source": "https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.3/docs/AURUM-2.3-HANDOFF.md",
    "status": "open"
   }
  ]
