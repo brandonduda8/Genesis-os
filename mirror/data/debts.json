@@ -411,7 +411,7 @@
    "id": "C-11",
    "debtor": "claude",
    "creditor": "brandon",
-   "what": "StarNet App NOW slice (Android) on Genesis-core claude/starnet-app from claude/origami-fold-one: Make/Meet/Manage shell, receipt-feed mirror with LIVE/STALE/UNKNOWN, Nighthawk chat v1 surface; no stake mechanics",
+   "what": "StarNet App NOW slice (Android) on Genesis-core claude/starnet-app from claude/origami-fold-one: Make/Meet/Manage shell, receipt-feed mirror with LIVE/STALE/UNKNOWN, Nighthawk chat v1 surface; no stake mechanics [core BUILT 2026-11-04: Genesis-core claude/starnet-app @cf07b52, starnet-app/core, 8 JVM tests; Android shell + CI wait on B-11]",
    "since": "2026-11-03",
    "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
    "status": "open"
@@ -434,6 +434,17 @@
    "why": "Claude's container cannot download CI artifacts; signing is Zane's",
    "since": "2026-11-04",
    "source": "https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.3/docs/AURUM-2.3-HANDOFF.md",
+   "status": "open"
+  },
+  {
+   "id": "B-11",
+   "debtor": "brandon",
+   "creditor": "claude",
+   "kind": "DECISION",
+   "what": "Confirm GitHub Actions cannot cost money (Settings > Billing: Actions spending limit $0, or no payment method), or say where the StarNet Android app should build instead. Genesis-core is private, so its Actions minutes are metered",
+   "why": "$0 fence: Android emulator CI is ~35 min per run; Claude can't see billing settings from its container",
+   "since": "2026-11-04",
+   "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/starnet-app/starnet-app",
    "status": "open"
   }
  ]

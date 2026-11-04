@@ -1,7 +1,7 @@
 # OPERATOR'S BRIEF
 
-<!-- mirror-digest: 597b269ebe73eb599ec5ed8c0632259709ad003d12d9578f4672b0770e695432 -->
-_Built 2026-11-04 07:35 UTC from mirror digest `597b269ebe73eb59` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
+<!-- mirror-digest: 400bf7228f143da19b98edc072d9f36b85f5df17d596ef3748b246c81e91df8d -->
+_Built 2026-11-04 11:34 UTC from mirror digest `400bf7228f143da1` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
 
 ## 1. What is being built (in force)
 
@@ -24,7 +24,7 @@ _Built 2026-11-04 07:35 UTC from mirror digest `597b269ebe73eb59` over 8 data fi
 
 ## 2. Open debts (who owes whom)
 
-### Brandon owes (9)
+### Brandon owes (10)
 
 | Id | To | What | Since | Due | Source |
 |---|---|---|---|---|---|
@@ -37,6 +37,7 @@ _Built 2026-11-04 07:35 UTC from mirror digest `597b269ebe73eb59` over 8 data fi
 | B-8 | operation | FD-004 Order 1: after the secrets check of empire-handoffs, adjust the Muse fine-grained token to Contents: Read-only on brandonduda8/empire-handoffs only, through GitHub's own settings | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
 | B-9 | operation | Install the AURUM-signed Aurum 2.2 (Zane delivered it 2026-11-02) next to the Aurum 2.2 Preview, move the library (transfer file or Takeout re-import), and give your verdict. Keep the Preview until 2.2 is accepted | 2026-11-03 |  | [link](https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.2/docs/AURUM-2.2-HANDOFF.md) |
 | B-10 | operation | Rule the build sequence: 1) Aurum 2.3 playlists + sound, 2) Shipyard read-only board PWA, 3) StarNet NOW slice, 4) Shipyard mission demo, then the music MCP tools (Claude's proposal; Claude starts 1 until you rule) | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
+| B-11 | claude | Confirm GitHub Actions cannot cost money (Settings > Billing: Actions spending limit $0, or no payment method), or say where the StarNet Android app should build instead. Genesis-core is private, so its Actions minutes are metered | 2026-11-04 |  | [link](https://github.com/brandonduda8/Genesis-core/tree/claude/starnet-app/starnet-app) |
 
 ### Zane owes (16)
 
@@ -83,7 +84,7 @@ _Built 2026-11-04 07:35 UTC from mirror digest `597b269ebe73eb59` over 8 data fi
 | C-7 | operation | Creation Station pattern: a loadout manifest + a green/red checklist script (Forge Floor #1 first); Super Las Vegas skeleton as Origami folds (Wall first, from real scanner feeds, paper labeled paper) | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/pull/28) |
 | C-8 | operation | WS3 Forge fork: sizing note first, then stake removal end to end with the Article V refusal battery; stop and file a sprawl report if the estimate is exceeded | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md) |
 | C-10 | brandon | Shipyard app MVP: phone-first read-only board PWA on genesis-hq claude/shipyard-app (extends shipyard/ from PR #20/#21), showing real Aurum status + source receipts; UNKNOWN where unproven [first checkpoint BUILT 2026-11-04: genesis-hq claude/shipyard-app @dfb1e47, shipyard/board/, 10 tests; next: one real mission board->PR->test->Zane] | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
-| C-11 | brandon | StarNet App NOW slice (Android) on Genesis-core claude/starnet-app from claude/origami-fold-one: Make/Meet/Manage shell, receipt-feed mirror with LIVE/STALE/UNKNOWN, Nighthawk chat v1 surface; no stake mechanics | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
+| C-11 | brandon | StarNet App NOW slice (Android) on Genesis-core claude/starnet-app from claude/origami-fold-one: Make/Meet/Manage shell, receipt-feed mirror with LIVE/STALE/UNKNOWN, Nighthawk chat v1 surface; no stake mechanics [core BUILT 2026-11-04: Genesis-core claude/starnet-app @cf07b52, starnet-app/core, 8 JVM tests; Android shell + CI wait on B-11] | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
 
 ## 3. Expiring power
 
@@ -107,19 +108,19 @@ _Built 2026-11-04 07:35 UTC from mirror digest `597b269ebe73eb59` over 8 data fi
 | s1 | designated primary power server | **none** | unknown | github, package, docker, starnet_hub (UNVERIFIED) |
 | penguin | Brandon's home network | **none** | unknown | docker, home_network (UNVERIFIED) |
 | phone | Brandon's pocket | **none** | unknown | home_network, device_proof (UNVERIFIED) |
-| claude-cloud | Claude Code cloud session | 2026-11-01T00:01:41Z (4773 min ago, STALE) | github, package | github, package (VERIFIED) |
+| claude-cloud | Claude Code cloud session | 2026-11-01T00:01:41Z (5012 min ago, STALE) | github, package | github, package (VERIFIED) |
 | astra | planning / review seat | **none** | unknown | review (UNVERIFIED) |
 | kaggle-colab | GPU/TPU lanes | **none** | unknown | gpu, tpu (UNVERIFIED) |
 | brandon | the only Level C vantage | **none** | unknown | level_c (VERIFIED) |
 
 | Work class | Routes to now | Substitutions |
 |---|---|---|
-| repo_work | **HOLD** | claude-cloud: probe stale (4773 min old); s1: no probe on record; zane-box: no probe on record |
-| package_build | **HOLD** | claude-cloud: probe stale (4773 min old); s1: no probe on record; penguin: no probe on record |
+| repo_work | **HOLD** | claude-cloud: probe stale (5012 min old); s1: no probe on record; zane-box: no probe on record |
+| package_build | **HOLD** | claude-cloud: probe stale (5012 min old); s1: no probe on record; penguin: no probe on record |
 | container_work | **HOLD** | s1: no probe on record; penguin: no probe on record |
 | model_call | **HOLD** | s1: no probe on record; penguin: no probe on record; zane-box: no probe on record |
 | home_network_proof | **HOLD** | penguin: no probe on record; phone: no probe on record |
-| verification | **HOLD** | zane-box: no probe on record; s1: no probe on record; claude-cloud: probe stale (4773 min old) |
+| verification | **HOLD** | zane-box: no probe on record; s1: no probe on record; claude-cloud: probe stale (5012 min old) |
 | gpu_training | **HOLD** | kaggle-colab: no probe on record |
 | level_c | **brandon** | - |
 
