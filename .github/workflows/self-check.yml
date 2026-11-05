@@ -59,9 +59,9 @@ jobs:
           status=0
           while IFS= read -r f; do
             echo "checking $f"
-            grep -oE '\]\(([^)#]+)\)' "$f" | sed 's/^](\(//; s/)$//' | while IFS= read -r link; do
+            grep -oE '\]\(([^)#]+)\)' "$f" | sed 's/^\](//; s/)$//' | while IFS= read -r link; do
               case "$link" in
-                http*|mailto:*|#*) continue ;;
+                http*|mailto:*|'#'*) continue ;;
               esac
               target="$(dirname "$f")/$link"
               if [ ! -e "$target" ]; then
