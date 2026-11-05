@@ -22,8 +22,28 @@ DETECTOR = ROOT / 'job-storm-ace' / 'ace_detector_v2.py'
 ANSWERS = ROOT / 'war-room' / 'JOB_STORM_ANSWERS_2026-10-31.md'
 COMMAND = ROOT / 'war-room' / 'JOB_STORM_COMMAND_2026-10-31.md'
 
-BANNED = ['630-210-5724', 'brandonduda8@gmail.com', 'hsurr:', 'sk-',
-          'BEGIN PRIVATE KEY', 'Bearer ', 'api_key', 'password']
+# Generic credential shapes are listed here. The candidate's own contact
+# strings (phone, email, ...) are personal data and are NOT kept in the repo:
+# put them, one per line, in the gitignored file `pii_banned.local.txt` next to
+# this builder (see pii_banned.example.txt), or in the ACE_PII_BANNED env var
+# (comma-separated). The builder refuses to run without at least one entry,
+# so a fresh checkout can never silently skip the PII scan.
+BANNED_GENERIC = ['hsurr:', 'sk-', 'BEGIN PRIVATE KEY', 'Bearer ', 'api_key', 'password']
+
+
+def load_pii_banned(here=None, env=None):
+    import os
+    here = Path(here) if here else Path(__file__).resolve().parent
+    env = os.environ if env is None else env
+    vals = [v.strip() for v in env.get('ACE_PII_BANNED', '').split(',') if v.strip()]
+    local = here / 'pii_banned.local.txt'
+    if local.exists():
+        vals += [l.strip() for l in local.read_text().splitlines()
+                 if l.strip() and not l.lstrip().startswith('#')]
+    return vals
+
+
+BANNED = list(BANNED_GENERIC)
 stats = {'dropped_scan': 0}
 
 def clean(rec):
@@ -49,6 +69,12 @@ def verdict_response(e):
     return '\n'.join(out)
 
 def main():
+    pii = load_pii_banned()
+    if not pii:
+        raise SystemExit("REFUSED: no personal PII strings configured for the safety scan. "
+                         "Create pii_banned.local.txt (gitignored; see pii_banned.example.txt) "
+                         "or set ACE_PII_BANNED before building.")
+    BANNED.extend(pii)
     HERE.mkdir(parents=True, exist_ok=True)
     (HERE / 'corpus').mkdir(exist_ok=True)
     (HERE / 'heldout').mkdir(exist_ok=True)

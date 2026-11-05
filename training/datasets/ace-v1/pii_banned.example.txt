@@ -1,0 +1,5 @@
+# Copy to pii_banned.local.txt (gitignored) and list, one per line, every
+# personal string that must never enter a training record (phone numbers,
+# email addresses, street address, ...). Lines starting with # are ignored.
+555-555-0100
+someone@example.com
