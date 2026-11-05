@@ -386,7 +386,8 @@
    "why": "one builder, four app orders (WO-005, StarNet build order, ChatGPT 003/004/2.3)",
    "since": "2026-11-03",
    "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
-   "status": "open"
+   "status": "done",
+   "done_evidence": "WO-GENESIS-HARK-002 (founder-issued 2026-11-05, Drive 01 Plans) calls Aurum 2.3 -> Shipyard read-only board -> StarNet NOW slice 'the approved sequence'"
   },
   {
    "id": "C-9",
@@ -396,7 +397,7 @@
    "since": "2026-11-03",
    "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
    "status": "done",
-   "done_evidence": "BUILT + emulator-TESTED: genesis-player claude/aurum-2.3 @07ce72c, CI run 41763413035 (battery 32/32, instrumented 9/9); unsigned aurum-2.3-release-unsigned.apk sha256 497200dd7ec1c97f6934c9c2ebb24eb22a0a0d18a3b68b7f6a06388290fd5cc0; handoff in Vault 04 (2026-11-04)"
+   "done_evidence": "BUILT + emulator-TESTED: genesis-player claude/aurum-2.3 @07ce72c, CI run 41763413035 (battery 32/32, instrumented 9/9); unsigned aurum-2.3-release-unsigned.apk sha256 497200dd7ec1c97f6934c9c2ebb24eb22a0a0d18a3b68b7f6a06388290fd5cc0; handoff in Vault 04 (2026-11-04); review home: draft PR genesis-player#21 (no merge), opened 2026-11-05 per WO-HARK-002"
   },
   {
    "id": "C-10",
