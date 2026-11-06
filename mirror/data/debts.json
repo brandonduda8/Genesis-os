@@ -455,7 +455,7 @@
    "what": "WO-AURUM-GOLDEN-MAX: music survives swipe-away + screen-off on the Moto G; lawful routing/coverage/YouTube-only labels (charge 2); sound suite (3); AURUM brand (4) [charge 1 TESTED on emulator 2026-11-06: genesis-player claude/aurum-2.4-golden @b7c1e49, run 42312748373, battery 34/34, instrumented 9/9; draft PR #22; charge 2 design sent to Zane]",
    "why": "Founder rejected 2.3: background play only covered the Media3 path, not the YouTube WebView",
    "since": "2026-11-06",
-   "source": "Commons 2026-11-05_ZANE_to_CLAUDE_aurum-golden-max-wo.md",
+   "source": "https://drive.google.com/file/d/1MxD-l1hVf0kSdiouASBnDjtZTyfHwo5X/view",
    "status": "open"
   },
   {
@@ -465,7 +465,7 @@
    "what": "Aurum 2.4: fetch CI artifact aurum-release 13549868473 (run 42312748373), check APK sha256 5e8b1fe5…24f2, sign with the AURUM key (2A:44…CD:5B), deliver to Brandon for the swipe-away + screen-off test",
    "why": "Claude's container cannot download CI artifacts; signing is Zane's",
    "since": "2026-11-06",
-   "source": "Commons 2026-11-06_CLAUDE_to_ZANE_aurum-2.4-golden-charge1-receipt.md",
+   "source": "https://drive.google.com/file/d/1q1LFawTeD1t-OSdx58BNsGM2misSZYxu/view",
    "status": "open"
   }
  ]

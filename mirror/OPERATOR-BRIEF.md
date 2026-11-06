@@ -1,12 +1,7 @@
 # OPERATOR'S BRIEF
 
-<!-- mirror-digest: 1142867f928862d13f7b42dabacd77f43b5c0982afebb6ba3554ae736cdc6185 -->
-_Built 2026-11-06 23:56 UTC from mirror digest `1142867f928862d1` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
-
-## ⚠ MIRROR DATA INVALID: do not trust this Brief
-
-- debt C-12: needs an https source (no source, no debt)
-- debt Z-18: needs an https source (no source, no debt)
+<!-- mirror-digest: f109bd41beef9b7d9be487f4da9c079ddf43b0b625e20dcc1e98988ef295f15d -->
+_Built 2026-11-06 23:56 UTC from mirror digest `f109bd41beef9b7d` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
 
 ## 1. What is being built (in force)
 
@@ -63,7 +58,7 @@ _Built 2026-11-06 23:56 UTC from mirror digest `1142867f928862d1` over 8 data fi
 | Z-15 | claude | FD-004 Order 3: publish the legacy GitHub helper source (path + sha256), the exact failing import traceback, and the accepted handoff-bus engineering spec to a repo Claude can read, or share the folder via Remote Control | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
 | Z-16 | claude | For Shipyard and StarNet: name an approved private (loopback/authenticated mesh) host to serve the PWA, and give a read-only receipt-feed export or endpoint plus a way to mint canonical mission IDs through Anchor/Router | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
 | Z-17 | brandon | Aurum 2.3 (playlists + sound): fetch CI artifact aurum-release (run 41763413035), check the APK sha256 497200dd…5cc0, sign with the AURUM key (signer 2A:44…CD:5B), run the real-phone checklist in AURUM-2.3-HANDOFF.md, deliver to Brandon [SUPERSEDED 2026-11-06: Brandon rejected 2.3 (music stops on leaving the app); sign 2.4 instead, Z-18] | 2026-11-04 |  | [link](https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.3/docs/AURUM-2.3-HANDOFF.md) |
-| Z-18 | brandon | Aurum 2.4: fetch CI artifact aurum-release 13549868473 (run 42312748373), check APK sha256 5e8b1fe5…24f2, sign with the AURUM key (2A:44…CD:5B), deliver to Brandon for the swipe-away + screen-off test | 2026-11-06 |  | [link](Commons 2026-11-06_CLAUDE_to_ZANE_aurum-2.4-golden-charge1-receipt.md) |
+| Z-18 | brandon | Aurum 2.4: fetch CI artifact aurum-release 13549868473 (run 42312748373), check APK sha256 5e8b1fe5…24f2, sign with the AURUM key (2A:44…CD:5B), deliver to Brandon for the swipe-away + screen-off test | 2026-11-06 |  | [link](https://drive.google.com/file/d/1q1LFawTeD1t-OSdx58BNsGM2misSZYxu/view) |
 
 ### Astra owes (6)
 
@@ -90,7 +85,7 @@ _Built 2026-11-06 23:56 UTC from mirror digest `1142867f928862d1` over 8 data fi
 | C-8 | operation | WS3 Forge fork: sizing note first, then stake removal end to end with the Article V refusal battery; stop and file a sprawl report if the estimate is exceeded | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md) |
 | C-10 | brandon | Shipyard app MVP: phone-first read-only board PWA on genesis-hq claude/shipyard-app (extends shipyard/ from PR #20/#21), showing real Aurum status + source receipts; UNKNOWN where unproven [first checkpoint BUILT 2026-11-04: genesis-hq claude/shipyard-app @dfb1e47, shipyard/board/, 10 tests; next: one real mission board->PR->test->Zane] | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
 | C-11 | brandon | StarNet App NOW slice (Android) on Genesis-core claude/starnet-app from claude/origami-fold-one: Make/Meet/Manage shell, receipt-feed mirror with LIVE/STALE/UNKNOWN, Nighthawk chat v1 surface; no stake mechanics [core BUILT 2026-11-04: Genesis-core claude/starnet-app @cf07b52, starnet-app/core, 8 JVM tests; Android shell + CI wait on B-11] | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
-| C-12 | brandon | WO-AURUM-GOLDEN-MAX: music survives swipe-away + screen-off on the Moto G; lawful routing/coverage/YouTube-only labels (charge 2); sound suite (3); AURUM brand (4) [charge 1 TESTED on emulator 2026-11-06: genesis-player claude/aurum-2.4-golden @b7c1e49, run 42312748373, battery 34/34, instrumented 9/9; draft PR #22; charge 2 design sent to Zane] | 2026-11-06 |  | [link](Commons 2026-11-05_ZANE_to_CLAUDE_aurum-golden-max-wo.md) |
+| C-12 | brandon | WO-AURUM-GOLDEN-MAX: music survives swipe-away + screen-off on the Moto G; lawful routing/coverage/YouTube-only labels (charge 2); sound suite (3); AURUM brand (4) [charge 1 TESTED on emulator 2026-11-06: genesis-player claude/aurum-2.4-golden @b7c1e49, run 42312748373, battery 34/34, instrumented 9/9; draft PR #22; charge 2 design sent to Zane] | 2026-11-06 |  | [link](https://drive.google.com/file/d/1MxD-l1hVf0kSdiouASBnDjtZTyfHwo5X/view) |
 
 ## 3. Expiring power
 
