@@ -431,7 +431,7 @@
    "id": "Z-17",
    "debtor": "zane",
    "creditor": "brandon",
-   "what": "Aurum 2.3 (playlists + sound): fetch CI artifact aurum-release (run 41763413035), check the APK sha256 497200dd…5cc0, sign with the AURUM key (signer 2A:44…CD:5B), run the real-phone checklist in AURUM-2.3-HANDOFF.md, deliver to Brandon",
+   "what": "Aurum 2.3 (playlists + sound): fetch CI artifact aurum-release (run 41763413035), check the APK sha256 497200dd…5cc0, sign with the AURUM key (signer 2A:44…CD:5B), run the real-phone checklist in AURUM-2.3-HANDOFF.md, deliver to Brandon [SUPERSEDED 2026-11-06: Brandon rejected 2.3 (music stops on leaving the app); sign 2.4 instead, Z-18]",
    "why": "Claude's container cannot download CI artifacts; signing is Zane's",
    "since": "2026-11-04",
    "source": "https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.3/docs/AURUM-2.3-HANDOFF.md",
@@ -446,6 +446,26 @@
    "why": "$0 fence: Android emulator CI is ~35 min per run; Claude can't see billing settings from its container",
    "since": "2026-11-04",
    "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/starnet-app/starnet-app",
+   "status": "open"
+  },
+  {
+   "id": "C-12",
+   "debtor": "claude",
+   "creditor": "brandon",
+   "what": "WO-AURUM-GOLDEN-MAX: music survives swipe-away + screen-off on the Moto G; lawful routing/coverage/YouTube-only labels (charge 2); sound suite (3); AURUM brand (4) [charge 1 TESTED on emulator 2026-11-06: genesis-player claude/aurum-2.4-golden @b7c1e49, run 42312748373, battery 34/34, instrumented 9/9; draft PR #22; charge 2 design sent to Zane]",
+   "why": "Founder rejected 2.3: background play only covered the Media3 path, not the YouTube WebView",
+   "since": "2026-11-06",
+   "source": "Commons 2026-11-05_ZANE_to_CLAUDE_aurum-golden-max-wo.md",
+   "status": "open"
+  },
+  {
+   "id": "Z-18",
+   "debtor": "zane",
+   "creditor": "brandon",
+   "what": "Aurum 2.4: fetch CI artifact aurum-release 13549868473 (run 42312748373), check APK sha256 5e8b1fe5…24f2, sign with the AURUM key (2A:44…CD:5B), deliver to Brandon for the swipe-away + screen-off test",
+   "why": "Claude's container cannot download CI artifacts; signing is Zane's",
+   "since": "2026-11-06",
+   "source": "Commons 2026-11-06_CLAUDE_to_ZANE_aurum-2.4-golden-charge1-receipt.md",
    "status": "open"
   }
  ]
