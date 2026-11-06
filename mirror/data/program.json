@@ -1,0 +1,89 @@
+{
+ "_law": "What is in force. Items Claude cannot read are graded UNVERIFIED with where they live.",
+ "in_force": [
+  {
+   "id": "WO-PLATINUM-MIRROR-MESH-MINIONS-001",
+   "rank": "PLATINUM (governs infrastructure)",
+   "grade": "VERIFIED",
+   "where": "relayed in Claude's session 2026-10-31; text not yet in a repo"
+  },
+  {
+   "id": "WO-UNIFIED-GAME-BUSINESS-001",
+   "rank": "product (governs product)",
+   "grade": "UNVERIFIED",
+   "where": "v2 relayed to Claude; v3 'rates set' not seen by Claude"
+  },
+  {
+   "id": "Genesis Economy Constitution",
+   "rank": "law (ratified 2026-10-31)",
+   "grade": "UNVERIFIED",
+   "where": "not in a repo Claude can reach; Article V named as refused mechanics"
+  },
+  {
+   "id": "WO-AGENT-MONEY-GAME-001 (the League)",
+   "rank": "product",
+   "grade": "UNVERIFIED",
+   "where": "not seen by Claude"
+  },
+  {
+   "id": "WO-MASTER-TROUBLESHOOTER-001",
+   "rank": "doctrine",
+   "grade": "VERIFIED",
+   "where": "Genesis-os war-room (merged #5)"
+  },
+  {
+   "id": "GHOST program",
+   "rank": "infrastructure",
+   "grade": "VERIFIED",
+   "where": "Genesis-os main 5b958ed; deploy owed (Z-1)"
+  },
+  {
+   "id": "WO-GENESIS-NODE-CLONE-001",
+   "rank": "infrastructure",
+   "grade": "UNVERIFIED",
+   "where": "not seen by Claude"
+  },
+  {
+   "id": "Training program",
+   "rank": "expiring power",
+   "grade": "UNVERIFIED",
+   "where": "autopilot on zane-box; kernels in Genesis-os#4"
+  },
+  {
+   "id": "GENESIS-EXEC-001 + policy register 2026-10-31",
+   "rank": "standing authority",
+   "grade": "VERIFIED",
+   "where": "exec/ (Genesis-os#6); register text relayed"
+  },
+  {
+   "id": "WO-ORIGAMI-001",
+   "rank": "product (app engine)",
+   "grade": "VERIFIED",
+   "where": "relayed 2026-10-31; v0 built in Genesis-core claude/origami-fold-one"
+  },
+  {
+   "id": "WO-STARNET-MAX-001",
+   "rank": "infrastructure + product",
+   "grade": "VERIFIED",
+   "where": "relayed 2026-10-31; inventory part 1 in starnet/STARNET-INVENTORY.md"
+  },
+  {
+   "id": "WO-CREATION-STATIONS-001 + Super Las Vegas build start",
+   "rank": "product",
+   "grade": "VERIFIED",
+   "where": "relayed 2026-10-31 21:04 CDT; Nighthawk = StarNet flagship (amends STARNET-MAX \u00a74)"
+  },
+  {
+   "id": "WO-CLAUDE-MASTER-BUILD-001",
+   "rank": "build program (WS1 fabric, WS2 stop, WS3 fork, WS4 stations/city, WS5 mirror)",
+   "grade": "VERIFIED",
+   "where": "relayed 2026-10-31 22:09 CDT; WS1+WS2 BUILT in Genesis-os#9"
+  },
+  {
+   "id": "FD-004 (founder directive)",
+   "rank": "authorization: Orders 1-4, $0",
+   "grade": "VERIFIED",
+   "where": "relayed 2026-11-01; Claude's scope = Order 3 minimum import fix (prepare only, no deploy) + Order 2 verification if eligible; Order 4 verification matrix adopted"
+  }
+ ]
+}

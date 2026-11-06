@@ -1,0 +1,472 @@
+{
+ "_law": "No source, no debt. Brandon's list holds only LEVEL_C / HANDS / DECISION. Done needs evidence; the git history is the record.",
+ "debts": [
+  {
+   "id": "B-1",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "what": "Play EMBERWATCH yourself (3 commands in RECEIPT-NETFORGE-001), or ask Zane to serve it on zane-box with --no-open",
+   "why": "Built and headless-played; DONE is you playing it",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-NETFORGE-001.md",
+   "status": "open",
+   "kind": "HANDS"
+  },
+  {
+   "id": "B-2",
+   "debtor": "brandon",
+   "creditor": "claude",
+   "what": "Open the micro-cap lab PR (one click; session creation was refused)",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-core/compare/claude/universe-start...claude/microcap-lab?expand=1",
+   "status": "open",
+   "kind": "DECISION"
+  },
+  {
+   "id": "B-3",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "what": "After Zane's APK rebuild: Pulse → Tha Aadity → tap a track; confirm audible + auto-advance",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/3",
+   "status": "open",
+   "kind": "HANDS"
+  },
+  {
+   "id": "B-4",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "what": "Charter-signing sitting: sign ghost_operations (90 days) on your own device; the minion charters follow the same sitting",
+   "why": "Turns per-item approvals into the tap-free classes the minions run under",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/1",
+   "status": "open",
+   "kind": "LEVEL_C"
+  },
+  {
+   "id": "B-5",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "what": "Authorize the S1 read-only preflight (G0); the mirror primary rides S1",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-core/pull/20",
+   "status": "open",
+   "kind": "DECISION"
+  },
+  {
+   "id": "Z-1",
+   "debtor": "zane",
+   "creditor": "operation",
+   "what": "Deploy GHOST v2 (main 5b958ed) on zane-box; place state/keys/nim.key; drain Q-002 or Q-003 through a real heal window",
+   "why": "Merged without a recorded review; every minion stands on this deploy",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/1",
+   "status": "open"
+  },
+  {
+   "id": "Z-2",
+   "debtor": "zane",
+   "creditor": "brandon",
+   "what": "Rebuild the Watch+Pulse APK (assets changed only)",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/3",
+   "status": "open"
+  },
+  {
+   "id": "Z-3",
+   "debtor": "zane",
+   "creditor": "operation",
+   "what": "Autopilot: launch ghost-h2h-v1 + ace-h2h-v1, rebuild kernels with the winners, launch them",
+   "why": "29 GPU-h + 20 TPU-h expire 2026-11-07T00:00Z",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/4",
+   "status": "open",
+   "due": "2026-11-07"
+  },
+  {
+   "id": "Z-4",
+   "debtor": "zane",
+   "creditor": "operation",
+   "what": "Re-run ghost-v1/build_dataset.py (the guard should refuse); decide on refreezing as v1.1",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/5",
+   "status": "open"
+  },
+  {
+   "id": "Z-5",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "Run tools/audius_match.py over the taste profile from a host with egress",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/genesis-player/pull/14",
+   "status": "open"
+  },
+  {
+   "id": "Z-6",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "Publish the Genesis MCP v2 server source (127.0.0.1:8770) to a repo or name its path",
+   "why": "All five fabric services must clone its pattern; no third shape",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/7",
+   "status": "open"
+  },
+  {
+   "id": "Z-7",
+   "debtor": "zane",
+   "creditor": "operation",
+   "what": "Vault production root on the prune-exempt shelf; import Emberwatch there; verify the CC0 reading and flip rights_clean",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/7",
+   "status": "open"
+  },
+  {
+   "id": "Z-8",
+   "debtor": "zane",
+   "creditor": "operation",
+   "what": "Rebuild Emberwatch on zane-box (npm run play -- --no-open) and file the playtest output",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-NETFORGE-KIT-INSPECTION-001.md",
+   "status": "open"
+  },
+  {
+   "id": "Z-9",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "Publish your operator state to mirror/data/operator-zane.json: current todo, open verifications, standards in force",
+   "why": "The operator's mirror is data, not chat memory; the skeleton holds only what Claude can see",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "Z-10",
+   "debtor": "zane",
+   "creditor": "operation",
+   "what": "Run mirror/probe.py --write on zane-box, S1 and penguin so routing has probes, not hope",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "A-1",
+   "debtor": "astra",
+   "creditor": "claude",
+   "what": "Rule on §3 'original': rights-clean AND genesis-made (Claude's reading) vs rights-clean alone",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-NETFORGE-KIT-INSPECTION-001.md",
+   "status": "open"
+  },
+  {
+   "id": "A-2",
+   "debtor": "astra",
+   "creditor": "claude",
+   "what": "Review the mirror / mesh / minion skeleton design",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "C-1",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "Genesis edition of Emberwatch: remove earn.stake + losable gear, drop the token wording, new name; npm test re-proves it (B-7 ruled A, the Genesis fork; carried by C-8)",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md",
+   "status": "open"
+  },
+  {
+   "id": "C-2",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "Build the five fabric services once Z-6 lands",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/7",
+   "status": "open"
+  },
+  {
+   "id": "C-3",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "Board hardening E-8: baseline schema + integrity check; live mergeable re-check",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/6",
+   "status": "open"
+  },
+  {
+   "id": "C-4",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "S1 mirror-primary package: checkout + manifest timer + reconcile-on-return script, staged for B-5",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "C-5",
+   "debtor": "claude",
+   "creditor": "brandon",
+   "what": "Draft the minion charters (one per roster entry) for the B-4 signing sitting, with GHOST action ceilings proposed for each class",
+   "why": "",
+   "since": "2026-10-31",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "B-6",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "kind": "DECISION",
+   "what": "Name the StarNet App (the flagship is named: Nighthawk, ruling 2026-10-31 21:04 CDT)",
+   "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami",
+   "why": "WO-STARNET-MAX §4: the fleet proposes, Brandon names",
+   "since": "2026-11-01",
+   "status": "open"
+  },
+  {
+   "id": "Z-11",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "STARNET-INVENTORY part 2: list the S1 StarNet tree (hub, station, vortex, heartbeat, display :8788, anchor :8888 read-only) and file each component's state to mirror/data/starnet.json",
+   "source": "https://github.com/brandonduda8/Genesis-os/blob/claude/mirror-mesh/starnet/STARNET-INVENTORY.md",
+   "why": "Part 1 (upstream source) is done; live state needs S1",
+   "since": "2026-11-01",
+   "status": "open"
+  },
+  {
+   "id": "Z-12",
+   "debtor": "zane",
+   "creditor": "brandon",
+   "what": "Serve Fold One where Brandon can open it: run origami.feeds.mirror_feed --every 30 and serve the folded app on S1 or penguin",
+   "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami",
+   "why": "Built and proved headless; DONE is Brandon watching it on his phone",
+   "since": "2026-11-01",
+   "status": "open"
+  },
+  {
+   "id": "A-3",
+   "debtor": "astra",
+   "creditor": "claude",
+   "what": "Confirm the canonical Article V refused-mechanics list (Origami refuses at the canvas from it)",
+   "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami",
+   "since": "2026-11-01",
+   "status": "open"
+  },
+  {
+   "id": "C-6",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "Origami next folds: visual canvas over fold-sheets; the OSS block research pass with a licence row per block before any block joins",
+   "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/origami-fold-one/origami",
+   "since": "2026-11-01",
+   "status": "open"
+  },
+  {
+   "id": "B-7",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "kind": "DECISION",
+   "what": "Forge Floor engine: A) Genesis fork of Net Forge with the stake removed (Claude recommends, scoped first) / C) a different engine / D) Net Forge as an internal bench only",
+   "why": "Net Forge refuses to build any game without a wager stake",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md",
+   "status": "done",
+   "done_evidence": "WO-CLAUDE-MASTER-BUILD-001 WS3 names 'ruling B-7, Option A' (the Genesis fork of Net Forge), relayed 2026-10-31 22:09 CDT"
+  },
+  {
+   "id": "A-4",
+   "debtor": "astra",
+   "creditor": "brandon",
+   "what": "Recommend on B-7 (the Forge Floor engine) and rule on K-6 (StarNet's 8 money/outbound classes)",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md",
+   "status": "open"
+  },
+  {
+   "id": "C-7",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "Creation Station pattern: a loadout manifest + a green/red checklist script (Forge Floor #1 first); Super Las Vegas skeleton as Origami folds (Wall first, from real scanner feeds, paper labeled paper)",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-core/pull/28",
+   "status": "open"
+  },
+  {
+   "id": "Z-13",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "Publish Amendment 2 (the PIN Protocol) and WO-COMMS-001 where Claude can read them; then verify fabric PR #9 and run the real stop drill on S1",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/9",
+   "status": "open",
+   "why": "fabric v1 engineered from the master WO's component list; reconciliations are listed in fabric/DESIGN.md §6"
+  },
+  {
+   "id": "A-5",
+   "debtor": "astra",
+   "creditor": "claude",
+   "what": "Publish the A-1 stop POLICY and the A-2 mirror amendments package (war-room/astra-max-design/) to a reachable repo",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-os/pull/9",
+   "status": "open",
+   "why": "the stop mechanism shipped first; it must be reconciled to her policy"
+  },
+  {
+   "id": "C-8",
+   "debtor": "claude",
+   "creditor": "operation",
+   "what": "WS3 Forge fork: sizing note first, then stake removal end to end with the Article V refusal battery; stop and file a sprawl report if the estimate is exceeded",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md",
+   "status": "open"
+  },
+  {
+   "id": "Z-15",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "FD-004 Order 3: publish the legacy GitHub helper source (path + sha256), the exact failing import traceback, and the accepted handoff-bus engineering spec to a repo Claude can read, or share the folder via Remote Control",
+   "why": "the helper and handoff_bus_poll.py live only on zane-box (~/workspace/genesis-os/tools); no reachable repo or shared folder holds them (searched 2026-11-01)",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "A-6",
+   "debtor": "astra",
+   "creditor": "claude",
+   "what": "FD-004 Order 2: file the independent review record for subscription-status `status` (method source/manifest, scope, test evidence) where Claude can read it, so Claude can verify as the second principal",
+   "why": "Claude is eligible (did not build or review it); without the artifacts any verification would be evidence-only and must be labeled so",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "B-8",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "kind": "HANDS",
+   "what": "FD-004 Order 1: after the secrets check of empire-handoffs, adjust the Muse fine-grained token to Contents: Read-only on brandonduda8/empire-handoffs only, through GitHub's own settings",
+   "why": "credential changes are yours; no write, no broader scope, no disclosure",
+   "since": "2026-11-01",
+   "source": "https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror",
+   "status": "open"
+  },
+  {
+   "id": "B-9",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "kind": "HANDS",
+   "what": "Install the AURUM-signed Aurum 2.2 (Zane delivered it 2026-11-02) next to the Aurum 2.2 Preview, move the library (transfer file or Takeout re-import), and give your verdict. Keep the Preview until 2.2 is accepted",
+   "why": "2.2 is DELIVERED; DONE is your verdict on the phone",
+   "since": "2026-11-03",
+   "source": "https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.2/docs/AURUM-2.2-HANDOFF.md",
+   "status": "open"
+  },
+  {
+   "id": "B-10",
+   "debtor": "brandon",
+   "creditor": "operation",
+   "kind": "DECISION",
+   "what": "Rule the build sequence: 1) Aurum 2.3 playlists + sound, 2) Shipyard read-only board PWA, 3) StarNet NOW slice, 4) Shipyard mission demo, then the music MCP tools (Claude's proposal; Claude starts 1 until you rule)",
+   "why": "one builder, four app orders (WO-005, StarNet build order, ChatGPT 003/004/2.3)",
+   "since": "2026-11-03",
+   "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
+   "status": "done",
+   "done_evidence": "WO-GENESIS-HARK-002 (founder-issued 2026-11-05, Drive 01 Plans) calls Aurum 2.3 -> Shipyard read-only board -> StarNet NOW slice 'the approved sequence'"
+  },
+  {
+   "id": "C-9",
+   "debtor": "claude",
+   "creditor": "brandon",
+   "what": "Aurum 2.3 on genesis-player claude/aurum-2.3: persistent local playlists (offline, no AI, export/import) and measured sound improvements (EQ/presets, opt-in loudness); CI battery; unsigned release to Vault 04 for Zane",
+   "since": "2026-11-03",
+   "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
+   "status": "done",
+   "done_evidence": "BUILT + emulator-TESTED: genesis-player claude/aurum-2.3 @07ce72c, CI run 41763413035 (battery 32/32, instrumented 9/9); unsigned aurum-2.3-release-unsigned.apk sha256 497200dd7ec1c97f6934c9c2ebb24eb22a0a0d18a3b68b7f6a06388290fd5cc0; handoff in Vault 04 (2026-11-04); review home: draft PR genesis-player#21 (no merge), opened 2026-11-05 per WO-HARK-002"
+  },
+  {
+   "id": "C-10",
+   "debtor": "claude",
+   "creditor": "brandon",
+   "what": "Shipyard app MVP: phone-first read-only board PWA on genesis-hq claude/shipyard-app (extends shipyard/ from PR #20/#21), showing real Aurum status + source receipts; UNKNOWN where unproven [first checkpoint BUILT 2026-11-04: genesis-hq claude/shipyard-app @dfb1e47, shipyard/board/, 10 tests; next: one real mission board->PR->test->Zane]",
+   "since": "2026-11-03",
+   "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
+   "status": "open"
+  },
+  {
+   "id": "C-11",
+   "debtor": "claude",
+   "creditor": "brandon",
+   "what": "StarNet App NOW slice (Android) on Genesis-core claude/starnet-app from claude/origami-fold-one: Make/Meet/Manage shell, receipt-feed mirror with LIVE/STALE/UNKNOWN, Nighthawk chat v1 surface; no stake mechanics [core BUILT 2026-11-04: Genesis-core claude/starnet-app @cf07b52, starnet-app/core, 8 JVM tests; Android shell + CI wait on B-11]",
+   "since": "2026-11-03",
+   "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
+   "status": "open"
+  },
+  {
+   "id": "Z-16",
+   "debtor": "zane",
+   "creditor": "claude",
+   "what": "For Shipyard and StarNet: name an approved private (loopback/authenticated mesh) host to serve the PWA, and give a read-only receipt-feed export or endpoint plus a way to mint canonical mission IDs through Anchor/Router",
+   "why": "Claude's container cannot reach the Genesis hosts; without these the board shows UNKNOWN/read-only",
+   "since": "2026-11-03",
+   "source": "https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view",
+   "status": "open"
+  },
+  {
+   "id": "Z-17",
+   "debtor": "zane",
+   "creditor": "brandon",
+   "what": "Aurum 2.3 (playlists + sound): fetch CI artifact aurum-release (run 41763413035), check the APK sha256 497200dd…5cc0, sign with the AURUM key (signer 2A:44…CD:5B), run the real-phone checklist in AURUM-2.3-HANDOFF.md, deliver to Brandon [SUPERSEDED 2026-11-06: Brandon rejected 2.3 (music stops on leaving the app); sign 2.4 instead, Z-18]",
+   "why": "Claude's container cannot download CI artifacts; signing is Zane's",
+   "since": "2026-11-04",
+   "source": "https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.3/docs/AURUM-2.3-HANDOFF.md",
+   "status": "open"
+  },
+  {
+   "id": "B-11",
+   "debtor": "brandon",
+   "creditor": "claude",
+   "kind": "DECISION",
+   "what": "Confirm GitHub Actions cannot cost money (Settings > Billing: Actions spending limit $0, or no payment method), or say where the StarNet Android app should build instead. Genesis-core is private, so its Actions minutes are metered",
+   "why": "$0 fence: Android emulator CI is ~35 min per run; Claude can't see billing settings from its container",
+   "since": "2026-11-04",
+   "source": "https://github.com/brandonduda8/Genesis-core/tree/claude/starnet-app/starnet-app",
+   "status": "open"
+  },
+  {
+   "id": "C-12",
+   "debtor": "claude",
+   "creditor": "brandon",
+   "what": "WO-AURUM-GOLDEN-MAX: music survives swipe-away + screen-off on the Moto G; lawful routing/coverage/YouTube-only labels (charge 2); sound suite (3); AURUM brand (4) [charge 1 TESTED on emulator 2026-11-06: genesis-player claude/aurum-2.4-golden @b7c1e49, run 42312748373, battery 34/34, instrumented 9/9; draft PR #22; charge 2 design sent to Zane]",
+   "why": "Founder rejected 2.3: background play only covered the Media3 path, not the YouTube WebView",
+   "since": "2026-11-06",
+   "source": "https://drive.google.com/file/d/1MxD-l1hVf0kSdiouASBnDjtZTyfHwo5X/view",
+   "status": "open"
+  },
+  {
+   "id": "Z-18",
+   "debtor": "zane",
+   "creditor": "brandon",
+   "what": "Aurum 2.4: fetch CI artifact aurum-release 13549868473 (run 42312748373), check APK sha256 5e8b1fe5…24f2, sign with the AURUM key (2A:44…CD:5B), deliver to Brandon for the swipe-away + screen-off test",
+   "why": "Claude's container cannot download CI artifacts; signing is Zane's",
+   "since": "2026-11-06",
+   "source": "https://drive.google.com/file/d/1q1LFawTeD1t-OSdx58BNsGM2misSZYxu/view",
+   "status": "open"
+  }
+ ]
+}
