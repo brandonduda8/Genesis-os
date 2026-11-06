@@ -9,3 +9,21 @@ __pycache__/
 .idea/
 
 genesis/memory.json
+
+# Build outputs / binaries — never commit
+*.apk
+*.aab
+watch-pulse/builds/
+build/
+
+# Local personal data (privacy) — keep on the machine, never commit
+job-storm-ace/profile.local.json
+job-storm-ace/registry.json
+job-storm-ace/kb/
+training/datasets/*/pii_banned.local.txt
+training/datasets/ace-v1/corpus/
+training/datasets/ace-v1/heldout/
+*.local.json
+
+# Test scratch keys
+ghost-server/tests/_lab_*.key

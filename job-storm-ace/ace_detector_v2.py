@@ -1,22 +1,27 @@
 #!/usr/bin/env python3
 """
-ACE DETECTOR v2 — the second-pass gate (built 2026-10-31, Brandon's upgrade order).
+ACE DETECTOR v2 — the second-pass gate (built 2026-10-31).
 
 Why this exists: detector v1's credential patterns were defeated by curly
 apostrophes and varied phrasing, and a degree-credentialed clinical role
-(Kent County "Access Center Clinician or BSW") floated to raw score 90 in
-the Wave-3 harvest. v2 normalizes text (curly quotes, case, punctuation)
-and scans role/employer/step text for three hard-rule classes:
+floated to a high raw score in an earlier harvest. v2 normalizes text
+(curly quotes, case, punctuation) and scans role/employer/step text for
+three hard-rule classes:
 
   CREDENTIAL  degree / license / clinical-credential requirements beyond
-              Brandon's record (GED 2018; forklift/pallet-jack/ServSafe
-              are ON the record and never flagged)
-  DRIVING     driver's-license / driving-role requirements — Brandon has
-              no license and no car (his ruling, 2026-10-31); HARD REJECT
-  RESIDENCY   remote roles restricted to states that exclude Illinois —
-              full detection needs the posting body (verify stage); the
-              title-level scan catches explicit "in <state>" phrasing only,
-              and says so.
+              the candidate's record of credentials (equipment certs such
+              as forklift / pallet jack are never flagged)
+  DRIVING     driver's-license / driving-role requirements (HARD REJECT
+              under the candidate's rules)
+  RESIDENCY   remote roles restricted to states that exclude the
+              candidate's home state; full detection needs the posting
+              body (verify stage); the title-level scan catches explicit
+              "in <state>" phrasing only, and says so.
+
+The candidate's personal facts (education, credentials, home state,
+transport) are NOT kept in this repo. They live in the gitignored local
+profile `job-storm-ace/profile.local.json` (see profile.example.json);
+this detector's rules do not need them to run.
 
 DRY-RUN BY DEFAULT: prints candidate IDs + matched patterns + recommended
 action. It mutates NOTHING. Flips happen by explicit ID under the mutation

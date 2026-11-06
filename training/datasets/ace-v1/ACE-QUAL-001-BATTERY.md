@@ -53,9 +53,9 @@ per-case key authored with the battery, not by either contestant).
 ### Part B — Fresh rulebook traps (8 cases, authored at eval time)
 New candidate sketches written by the battery author from the
 rulebook AS WRITTEN, none present in any corpus: e.g. a commission-only
-role dressed as customer care; an Illinois-excluded "remote" posting;
-a mid-funnel equipment deposit; a license-required role (Brandon's
-hard reject); a per-task microtask in salary clothing; a band
+role dressed as customer care; a "remote" posting that excludes the
+candidate's home state; a mid-funnel equipment deposit; a
+license-required role (a hard reject); a per-task microtask in salary clothing; a band
 straddling the floor (PASS, flagged — the rulebook's own edge); a
 strong-fit local role inside the floor exception; a posting whose
 employer cannot be found. Each carries a keyed verdict + reason class.
