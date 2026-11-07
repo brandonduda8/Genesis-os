@@ -1,0 +1,190 @@
+{
+  "_doc": "Suites the executive baseline runs. cwd is relative to --root (the directory holding the repo checkouts: ~/workspace on zane-box). {py} = --py (a python with pytest). known_env_failures = pytest node ids documented as environment-only; PARTIAL only if every failure matches one BY NAME. pass_regex = a suite's own success marker for runners without a parseable count.",
+  "root": "~/workspace",
+  "suites": [
+    {
+      "name": "genesis-core-full",
+      "repo": "Genesis-core",
+      "cwd": "genesis-core",
+      "argv": [
+        "{py}",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "timeout": 1200,
+      "known_env_failures": [
+        "tests/kernel/adapters/test_git_fetch_mcp.py::test_fetch_mcp_markdown",
+        "tests/kernel/engine/test_mesh_live_delegation.py::test_live_http_delegation_executes_real_tools"
+      ]
+    },
+    {
+      "name": "ghost-server-v2",
+      "repo": "Genesis-os",
+      "cwd": "genesis-os/ghost-server",
+      "argv": [
+        "python3",
+        "-B",
+        "-W",
+        "ignore",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-t",
+        "."
+      ],
+      "requires": [
+        "tests"
+      ]
+    },
+    {
+      "name": "training-kernels",
+      "repo": "Genesis-os",
+      "cwd": "genesis-os",
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "training/kernels/tests",
+        "-t",
+        "training/kernels"
+      ],
+      "requires": [
+        "training/kernels/tests"
+      ]
+    },
+    {
+      "name": "dataset-builders",
+      "repo": "Genesis-os",
+      "cwd": "genesis-os",
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "training/datasets/tests",
+        "-t",
+        "training/datasets"
+      ],
+      "requires": [
+        "training/datasets/tests"
+      ]
+    },
+    {
+      "name": "exec-board",
+      "repo": "Genesis-os",
+      "cwd": "genesis-os",
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "exec/tests",
+        "-t",
+        "exec"
+      ],
+      "requires": [
+        "exec/tests"
+      ]
+    },
+    {
+      "name": "watch-pulse-soundcloud",
+      "repo": "Genesis-os",
+      "cwd": "genesis-os",
+      "argv": [
+        "node",
+        "watch-pulse/tests/pulse_soundcloud.test.js"
+      ],
+      "requires": [
+        "watch-pulse/tests/pulse_soundcloud.test.js"
+      ],
+      "pass_regex": "pulse_soundcloud: \\d+ checks OK"
+    },
+    {
+      "name": "aurum-tools",
+      "repo": "genesis-player",
+      "cwd": "genesis-player",
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_*.py"
+      ],
+      "requires": [
+        "tools/test_taste_import.py"
+      ]
+    },
+    {
+      "name": "crypto-scanner",
+      "repo": "Genesis-core",
+      "cwd": "genesis-core",
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "research/crypto_scanner/tests",
+        "-t",
+        "research/crypto_scanner"
+      ],
+      "requires": [
+        "research/crypto_scanner/tests"
+      ]
+    },
+    {
+      "name": "microcap-lab",
+      "repo": "Genesis-core",
+      "cwd": "genesis-core",
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "research/microcap_lab/tests",
+        "-t",
+        "research/microcap_lab"
+      ],
+      "requires": [
+        "research/microcap_lab/tests"
+      ]
+    },
+    {
+      "name": "agent-x-cody",
+      "repo": "Agent-x",
+      "cwd": "agent-x/cody-core",
+      "argv": [
+        "{py}",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests"
+      ],
+      "requires": [
+        "tests"
+      ]
+    }
+  ]
+}
