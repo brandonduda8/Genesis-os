@@ -148,6 +148,11 @@ header{position:sticky;top:0;z-index:20;background:rgba(10,10,12,.92);
   font-size:15px;font-weight:800;cursor:pointer}
 #amsend:disabled{opacity:.5}
 .typing{color:var(--dim);font-style:italic;font-size:13px}
+/* Q-POL-001 (ruling A): SoundCloud plays only in SoundCloud's own, visible, branded widget */
+#scwrap{position:fixed;left:0;right:0;z-index:29;display:none;background:#000;border-top:1px solid var(--line)}
+#scwrap .in{max-width:760px;margin:0 auto}
+#scwrap iframe{width:100%;height:116px;border:0;display:block}
+#scnote{font-size:11px;color:var(--dim);padding:4px 12px 6px}
 </style>
 </head>
 <body>
@@ -203,6 +208,7 @@ header{position:sticky;top:0;z-index:20;background:rgba(10,10,12,.92);
   </div>
   <div id="fsupnext"><div id="fsuphead">UP NEXT</div><div id="fsuplist"></div></div>
 </div>
+<div id="scwrap" aria-label="SoundCloud player"><div class="in"><div id="scnote">Streaming through SoundCloud's official player · stream-only, not saved offline</div></div></div>
 <audio id="audio" preload="none"></audio>
 <script>
 "use strict";
@@ -379,6 +385,9 @@ function playCurrent(){
   if(!keepSeekOnce) pendingSeek=0; // P1-1: resume seeks are opt-in per track
   keepSeekOnce=false;
   const g=++playGen; failPending=0;
+  if(!t.stream_url&&t.soundcloud_url){ audio.pause(); audio.removeAttribute("src"); scPlay(t,g); }
+  else {
+  scStop();
   if(!t.stream_url){ failTrack(g, "No stream saved for this one yet"); return; }
   setStatus('<span class="spin"></span>Loading…');
   audio.src=t.stream_url;
@@ -387,6 +396,7 @@ function playCurrent(){
   if(pendingSeek>0){ // P3: resume position
     resumeTarget=pendingSeek; pendingSeek=0;
     audio.addEventListener("loadedmetadata", applyResumeSeek);
+  }
   }
   $("art").src=t.artwork_url||PLACE; $("art").onerror=function(){this.src=PLACE}; $("art").alt=t.title+" — cover art";
   $("ntitle").textContent=t.title; $("nartist").textContent=t.artist;
@@ -420,7 +430,8 @@ function next(){ if(!queue.length) return;
   } else qi=(qi+1)%queue.length;
   saveResume(); playCurrent(); }
 function prev(){ if(!queue.length) return;
-  if(audio.currentTime>3){ audio.currentTime=0; return; }
+  if(scActive()){ if(scPos>3000){ scWidget.seekTo(0); return; } }
+  else if(audio.currentTime>3){ audio.currentTime=0; return; }
   if(shuffle&&queue.length>1){
     if(shufflePos>0){ shufflePos--; qi=shuffleOrder[shufflePos]; } // walk shuffle history
     /* else: at the start of the shuffle pass — replay the current track */
@@ -429,6 +440,7 @@ function prev(){ if(!queue.length) return;
 function toggle(){
   if(!queue.length){ const l=currentList();
     if(l.length) playFrom(l,0); else setStatus("Nothing to play yet — the library is empty."); return; }
+  if(scActive()){ scToggle(); return; }
   if(audio.paused){
     if(!audio.currentSrc){ playFrom(queue,qi<0?0:qi); return; } // P0-1: a restored resume never set audio.src — playFrom does
     audio.play().then(()=>{ setPlay(false); syncFS(); }).catch(()=>setStatus("Couldn't start playback."));
@@ -554,6 +566,58 @@ function sleepFire(){
   };
   step();
 }
+/* ---------- Q-POL-001 ruling A: SoundCloud through its official widget ONLY ----------
+   No client_id, no api-v2 calls, no signed stream URLs, nothing stored: the widget (w.soundcloud.com) streams and
+   stays visible with SoundCloud's branding. It needs a connection; SoundCloud tracks are never saved offline. */
+let scWidget=null, scReady=null, scCur=null, scPos=0, scDur=0;
+const SC_OPTS={auto_play:true, visual:false, show_comments:false, hide_related:true, show_teaser:false, color:"#e5322d"};
+function scActive(){ return !!(scCur&&queue[qi]&&queue[qi].id===scCur.id); }
+function scApi(){
+  if(window.SC&&window.SC.Widget) return Promise.resolve();
+  if(scReady) return scReady;
+  scReady=new Promise((res,rej)=>{ const s=document.createElement("script");
+    s.src="https://w.soundcloud.com/player/api.js"; s.onload=res; s.onerror=()=>{ scReady=null; rej(new Error("sc api")); };
+    document.head.appendChild(s); });
+  return scReady;
+}
+function scSrc(url){
+  return "https://w.soundcloud.com/player/?url="+encodeURIComponent(url)+"&"+
+    Object.entries(SC_OPTS).map(([k,v])=>k+"="+encodeURIComponent(v)).join("&");
+}
+function scShow(on){ const w=$("scwrap"); w.style.display=on?"block":"none";
+  if(on) w.style.bottom=($("bar").offsetHeight||0)+"px"; }
+function scPlay(t,g){
+  scCur=t; scPos=0; scDur=0;
+  if(navigator.onLine===false){ failTrack(g,"SoundCloud needs a connection (stream-only, never offline)"); return; }
+  setStatus('<span class="spin"></span>Loading from SoundCloud…');
+  scShow(true); armStall(g);
+  scApi().then(()=>{
+    if(g!==playGen) return;
+    let f=$("scwrap").querySelector("iframe");
+    if(!f){ f=document.createElement("iframe"); f.allow="autoplay; encrypted-media"; f.title="SoundCloud player";
+      f.src=scSrc(t.soundcloud_url); $("scwrap").querySelector(".in").insertBefore(f,$("scnote"));
+      scWidget=window.SC.Widget(f); scBind(); }
+    else scWidget.load(t.soundcloud_url, SC_OPTS);
+  }).catch(()=>failTrack(g,"SoundCloud player unavailable"));
+}
+function scBind(){
+  const E=window.SC.Widget.Events;
+  scWidget.bind(E.PLAY,()=>{ if(!scActive()) return; clearStall(); setStatus(""); skipStreak=0; setPlay(false); syncFS(); });
+  scWidget.bind(E.PAUSE,()=>{ if(scActive()){ setPlay(true); syncFS(); } });
+  scWidget.bind(E.PLAY_PROGRESS,e=>{ if(!scActive()) return; scPos=e.currentPosition||0;
+    if(e.relativePosition>0) scDur=scPos/e.relativePosition; scSyncSeek(); });
+  scWidget.bind(E.FINISH,()=>{ if(scActive()){ endCurTrack("ended"); next(); } });
+  scWidget.bind(E.ERROR,()=>{ if(scActive()) failTrack(playGen,"SoundCloud couldn't play this one"); });
+}
+function scStop(){ if(scWidget){ try{ scWidget.pause(); }catch(e){} } scCur=null; scShow(false); }
+function scToggle(){ if(!scWidget){ playFrom(queue,qi<0?0:qi); return; }
+  scWidget.isPaused(p=>{ if(p) scWidget.play(); else { scWidget.pause(); cancelSleep(); saveResume(); } }); }
+function scSyncSeek(){
+  const v=scDur?Math.round(scPos/scDur*1000):0;
+  $("seek").value=v; $("fsseek").value=v;
+  $("cur").textContent=fmt(scPos/1000); $("dur").textContent=fmt(scDur/1000);
+  $("fscur").textContent=fmt(scPos/1000); $("fsdur").textContent=fmt(scDur/1000);
+}
 /* ---------- wiring ---------- */
 $("play").onclick=toggle; $("next").onclick=next; $("prev").onclick=prev;
 $("fsplay").onclick=toggle; $("fsnext").onclick=next; $("fsprev").onclick=prev;
@@ -596,8 +660,10 @@ audio.ontimeupdate=()=>{
   if(now-lastSave>15000){ lastSave=now; saveResume(); }
 };
 audio.onloadedmetadata=()=>{ $("dur").textContent=fmt(audio.duration); $("fsdur").textContent=fmt(audio.duration); };
-$("seek").oninput=e=>{ if(audio.duration) audio.currentTime=e.target.value/1000*audio.duration; };
-$("fsseek").oninput=e=>{ if(audio.duration) audio.currentTime=e.target.value/1000*audio.duration; };
+$("seek").oninput=e=>{ if(scActive()){ if(scDur) scWidget.seekTo(e.target.value/1000*scDur); }
+  else if(audio.duration) audio.currentTime=e.target.value/1000*audio.duration; };
+$("fsseek").oninput=e=>{ if(scActive()){ if(scDur) scWidget.seekTo(e.target.value/1000*scDur); }
+  else if(audio.duration) audio.currentTime=e.target.value/1000*audio.duration; };
 $("search").oninput=e=>{ filter=e.target.value.trim(); render(); };
 document.addEventListener("pagehide", saveResume);
 document.addEventListener("visibilitychange", ()=>{ if(document.hidden) saveResume(); });
