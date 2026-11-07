@@ -452,7 +452,7 @@
    "id": "C-12",
    "debtor": "claude",
    "creditor": "brandon",
-   "what": "WO-AURUM-GOLDEN-MAX: music survives swipe-away + screen-off on the Moto G; lawful routing/coverage/YouTube-only labels (charge 2); sound suite (3); AURUM brand (4) [charge 1 TESTED on emulator 2026-11-06: genesis-player claude/aurum-2.4-golden @b7c1e49, run 42312748373, battery 34/34, instrumented 9/9; draft PR #22; charge 2 design sent to Zane]",
+   "what": "WO-AURUM-GOLDEN-MAX: music survives swipe-away + screen-off on the Moto G; lawful routing/coverage/YouTube-only labels (charge 2); sound suite (3); AURUM brand (4) [charges 1+2 TESTED on emulator 2026-11-07: genesis-player claude/aurum-2.4-golden @2da39d1 (2.4.1, vc 9), run 42368947977, battery 39/39, instrumented 9/9, PlayRouterTest 9/9; draft PR #22; next: charge 3 sound suite]",
    "why": "Founder rejected 2.3: background play only covered the Media3 path, not the YouTube WebView",
    "since": "2026-11-06",
    "source": "https://drive.google.com/file/d/1MxD-l1hVf0kSdiouASBnDjtZTyfHwo5X/view",
@@ -462,10 +462,10 @@
    "id": "Z-18",
    "debtor": "zane",
    "creditor": "brandon",
-   "what": "Aurum 2.4: fetch CI artifact aurum-release 13549868473 (run 42312748373), check APK sha256 5e8b1fe5…24f2, sign with the AURUM key (2A:44…CD:5B), deliver to Brandon for the swipe-away + screen-off test",
+   "what": "Aurum 2.4.1 (golden charges 1+2; supersedes 2.4): fetch CI artifact aurum-release 13572828110 (run 42368947977), check APK sha256 21560e9b…85b1, sign with the AURUM key (2A:44…CD:5B), deliver to Brandon with the Moto G checklist in docs/AURUM-2.4-HANDOFF.md",
    "why": "Claude's container cannot download CI artifacts; signing is Zane's",
    "since": "2026-11-06",
-   "source": "https://drive.google.com/file/d/1q1LFawTeD1t-OSdx58BNsGM2misSZYxu/view",
+   "source": "https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.4-golden/docs/AURUM-2.4-HANDOFF.md",
    "status": "open"
   }
  ]

@@ -1,7 +1,7 @@
 # OPERATOR'S BRIEF
 
-<!-- mirror-digest: f109bd41beef9b7d9be487f4da9c079ddf43b0b625e20dcc1e98988ef295f15d -->
-_Built 2026-11-06 23:56 UTC from mirror digest `f109bd41beef9b7d` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
+<!-- mirror-digest: 71f3dd45cff1d446322aa81eea19b946179a403e14e274d4bdd0789effb60d84 -->
+_Built 2026-11-07 11:56 UTC from mirror digest `71f3dd45cff1d446` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
 
 ## 1. What is being built (in force)
 
@@ -58,7 +58,7 @@ _Built 2026-11-06 23:56 UTC from mirror digest `f109bd41beef9b7d` over 8 data fi
 | Z-15 | claude | FD-004 Order 3: publish the legacy GitHub helper source (path + sha256), the exact failing import traceback, and the accepted handoff-bus engineering spec to a repo Claude can read, or share the folder via Remote Control | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
 | Z-16 | claude | For Shipyard and StarNet: name an approved private (loopback/authenticated mesh) host to serve the PWA, and give a read-only receipt-feed export or endpoint plus a way to mint canonical mission IDs through Anchor/Router | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
 | Z-17 | brandon | Aurum 2.3 (playlists + sound): fetch CI artifact aurum-release (run 41763413035), check the APK sha256 497200dd…5cc0, sign with the AURUM key (signer 2A:44…CD:5B), run the real-phone checklist in AURUM-2.3-HANDOFF.md, deliver to Brandon [SUPERSEDED 2026-11-06: Brandon rejected 2.3 (music stops on leaving the app); sign 2.4 instead, Z-18] | 2026-11-04 |  | [link](https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.3/docs/AURUM-2.3-HANDOFF.md) |
-| Z-18 | brandon | Aurum 2.4: fetch CI artifact aurum-release 13549868473 (run 42312748373), check APK sha256 5e8b1fe5…24f2, sign with the AURUM key (2A:44…CD:5B), deliver to Brandon for the swipe-away + screen-off test | 2026-11-06 |  | [link](https://drive.google.com/file/d/1q1LFawTeD1t-OSdx58BNsGM2misSZYxu/view) |
+| Z-18 | brandon | Aurum 2.4.1 (golden charges 1+2; supersedes 2.4): fetch CI artifact aurum-release 13572828110 (run 42368947977), check APK sha256 21560e9b…85b1, sign with the AURUM key (2A:44…CD:5B), deliver to Brandon with the Moto G checklist in docs/AURUM-2.4-HANDOFF.md | 2026-11-06 |  | [link](https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.4-golden/docs/AURUM-2.4-HANDOFF.md) |
 
 ### Astra owes (6)
 
@@ -85,7 +85,7 @@ _Built 2026-11-06 23:56 UTC from mirror digest `f109bd41beef9b7d` over 8 data fi
 | C-8 | operation | WS3 Forge fork: sizing note first, then stake removal end to end with the Article V refusal battery; stop and file a sprawl report if the estimate is exceeded | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md) |
 | C-10 | brandon | Shipyard app MVP: phone-first read-only board PWA on genesis-hq claude/shipyard-app (extends shipyard/ from PR #20/#21), showing real Aurum status + source receipts; UNKNOWN where unproven [first checkpoint BUILT 2026-11-04: genesis-hq claude/shipyard-app @dfb1e47, shipyard/board/, 10 tests; next: one real mission board->PR->test->Zane] | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
 | C-11 | brandon | StarNet App NOW slice (Android) on Genesis-core claude/starnet-app from claude/origami-fold-one: Make/Meet/Manage shell, receipt-feed mirror with LIVE/STALE/UNKNOWN, Nighthawk chat v1 surface; no stake mechanics [core BUILT 2026-11-04: Genesis-core claude/starnet-app @cf07b52, starnet-app/core, 8 JVM tests; Android shell + CI wait on B-11] | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
-| C-12 | brandon | WO-AURUM-GOLDEN-MAX: music survives swipe-away + screen-off on the Moto G; lawful routing/coverage/YouTube-only labels (charge 2); sound suite (3); AURUM brand (4) [charge 1 TESTED on emulator 2026-11-06: genesis-player claude/aurum-2.4-golden @b7c1e49, run 42312748373, battery 34/34, instrumented 9/9; draft PR #22; charge 2 design sent to Zane] | 2026-11-06 |  | [link](https://drive.google.com/file/d/1MxD-l1hVf0kSdiouASBnDjtZTyfHwo5X/view) |
+| C-12 | brandon | WO-AURUM-GOLDEN-MAX: music survives swipe-away + screen-off on the Moto G; lawful routing/coverage/YouTube-only labels (charge 2); sound suite (3); AURUM brand (4) [charges 1+2 TESTED on emulator 2026-11-07: genesis-player claude/aurum-2.4-golden @2da39d1 (2.4.1, vc 9), run 42368947977, battery 39/39, instrumented 9/9, PlayRouterTest 9/9; draft PR #22; next: charge 3 sound suite] | 2026-11-06 |  | [link](https://drive.google.com/file/d/1MxD-l1hVf0kSdiouASBnDjtZTyfHwo5X/view) |
 
 ## 3. Expiring power
 
@@ -109,19 +109,19 @@ _Built 2026-11-06 23:56 UTC from mirror digest `f109bd41beef9b7d` over 8 data fi
 | s1 | designated primary power server | **none** | unknown | github, package, docker, starnet_hub (UNVERIFIED) |
 | penguin | Brandon's home network | **none** | unknown | docker, home_network (UNVERIFIED) |
 | phone | Brandon's pocket | **none** | unknown | home_network, device_proof (UNVERIFIED) |
-| claude-cloud | Claude Code cloud session | 2026-11-01T00:01:41Z (8634 min ago, STALE) | github, package | github, package (VERIFIED) |
+| claude-cloud | Claude Code cloud session | 2026-11-01T00:01:41Z (9355 min ago, STALE) | github, package | github, package (VERIFIED) |
 | astra | planning / review seat | **none** | unknown | review (UNVERIFIED) |
 | kaggle-colab | GPU/TPU lanes | **none** | unknown | gpu, tpu (UNVERIFIED) |
 | brandon | the only Level C vantage | **none** | unknown | level_c (VERIFIED) |
 
 | Work class | Routes to now | Substitutions |
 |---|---|---|
-| repo_work | **HOLD** | claude-cloud: probe stale (8634 min old); s1: no probe on record; zane-box: no probe on record |
-| package_build | **HOLD** | claude-cloud: probe stale (8634 min old); s1: no probe on record; penguin: no probe on record |
+| repo_work | **HOLD** | claude-cloud: probe stale (9355 min old); s1: no probe on record; zane-box: no probe on record |
+| package_build | **HOLD** | claude-cloud: probe stale (9355 min old); s1: no probe on record; penguin: no probe on record |
 | container_work | **HOLD** | s1: no probe on record; penguin: no probe on record |
 | model_call | **HOLD** | s1: no probe on record; penguin: no probe on record; zane-box: no probe on record |
 | home_network_proof | **HOLD** | penguin: no probe on record; phone: no probe on record |
-| verification | **HOLD** | zane-box: no probe on record; s1: no probe on record; claude-cloud: probe stale (8634 min old) |
+| verification | **HOLD** | zane-box: no probe on record; s1: no probe on record; claude-cloud: probe stale (9355 min old) |
 | gpu_training | **HOLD** | kaggle-colab: no probe on record |
 | level_c | **brandon** | - |
 
