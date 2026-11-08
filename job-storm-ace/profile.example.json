@@ -1,0 +1,9 @@
+{
+  "_comment": "Copy to profile.local.json (gitignored) and fill in locally. Never commit real values.",
+  "home_state": "XX",
+  "education_highest": "<highest completed education>",
+  "credentials_held": ["<equipment or food-safety certs on record>"],
+  "drivers_license": false,
+  "pay_floor_remote": 0,
+  "pay_floor_local": 0
+}

@@ -8,6 +8,13 @@ output and from re-reading the written files, not from memory).
 **Location:** `genesis-os/training/datasets/ace-v1/corpus/` (training)
 + `heldout/` (frozen eval core — never training data).
 
+> **Privacy (2026-11-05):** `corpus/` and `heldout/` are built from the
+> candidate's personal job-search records, so they are **local-only and
+> gitignored** — they are no longer committed. Keep them on the training
+> box; the freeze hash below still guards the local held-out file.
+> The builder's personal PII strings live in the gitignored
+> `pii_banned.local.txt` (see `pii_banned.example.txt`).
+
 ## Format (mirrors the Cody v1 pattern)
 
 One JSONL record per line. Every record carries a `source` field naming
@@ -71,7 +78,7 @@ By type: verdict 65 · qa 98 · doc 12. Per-type corpus files total
 
 ## Provenance & safety rules applied
 
-- **PII/credential rule:** records containing Brandon's email or phone
+- **PII/credential rule:** records containing the candidate's email or phone
   strings, or credential shapes (`hsurr:`, key prefixes, private-key
   blocks), were dropped by the builder's scan — **10 records dropped**
   (5 registry verdicts whose recorded evidence quotes his email, 2 KB
@@ -94,12 +101,12 @@ refresh. Shadow-only, like the LoRA seat: it advises, never submits.
 
 - **Features** (all from the recorded candidate schema, no new data):
   lane one-hot (remote/local); pay_min, pay_max normalized by the
-  lane's floor (remote $15 / local $16); pay_period one-hot;
+  lane's configured pay floor (kept in the local profile, not the repo); pay_period one-hot;
   `employer_domain_verified`, `employer_verified`, `base_pay_stated`
   booleans; `asks_upfront_fee`, `equipment_purchase_required`,
   `requires_degree` booleans; work_model one-hot (w2_hourly / contract
   / 1099_platform / per_task / microtask); `posted_days_ago` bucketed;
-  `distance_mi` (local lane, null→−1); excluded-state flag (Illinois in
+  `distance_mi` (local lane, null→−1); excluded-state flag (the candidate's home state in
   `excluded_states` or absent from `allowed_states`); required-
   credential match count vs held credentials.
 - **Labels:** the recorded registry state, collapsed: PASS-pool =
@@ -115,7 +122,7 @@ refresh. Shadow-only, like the LoRA seat: it advises, never submits.
   frozen set; the classifier's PASS bar mirrors the battery's:
   ≥90% verdict agreement with recorded outcomes, and **zero**
   PASS-pool predictions on candidates whose recorded reason names a
-  hard rule (fee trap, Illinois exclusion, license requirement).
+  hard rule (fee trap, home-state exclusion, license requirement).
 
 ## Known gaps (honest — read before training on v1)
 
@@ -128,7 +135,7 @@ refresh. Shadow-only, like the LoRA seat: it advises, never submits.
    answers table = 15 records). Preference learning beyond those
    rulings would be invention; v1 does not attempt it.
 3. **Fact conflicts ride along, flagged.** JOB_STORM_ANSWERS records
-   three unresolved conflicts (certifications, start date, DriveLine
+   three unresolved conflicts (certifications, start date, current-job
    title "PROPOSED, unconfirmed"). The records carry the source's own
    conflict flags verbatim — the corpus teaches the flags, not a
    resolution. Training must not be read as resolving them.

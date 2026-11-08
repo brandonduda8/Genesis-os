@@ -23,6 +23,8 @@ TEXT_FIELDS = ("instruction", "response", "text")
 KNOWN_V1 = {("ghost-v1", "GHOST-HELDOUT-004"), ("ghost-v1", "GHOST-C-019")}
 FROZEN = {"ghost-v1/heldout/ghost-heldout-v1.jsonl": "74d68f5329388dbc1f9162f6052bb4f4cb3ecd04303bfab1823d428c1a518f2a",
           "ace-v1/heldout/ace-heldout-v1.jsonl": "23452d59cdcbf897a54bbdb3fbea8d89a449efe6c7d6f543b906fe64e91cd632"}
+# Built from personal job-search records: local-only and gitignored (privacy, 2026-11-05).
+LOCAL_ONLY = {"ace-v1/heldout/ace-heldout-v1.jsonl"}
 
 
 class Builders(unittest.TestCase):
@@ -60,8 +62,40 @@ class Builders(unittest.TestCase):
 
     def test_frozen_heldouts_still_match_their_manifest_hashes(self):
         for rel, sha in FROZEN.items():
-            got = hashlib.sha256(open(os.path.join(DATASETS, rel), "rb").read()).hexdigest()
+            path = os.path.join(DATASETS, rel)
+            if rel in LOCAL_ONLY and not os.path.exists(path):
+                continue  # gitignored personal data: checked only where the local copy exists
+            got = hashlib.sha256(open(path, "rb").read()).hexdigest()
             self.assertEqual(got, sha, rel)
+
+    def test_local_only_personal_datasets_are_not_tracked_and_are_gitignored(self):
+        repo = os.path.dirname(os.path.dirname(DATASETS))
+        if not os.path.isdir(os.path.join(repo, ".git")):
+            self.skipTest("not a git checkout")
+        import subprocess
+        tracked = subprocess.run(["git", "-C", repo, "ls-files", "training/datasets/ace-v1/corpus",
+                                  "training/datasets/ace-v1/heldout"], capture_output=True, text=True).stdout
+        self.assertEqual(tracked.strip(), "", "personal ACE corpus/heldout must stay out of git")
+        for rel in LOCAL_ONLY:
+            ig = subprocess.run(["git", "-C", repo, "check-ignore", "-q", "--no-index",
+                                 os.path.join("training/datasets", rel)])
+            self.assertEqual(ig.returncode, 0, f"{rel} must be gitignored")
+
+    def test_ace_builder_keeps_no_personal_contact_strings(self):
+        src = open(os.path.join(DATASETS, "ace-v1", "build_dataset.py")).read()
+        self.assertNotRegex(src, r"\b\d{3}-\d{3}-\d{4}\b")
+        self.assertNotRegex(src, r"[A-Za-z0-9._%+-]+@(gmail|yahoo|outlook|hotmail)\.com")
+
+    def test_ace_builder_refuses_to_run_without_a_pii_list(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("ace_build", os.path.join(DATASETS, "ace-v1", "build_dataset.py"))
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        empty = tempfile.mkdtemp()
+        self.assertEqual(mod.load_pii_banned(here=empty, env={}), [])
+        Path(empty, "pii_banned.local.txt").write_text("# c\n555-555-0100\n")
+        self.assertEqual(mod.load_pii_banned(here=empty, env={"ACE_PII_BANNED": "a@example.com"}),
+                         ["a@example.com", "555-555-0100"])
 
 
 class FrozenGuard(unittest.TestCase):
