@@ -1,0 +1,72 @@
+{
+ "_law": "Order = preference. Each class lists the probe legs it needs. A skipped vantage is written into the job's receipt as a substitution.",
+ "classes": {
+  "repo_work": {
+   "order": [
+    "claude-cloud",
+    "s1",
+    "zane-box"
+   ],
+   "needs": [
+    "github"
+   ]
+  },
+  "package_build": {
+   "order": [
+    "claude-cloud",
+    "s1",
+    "penguin"
+   ],
+   "needs": [
+    "package"
+   ]
+  },
+  "container_work": {
+   "order": [
+    "s1",
+    "penguin"
+   ],
+   "needs": [
+    "docker"
+   ]
+  },
+  "model_call": {
+   "order": [
+    "s1",
+    "penguin",
+    "zane-box"
+   ],
+   "needs": [
+    "model"
+   ]
+  },
+  "home_network_proof": {
+   "order": [
+    "penguin",
+    "phone"
+   ],
+   "needs": []
+  },
+  "verification": {
+   "order": [
+    "zane-box",
+    "s1",
+    "claude-cloud"
+   ],
+   "needs": [],
+   "note": "call route() with exclude=<builder>"
+  },
+  "gpu_training": {
+   "order": [
+    "kaggle-colab"
+   ],
+   "needs": []
+  },
+  "level_c": {
+   "order": [
+    "brandon"
+   ],
+   "needs": []
+  }
+ }
+}

@@ -8,7 +8,7 @@ Sources, all read-only:
     live through the `gh` CLI. If gh is missing or refused, the section says NOT TESTED. It never shows stale data as
     current.
   * Baseline: the record exec/baseline.py wrote (it ran the suites). It is shown with its timestamp.
-  * Owner queue: exec/OWNER-QUEUE.json, the Class C and his-hands items. Each item MUST carry a source link; an item
+  * Owner queue: mirror/data/debts.json (the open-debts register): Brandon's and Zane's open items. Each item MUST carry a source link; an item
     without one is rejected and not shown. These are declared by agents, so the board labels them DECLARED, not
     telemetry.
 Nothing here writes to any registry, and revenue is shown only as verified receipts (none are wired yet = NOT TESTED).
@@ -77,7 +77,14 @@ def collect_prs(repos=REPOS, fetch: Callable[[List[str]], Any] = gh_json) -> Dic
 def load_owner_queue(path: str) -> Dict[str, Any]:
     if not os.path.exists(path):
         return {"items": [], "rejected": [], "status": "NOT TESTED"}
-    data = json.load(open(path))
+    with open(path) as f:
+        data = json.load(f)
+    if "debts" in data:  # the mirror's open-debts register is the source of record (WO-PLATINUM §1, §3)
+        kinds = {"LEVEL_C": "C"}
+        data = {"items": [{"who": d["debtor"], "class": kinds.get(d.get("kind"), d.get("kind") or "VERIFY"),
+                           "ask": d["what"], "why": d.get("why", ""), "source": d["source"],
+                           "source_label": d["id"]}
+                          for d in data["debts"] if d["status"] == "open" and d["debtor"] in ("brandon", "zane")]}
     ok, bad = [], []
     for it in data.get("items", []):
         (ok if str(it.get("source", "")).startswith("https://") and it.get("ask") and it.get("class") in ("C", "HANDS", "DECISION", "VERIFY", "RUN")
@@ -160,7 +167,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     here = os.path.dirname(os.path.abspath(__file__))
     ap = argparse.ArgumentParser()
     ap.add_argument("--baseline")
-    ap.add_argument("--owner-queue", default=os.path.join(here, "OWNER-QUEUE.json"))
+    ap.add_argument("--owner-queue", default=os.path.join(os.path.dirname(here), "mirror", "data", "debts.json"))
     ap.add_argument("--out", required=True)
     ap.add_argument("--html")
     a = ap.parse_args(argv)

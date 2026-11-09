@@ -1,0 +1,177 @@
+{
+ "_law": "No Level C; one credential at most; a verifier seat that is not a minion; one instance each; growth is Brandon's amendment.",
+ "minions": [
+  {
+   "id": "drain",
+   "role": "Drain Minion",
+   "scope": "first response in a heal window: drain queued GHOST jobs",
+   "policy_class": "ghost_operations",
+   "actions": [
+    "ghost_requeue",
+    "ghost_forward",
+    "ghost_complete"
+   ],
+   "vantages": [
+    "s1",
+    "zane-box"
+   ],
+   "credentials": [],
+   "verifier": "zane",
+   "max_instances": 1,
+   "embryo": "heal-window first-response watcher, q15m, armed 2026-10-31 (relayed)",
+   "embryo_grade": "UNVERIFIED",
+   "resume": "GHOST job state + drain log"
+  },
+  {
+   "id": "revival",
+   "role": "Revival Minion",
+   "scope": "keepalive + restart of chartered services only",
+   "policy_class": "ghost_operations",
+   "actions": [
+    "ghost_unblock"
+   ],
+   "vantages": [
+    "s1",
+    "zane-box"
+   ],
+   "credentials": [],
+   "verifier": "zane",
+   "max_instances": 1,
+   "embryo": "keepalive scripts on zane-box (relayed)",
+   "embryo_grade": "UNKNOWN",
+   "resume": "service health records"
+  },
+  {
+   "id": "training",
+   "role": "Training Minion",
+   "scope": "the autopilot: launch queued runs, burn quota before expiry",
+   "policy_class": "training",
+   "actions": [
+    "launch_queued_run",
+    "harvest_outputs"
+   ],
+   "vantages": [
+    "s1",
+    "zane-box"
+   ],
+   "credentials": [],
+   "verifier": "zane",
+   "max_instances": 1,
+   "embryo": "training autopilot, live (relayed)",
+   "embryo_grade": "UNVERIFIED",
+   "resume": "training QUEUE + burn ledger"
+  },
+  {
+   "id": "watch",
+   "role": "Watch Minions",
+   "scope": "takeout / reply / deadline watches; report, never act",
+   "policy_class": "research",
+   "actions": [
+    "read_feed",
+    "file_alert"
+   ],
+   "vantages": [
+    "s1",
+    "zane-box"
+   ],
+   "credentials": [],
+   "verifier": "zane",
+   "max_instances": 1,
+   "embryo": "takeout + reply watches (relayed)",
+   "embryo_grade": "UNKNOWN",
+   "resume": "last-seen cursor in the mirror"
+  },
+  {
+   "id": "courier",
+   "role": "Courier Minions",
+   "scope": "vantage-to-vantage relays + harvests of receipts and probes",
+   "policy_class": "operational_communications",
+   "actions": [
+    "relay_envelope",
+    "harvest_receipts"
+   ],
+   "vantages": [
+    "s1",
+    "zane-box"
+   ],
+   "credentials": [
+    "a2a-signing-key"
+   ],
+   "verifier": "zane",
+   "max_instances": 1,
+   "embryo": "Brandon's taps, and A2A envelopes in GHOST",
+   "embryo_grade": "UNVERIFIED",
+   "resume": "A2A envelope ids (idempotent)"
+  },
+  {
+   "id": "janitor",
+   "role": "Janitor",
+   "scope": "storage governance inside protected-paths law; never deletes unprotected-unknown",
+   "policy_class": "engineering",
+   "actions": [
+    "report_usage",
+    "move_to_quarantine"
+   ],
+   "vantages": [
+    "s1",
+    "zane-box"
+   ],
+   "credentials": [],
+   "verifier": "zane",
+   "max_instances": 1,
+   "embryo": "storage governor (relayed)",
+   "embryo_grade": "UNKNOWN",
+   "resume": "quarantine manifest"
+  },
+  {
+   "id": "scorekeeper",
+   "role": "Scorekeeper",
+   "scope": "boards, ledgers, the mirror's manifest + freshness",
+   "policy_class": "engineering",
+   "actions": [
+    "run_baseline",
+    "render_board",
+    "write_manifest"
+   ],
+   "vantages": [
+    "s1",
+    "zane-box"
+   ],
+   "credentials": [],
+   "verifier": "zane",
+   "max_instances": 1,
+   "embryo": "exec/baseline.py + exec/board.py + mirror/mirror.py (this repo)",
+   "embryo_grade": "VERIFIED",
+   "resume": "stateless: re-reads sources each run"
+  },
+  {
+   "id": "night-builder",
+   "role": "Night Builder",
+   "scope": "one bounded build task from the queue at a time; tests or it didn't happen",
+   "policy_class": "engineering",
+   "actions": [
+    "build_in_worktree",
+    "run_tests",
+    "open_draft_pr"
+   ],
+   "vantages": [
+    "s1",
+    "zane-box"
+   ],
+   "credentials": [],
+   "verifier": "zane",
+   "max_instances": 1,
+   "embryo": "none: last, behind the others' proof",
+   "embryo_grade": "VERIFIED",
+   "resume": "worktree + task id; a killed run leaves a STOPPED-AT receipt"
+  }
+ ],
+ "_flagship": {
+  "name": "Nighthawk",
+  "seat": "StarNet on S1",
+  "role": "runs the creation stations' floor, tends the city, coordinates the residents; Brandon's conversational agent through the app",
+  "not": "a deadline watcher: administrative watching stays with the background minions",
+  "state": "NOT BUILT: needs a StarNet seat on S1 + a model-field-proven brain + a signed charter",
+  "ruling": "Brandon, 2026-10-31 21:04 CDT"
+ }
+}
