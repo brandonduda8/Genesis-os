@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-08T13:35:10Z",
- "digest": "1953bf02383c8e0350135f4de5b9a9143e7c47c3f7f603c75fcd5d29edec9bd2",
+ "generated_at": "2026-11-09T07:34:30Z",
+ "digest": "6c04d48ab062e7bf05f043fc5b23c04f184fa03091a38f166f6af22f7d2117d9",
  "files": {
   "conflicts.json": "b947c902edce2e3462d6d7e71ddf9d94efd1860fc8bd739f4af0b591ac44f5c6",
-  "debts.json": "54eb9f37ec5847708217783de9cf6662b3b51a09c2413723410db1dd79f2a6d8",
+  "debts.json": "8d874e66c45fcc35bc98b7654f046c87228e1be82796fddd1b6a7df01f8fdf5f",
   "probes/claude-cloud.json": "a721826fccdf3215bcd3ae362d61e8c373120bbe89311d231841676cd5f4ba0b",
   "program.json": "912cc190815c42c257ee44e5de883e11ae48d5e9ebb9db8b113ac4ee7314e582",
   "roster.json": "28cc03c60fed29db26eb9036afe455d6a4fa398816c650561b620dafc2f6689c",

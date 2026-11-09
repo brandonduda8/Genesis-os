@@ -1,7 +1,7 @@
 # OPERATOR'S BRIEF
 
-<!-- mirror-digest: 1953bf02383c8e0350135f4de5b9a9143e7c47c3f7f603c75fcd5d29edec9bd2 -->
-_Built 2026-11-08 13:35 UTC from mirror digest `1953bf02383c8e03` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
+<!-- mirror-digest: 6c04d48ab062e7bf05f043fc5b23c04f184fa03091a38f166f6af22f7d2117d9 -->
+_Built 2026-11-09 07:34 UTC from mirror digest `6c04d48ab062e7bf` over 8 data files. Run `python3 mirror/brief.py --check <this file>`: STALE means regenerate._
 
 ## 1. What is being built (in force)
 
@@ -58,7 +58,7 @@ _Built 2026-11-08 13:35 UTC from mirror digest `1953bf02383c8e03` over 8 data fi
 | Z-15 | claude | FD-004 Order 3: publish the legacy GitHub helper source (path + sha256), the exact failing import traceback, and the accepted handoff-bus engineering spec to a repo Claude can read, or share the folder via Remote Control | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-os/tree/claude/mirror-mesh/mirror) |
 | Z-16 | claude | For Shipyard and StarNet: name an approved private (loopback/authenticated mesh) host to serve the PWA, and give a read-only receipt-feed export or endpoint plus a way to mint canonical mission IDs through Anchor/Router | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
 | Z-17 | brandon | Aurum 2.3 (playlists + sound): fetch CI artifact aurum-release (run 41763413035), check the APK sha256 497200dd…5cc0, sign with the AURUM key (signer 2A:44…CD:5B), run the real-phone checklist in AURUM-2.3-HANDOFF.md, deliver to Brandon [SUPERSEDED 2026-11-06: Brandon rejected 2.3 (music stops on leaving the app); sign 2.4 instead, Z-18] | 2026-11-04 |  | [link](https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.3/docs/AURUM-2.3-HANDOFF.md) |
-| Z-18 | brandon | Aurum 2.4.3 (golden charges 1-3b; supersedes 2.4/2.4.1/2.4.2): fetch CI artifact aurum-release 13618844822 (run 42484050785), check APK sha256 23da3f8d…b969, sign with the AURUM key (2A:44…CD:5B), deliver to Brandon with the Moto G checklist in docs/AURUM-2.4-HANDOFF.md | 2026-11-06 |  | [link](https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.4-golden/docs/AURUM-2.4-HANDOFF.md) |
+| Z-18 | brandon | Aurum 2.4.4 (all golden charges; supersedes 2.4.x): sign artifact aurum-release 13656718656 (run 42577956403; APK sha256 5539fd77…2d5f, also in the run's check annotations) with the AURUM key, deliver to Brandon with the Moto G checklist. Also: 2.4.3 SIGNED apk observed in Vault 04 2026-11-08T16:15Z — please file apksigner --print-certs + hashes so the signer can be verified | 2026-11-06 |  | [link](https://github.com/brandonduda8/genesis-player/blob/claude/aurum-2.4-golden/docs/AURUM-2.4-HANDOFF.md) |
 
 ### Astra owes (6)
 
@@ -85,7 +85,7 @@ _Built 2026-11-08 13:35 UTC from mirror digest `1953bf02383c8e03` over 8 data fi
 | C-8 | operation | WS3 Forge fork: sizing note first, then stake removal end to end with the Article V refusal battery; stop and file a sprawl report if the estimate is exceeded | 2026-11-01 |  | [link](https://github.com/brandonduda8/Genesis-core/blob/claude/universe-start/docs/universe/RECEIPT-FORGE-FLOOR-001.md) |
 | C-10 | brandon | Shipyard app MVP: phone-first read-only board PWA on genesis-hq claude/shipyard-app (extends shipyard/ from PR #20/#21), showing real Aurum status + source receipts; UNKNOWN where unproven [first checkpoint BUILT 2026-11-04: genesis-hq claude/shipyard-app @dfb1e47, shipyard/board/, 10 tests; next: one real mission board->PR->test->Zane] | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
 | C-11 | brandon | StarNet App NOW slice (Android) on Genesis-core claude/starnet-app from claude/origami-fold-one: Make/Meet/Manage shell, receipt-feed mirror with LIVE/STALE/UNKNOWN, Nighthawk chat v1 surface; no stake mechanics [core BUILT 2026-11-04: Genesis-core claude/starnet-app @cf07b52, starnet-app/core, 8 JVM tests; Android shell + CI wait on B-11] | 2026-11-03 |  | [link](https://drive.google.com/file/d/10cxGlE73dgpB4y-oIAVVYc_0GvvYU57-/view) |
-| C-12 | brandon | WO-AURUM-GOLDEN-MAX: music survives swipe-away + screen-off on the Moto G; lawful routing/coverage/YouTube-only labels (charge 2); sound suite (3); AURUM brand (4) [charges 1, 2, 3a, 3b TESTED on emulator 2026-11-08: genesis-player claude/aurum-2.4-golden @9035bc7 (2.4.3, vc 11), run 42484050785, battery 48/48, instrumented 12/12; 3b = tiered vault (lossless 2 GiB) + FLAC 24/96 proven; ALAC: no emulator decoder, told + skipped, unproven; Opus transcode not built; next: charge 4 brand] | 2026-11-06 |  | [link](https://drive.google.com/file/d/1MxD-l1hVf0kSdiouASBnDjtZTyfHwo5X/view) |
+| C-12 | brandon | WO-AURUM-GOLDEN-MAX: music survives swipe-away + screen-off on the Moto G [all 4 charges BUILT + TESTED on emulator 2026-11-09: genesis-player claude/aurum-2.4-golden @024853e (2.4.4, vc 12), run 42577956403, battery 49/49, instrumented 12/12; 1 keep-playing setup, 2 routing/coverage/labels, 3 AutoEq JBL correction + format line + tiered vault + FLAC 24/96 (ALAC told+skipped where no decoder), 4 original AURUM icon/notification/splash. Remaining: the DONE gate is Brandon's Moto G checklist] | 2026-11-06 |  | [link](https://drive.google.com/file/d/1MxD-l1hVf0kSdiouASBnDjtZTyfHwo5X/view) |
 
 ## 3. Expiring power
 
@@ -109,19 +109,19 @@ _Built 2026-11-08 13:35 UTC from mirror digest `1953bf02383c8e03` over 8 data fi
 | s1 | designated primary power server | **none** | unknown | github, package, docker, starnet_hub (UNVERIFIED) |
 | penguin | Brandon's home network | **none** | unknown | docker, home_network (UNVERIFIED) |
 | phone | Brandon's pocket | **none** | unknown | home_network, device_proof (UNVERIFIED) |
-| claude-cloud | Claude Code cloud session | 2026-11-01T00:01:41Z (10893 min ago, STALE) | github, package | github, package (VERIFIED) |
+| claude-cloud | Claude Code cloud session | 2026-11-01T00:01:41Z (11972 min ago, STALE) | github, package | github, package (VERIFIED) |
 | astra | planning / review seat | **none** | unknown | review (UNVERIFIED) |
 | kaggle-colab | GPU/TPU lanes | **none** | unknown | gpu, tpu (UNVERIFIED) |
 | brandon | the only Level C vantage | **none** | unknown | level_c (VERIFIED) |
 
 | Work class | Routes to now | Substitutions |
 |---|---|---|
-| repo_work | **HOLD** | claude-cloud: probe stale (10893 min old); s1: no probe on record; zane-box: no probe on record |
-| package_build | **HOLD** | claude-cloud: probe stale (10893 min old); s1: no probe on record; penguin: no probe on record |
+| repo_work | **HOLD** | claude-cloud: probe stale (11972 min old); s1: no probe on record; zane-box: no probe on record |
+| package_build | **HOLD** | claude-cloud: probe stale (11972 min old); s1: no probe on record; penguin: no probe on record |
 | container_work | **HOLD** | s1: no probe on record; penguin: no probe on record |
 | model_call | **HOLD** | s1: no probe on record; penguin: no probe on record; zane-box: no probe on record |
 | home_network_proof | **HOLD** | penguin: no probe on record; phone: no probe on record |
-| verification | **HOLD** | zane-box: no probe on record; s1: no probe on record; claude-cloud: probe stale (10893 min old) |
+| verification | **HOLD** | zane-box: no probe on record; s1: no probe on record; claude-cloud: probe stale (11972 min old) |
 | gpu_training | **HOLD** | kaggle-colab: no probe on record |
 | level_c | **brandon** | - |
 
